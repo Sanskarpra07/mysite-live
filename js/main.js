@@ -389,46 +389,43 @@ if (form) {
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
     }
 
-    status.textContent = '⏳ Validation complete. Sending email...';
-    status.style.color = '#2cb67d';
+    status.textContent = '';
 
-    // Simulate form submission to Formspree
-    // If you're using Formspree, the form will auto-submit
-    // Otherwise, you can send via AJAX here
-    setTimeout(() => {
-      // If using standard form submission with Formspree action attribute,
-      // this will naturally submit. If you want AJAX:
-      const formData = new FormData(form);
-      
-      // For Formspree users: uncomment the next line if you set the action attribute
-      form.submit();
-      
-      // For manual AJAX (if not using form action):
-      /*
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-      })
+    // Send via AJAX (fetch) so the page never redirects to Formspree
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
       .then(response => {
         if (response.ok) {
-          status.textContent = '✅ Email sent successfully! Thank you, ' + name + '!';
+          status.textContent = '✅ Message sent successfully! Thank you, ' + name + '.';
           status.style.color = '#2cb67d';
           form.reset();
         } else {
-          status.textContent = '❌ Error sending email. Please try again.';
-          status.style.color = '#f87171';
+          return response.json().then(data => {
+            const msg = (data && data.errors)
+              ? data.errors.map(e => e.message).join(', ')
+              : 'Something went wrong. Please try again.';
+            status.textContent = '❌ ' + msg;
+            status.style.color = '#f87171';
+          });
+        }
+      })
+      .catch(() => {
+        status.textContent = '❌ Network error. Please check your connection and try again.';
+        status.style.color = '#f87171';
+      })
+      .finally(() => {
+        if (btn) {
           btn.disabled = false;
           btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
         }
-      })
-      .catch(error => {
-        status.textContent = '❌ Network error. Please try again.';
-        status.style.color = '#f87171';
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
       });
-      */
-    }, 500);
   });
 }
 
