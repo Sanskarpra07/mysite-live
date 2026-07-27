@@ -307,32 +307,128 @@ document.querySelectorAll('.filter').forEach(btn => {
 });
 
 // =====================================================
-//  CONTACT FORM
+//  CONTACT FORM WITH VALIDATION
 // =====================================================
 const form = document.getElementById('contact-form');
 if (form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const status = document.getElementById('form-status');
+    
+    // Get form values and trim whitespace
     const name = form.name.value.trim();
     const email = form.email.value.trim();
+    const subject = form.subject.value.trim();
     const message = form.message.value.trim();
 
-    if (!name || !email || !message) {
-      status.textContent = '⚠ Please fill in all required fields.';
+    // Clear previous messages
+    status.textContent = '';
+    status.style.color = '';
+
+    // ===== VALIDATION CHECKS =====
+    
+    // 1. Name validation
+    if (!name) {
+      status.textContent = '⚠ Name is required.';
       status.style.color = '#f87171';
       return;
     }
-    const btn = form.querySelector('button[type="submit"]');
-    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...'; }
-    status.textContent = '';
+    if (name.length < 2) {
+      status.textContent = '⚠ Name must be at least 2 characters.';
+      status.style.color = '#f87171';
+      return;
+    }
+    if (name.length > 50) {
+      status.textContent = '⚠ Name must be less than 50 characters.';
+      status.style.color = '#f87171';
+      return;
+    }
 
+    // 2. Email validation
+    if (!email) {
+      status.textContent = '⚠ Email is required.';
+      status.style.color = '#f87171';
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      status.textContent = '⚠ Please enter a valid email address.';
+      status.style.color = '#f87171';
+      return;
+    }
+
+    // 3. Message validation
+    if (!message) {
+      status.textContent = '⚠ Message is required.';
+      status.style.color = '#f87171';
+      return;
+    }
+    if (message.length < 5) {
+      status.textContent = '⚠ Message must be at least 5 characters.';
+      status.style.color = '#f87171';
+      return;
+    }
+    if (message.length > 2000) {
+      status.textContent = '⚠ Message must be less than 2000 characters.';
+      status.style.color = '#f87171';
+      return;
+    }
+
+    // 4. Subject validation (optional but check length if provided)
+    if (subject && subject.length > 100) {
+      status.textContent = '⚠ Subject must be less than 100 characters.';
+      status.style.color = '#f87171';
+      return;
+    }
+
+    // ===== ALL VALIDATIONS PASSED =====
+    // Disable button and show sending message
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+    }
+
+    status.textContent = '⏳ Validation complete. Sending email...';
+    status.style.color = '#2cb67d';
+
+    // Simulate form submission to Formspree
+    // If you're using Formspree, the form will auto-submit
+    // Otherwise, you can send via AJAX here
     setTimeout(() => {
-      status.innerHTML = '✅ Message sent — thank you, ' + name + '!';
-      status.style.color = 'var(--accent-cyan)';
-      form.reset();
-      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message'; }
-    }, 1200);
+      // If using standard form submission with Formspree action attribute,
+      // this will naturally submit. If you want AJAX:
+      const formData = new FormData(form);
+      
+      // For Formspree users: uncomment the next line if you set the action attribute
+      form.submit();
+      
+      // For manual AJAX (if not using form action):
+      /*
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+      })
+      .then(response => {
+        if (response.ok) {
+          status.textContent = '✅ Email sent successfully! Thank you, ' + name + '!';
+          status.style.color = '#2cb67d';
+          form.reset();
+        } else {
+          status.textContent = '❌ Error sending email. Please try again.';
+          status.style.color = '#f87171';
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+        }
+      })
+      .catch(error => {
+        status.textContent = '❌ Network error. Please try again.';
+        status.style.color = '#f87171';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+      });
+      */
+    }, 500);
   });
 }
 
