@@ -8,6 +8,49 @@
       name="description"
       content="Sanskar Man Pradhan — BCA student, frontend developer, and content writer based in Lalitpur, Nepal."
     />
+    <link rel="canonical" href="https://sanskar-manpradhan.com.np/" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" href="favicon.svg" />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sanskar Man Pradhan — Portfolio" />
+    <meta
+      property="og:description"
+      content="BCA student, frontend developer, and content writer based in Lalitpur, Nepal."
+    />
+    <meta property="og:image" content="https://sanskar-manpradhan.com.np/assets/dp.jpg" />
+    <meta property="og:url" content="https://sanskar-manpradhan.com.np/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sanskar Man Pradhan — Portfolio" />
+    <meta
+      name="twitter:description"
+      content="BCA student, frontend developer, and content writer based in Lalitpur, Nepal."
+    />
+    <meta name="twitter:image" content="https://sanskar-manpradhan.com.np/assets/dp.jpg" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sanskar Man Pradhan",
+      "url": "https://sanskar-manpradhan.com.np/",
+      "jobTitle": "Frontend Developer",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Lalitpur",
+        "addressCountry": "NP"
+      },
+      "sameAs": [
+        "https://github.com/Sanskarpra07",
+        "https://www.linkedin.com/in/sanskar-pradhan-246622282/"
+      ]
+    }
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -202,13 +245,17 @@
             <div class="profile-ring-wrap">
               <div class="profile-ring"></div>
               <div class="profile-photo" role="img" aria-label="Profile photo">
-                <img
-                  src="assets/dp.jpg"
-                  alt="Sanskar Man Pradhan profile photo"
-                  loading="lazy"
-                  width="240"
-                  height="240"
-                />
+                <picture>
+                  <source srcset="assets/dp.webp" type="image/webp" />
+                  <img
+                    src="assets/dp.jpg"
+                    alt="Sanskar Man Pradhan profile photo"
+                    loading="eager"
+                    fetchpriority="high"
+                    width="240"
+                    height="240"
+                  />
+                </picture>
               </div>
             </div>
           </aside>
@@ -231,12 +278,15 @@
 
         <div class="about-grid">
           <div class="about-photo glass">
-            <img src="assets/dp.jpg"
-              alt="Sanskar Man Pradhan"
-              loading="lazy"
-              width="400"
-              height="400"
-            />
+            <picture>
+              <source srcset="assets/dp.webp" type="image/webp" />
+              <img src="assets/dp.jpg"
+                alt="Sanskar Man Pradhan"
+                loading="lazy"
+                width="400"
+                height="400"
+              />
+            </picture>
           </div>
           <div class="about-content">
             <ul class="about-meta">
@@ -787,6 +837,8 @@
           </div>
 
          <form id="contact-form" class="contact-form glass" action="https://formspree.io/f/xvzedvlq" method="POST" novalidate>
+            <!-- Honeypot field: hidden from real users, catches simple bots -->
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
             <div class="form-row">
               <label for="name"> <i class="fa-solid fa-user"></i> Name </label>
               <input
