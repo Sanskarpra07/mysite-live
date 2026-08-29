@@ -695,6 +695,8 @@ body.theme-light #site-header {
 .social-icon-wrap.gh { background: rgba(255,255,255,0.08); color: #e6e6e6; border: 1px solid rgba(255,255,255,0.12); }
 .social-icon-wrap.li { background: rgba(0,119,181,0.15); color: #0077b5; border: 1px solid rgba(0,119,181,0.25); }
 .social-icon-wrap.email { background: rgba(127,90,240,0.12); color: var(--accent-violet); border: 1px solid rgba(127,90,240,0.25); }
+.social-icon-wrap.fb { background: rgba(24,119,242,0.15); color: #1877f2; border: 1px solid rgba(24,119,242,0.25); }
+.social-icon-wrap.ig { background: rgba(225,48,108,0.15); color: #e1306c; border: 1px solid rgba(225,48,108,0.25); }
 .social-info h3 {
   font-family: var(--font-head); font-size: 1rem; font-weight: 600;
   color: var(--text); margin-bottom: 3px;
