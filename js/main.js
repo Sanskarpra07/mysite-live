@@ -193,11 +193,17 @@ if (canvas) {
   let mouse = { x: -9999, y: -9999 };
   window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 
-  function draw() {
+function draw() {
     ctx.clearRect(0, 0, w, h);
+    const isLight = document.body.classList.contains('theme-light');
     const g = ctx.createLinearGradient(0, 0, w, h);
-    g.addColorStop(0, '#02020e');
-    g.addColorStop(1, '#0a0a12');
+    if (isLight) {
+      g.addColorStop(0, '#f8fafc');
+      g.addColorStop(1, '#eef1f6');
+    } else {
+      g.addColorStop(0, '#02020e');
+      g.addColorStop(1, '#0a0a12');
+    }
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
 
