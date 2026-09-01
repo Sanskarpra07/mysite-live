@@ -1,44 +1,26 @@
 // =====================================================
-//  PAGE LOADER
-// =====================================================
-document.addEventListener('DOMContentLoaded', () => {
-  const loader = document.getElementById('page-loader');
-  if (loader) {
-    setTimeout(() => {
-      loader.style.opacity = '0';
-      loader.setAttribute('aria-hidden', 'true');
-      setTimeout(() => loader.remove(), 500);
-    }, 800);
-  }
-
-  // Update year in footer
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-});
-
-// =====================================================
-//  THEME TOGGLE
+//  THEME TOGGLE (data-theme on <html>)
 // =====================================================
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+const root = document.documentElement;
 
-// Load saved preference
+const applyTheme = (theme) => {
+  root.setAttribute('data-theme', theme);
+  if (themeIcon) {
+    themeIcon.classList.toggle('fa-moon', theme !== 'light');
+    themeIcon.classList.toggle('fa-sun', theme === 'light');
+  }
+};
+
 const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-  document.body.classList.remove('theme-dark');
-  document.body.classList.add('theme-light');
-  if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
-}
+if (savedTheme === 'light') applyTheme('light');
 
 if (themeToggle) {
   themeToggle.addEventListener('click', () => {
-    const isLight = document.body.classList.toggle('theme-light');
-    document.body.classList.toggle('theme-dark', !isLight);
-    if (themeIcon) {
-      themeIcon.classList.toggle('fa-moon', !isLight);
-      themeIcon.classList.toggle('fa-sun', isLight);
-    }
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    localStorage.setItem('theme', next);
   });
 }
 
@@ -49,11 +31,16 @@ const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
 let mobileMenuOpen = false;
 
+const closeMenu = () => {
+  mobileMenuOpen = false;
+  if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  if (navLinks) { navLinks.classList.remove('nav-mobile-open'); navLinks.style.display = ''; }
+};
+
 if (hamburger && navLinks) {
   hamburger.addEventListener('click', () => {
     mobileMenuOpen = !mobileMenuOpen;
     hamburger.setAttribute('aria-expanded', String(mobileMenuOpen));
-
     if (mobileMenuOpen) {
       navLinks.classList.add('nav-mobile-open');
       navLinks.style.display = 'flex';
@@ -63,57 +50,18 @@ if (hamburger && navLinks) {
     }
   });
 
-  // Close menu when a link is clicked
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenuOpen = false;
-      hamburger.setAttribute('aria-expanded', 'false');
-      navLinks.classList.remove('nav-mobile-open');
-      navLinks.style.display = '';
-    });
-  });
-
-  // Close on outside click
+  navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   document.addEventListener('click', (e) => {
-    if (mobileMenuOpen && !hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-      mobileMenuOpen = false;
-      hamburger.setAttribute('aria-expanded', 'false');
-      navLinks.classList.remove('nav-mobile-open');
-      navLinks.style.display = '';
-    }
+    if (mobileMenuOpen && !hamburger.contains(e.target) && !navLinks.contains(e.target)) closeMenu();
   });
 }
 
-// On resize: reset mobile menu state
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 900) {
-    if (navLinks) { navLinks.style.display = ''; navLinks.classList.remove('nav-mobile-open'); }
-    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
-    mobileMenuOpen = false;
-  }
+  if (window.innerWidth > 900) closeMenu();
 });
 
 // =====================================================
-//  ACTIVE NAV LINK ON SCROLL
-// =====================================================
-const sections = document.querySelectorAll('section[id], div[id="home"]');
-const navItems = document.querySelectorAll('.nav-links a');
-
-const navObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const id = entry.target.id;
-      navItems.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
-      });
-    }
-  });
-}, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-
-sections.forEach(s => navObserver.observe(s));
-
-// =====================================================
-//  SMOOTH SCROLL
+//  SMOOTH SCROLL (accounting for sticky header)
 // =====================================================
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
@@ -122,7 +70,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        const offset = 80; // navbar height
+        closeMenu();
+        const offset = 68;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
@@ -131,31 +80,47 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 // =====================================================
+//  ACTIVE NAV LINK ON SCROLL
+// =====================================================
+const sections = document.querySelectorAll('section[id]');
+const navItems = document.querySelectorAll('.nav-links a');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navItems.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${id}`));
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+sections.forEach(s => navObserver.observe(s));
+
+// =====================================================
 //  TYPEWRITER TAGLINE
 // =====================================================
 const typeEl = document.getElementById('typewriter-text');
 const taglines = [
-  'Frontend Designer',
-  'WordPress Expert',
+  'Frontend Developer',
+  'WordPress Specialist',
   'Content Writer',
   'BCA Student',
-  'Problem Solver',
+  'UI Enthusiast',
 ];
 let ti = 0, ci = 0, isDeleting = false;
 
 function typeLoop() {
   if (!typeEl) return;
   const txt = taglines[ti];
-
   if (!isDeleting) {
-    typeEl.textContent = txt.slice(0, ci++);
+    typeEl.textContent = 'I am a ' + txt.slice(0, ci++);
     if (ci > txt.length) {
       isDeleting = true;
       setTimeout(typeLoop, 1600);
       return;
     }
   } else {
-    typeEl.textContent = txt.slice(0, ci--);
+    typeEl.textContent = 'I am a ' + txt.slice(0, ci--);
     if (ci < 0) {
       isDeleting = false;
       ti = (ti + 1) % taglines.length;
@@ -166,130 +131,65 @@ function typeLoop() {
   }
   setTimeout(typeLoop, isDeleting ? 55 : 100);
 }
-typeLoop();
+if (typeEl) typeLoop();
 
 // =====================================================
-//  CANVAS PARTICLE / CONSTELLATION BG
+//  BACKGROUND TORCH SPOTLIGHT (fine pointer only)
 // =====================================================
-const canvas = document.getElementById('bg-canvas');
-if (canvas) {
-  const ctx = canvas.getContext('2d');
-  let w = canvas.width = innerWidth;
-  let h = canvas.height = innerHeight;
+(() => {
+  if (!window.matchMedia('(pointer:fine)').matches) return;
 
-  window.addEventListener('resize', () => {
-    w = canvas.width = innerWidth;
-    h = canvas.height = innerHeight;
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let mx = targetX;
+  let my = targetY;
+  const lerp = 0.18;
+
+  window.addEventListener('pointermove', e => { targetX = e.clientX; targetY = e.clientY; }, { passive: true });
+  window.addEventListener('pointerleave', () => { targetX = -9999; targetY = -9999; });
+
+  (function loop() {
+    mx += (targetX - mx) * lerp;
+    my += (targetY - my) * lerp;
+    root.style.setProperty('--mx', `${mx}px`);
+    root.style.setProperty('--my', `${my}px`);
+    requestAnimationFrame(loop);
+  })();
+})();
+
+// =====================================================
+//  INTERSECTION OBSERVER — COUNTERS + SKILL BARS
+// =====================================================
+const animate = (target) => {
+  target.querySelectorAll('.count').forEach(el => {
+    if (el.dataset.started) return;
+    el.dataset.started = '1';
+    const goal = +el.dataset.target;
+    let cur = 0;
+    const duration = 1400;
+    const step = goal / (duration / 16);
+    const iv = setInterval(() => {
+      cur = Math.min(cur + step, goal);
+      el.textContent = goal >= 100 ? Math.floor(cur).toLocaleString() : Math.floor(cur);
+      if (cur >= goal) clearInterval(iv);
+    }, 16);
   });
 
-  const NUM = Math.min(Math.floor((w * h) / 55000) + 55, 120);
-  const particles = Array.from({ length: NUM }, () => ({
-    x: Math.random() * w, y: Math.random() * h,
-    r: Math.random() * 1.4 + 0.4,
-    vx: (Math.random() - 0.5) * 0.4,
-    vy: (Math.random() - 0.5) * 0.4,
-  }));
+  target.querySelectorAll('.skill-bar .skill-fill').forEach(fill => {
+    fill.style.width = fill.dataset.percent + '%';
+  });
+};
 
-  let mouse = { x: -9999, y: -9999 };
-  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-
-function draw() {
-    ctx.clearRect(0, 0, w, h);
-    const isLight = document.body.classList.contains('theme-light');
-    const g = ctx.createLinearGradient(0, 0, w, h);
-    if (isLight) {
-      g.addColorStop(0, '#f8fafc');
-      g.addColorStop(1, '#eef1f6');
-    } else {
-      g.addColorStop(0, '#02020e');
-      g.addColorStop(1, '#0a0a12');
-    }
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
-
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-      const dx = mouse.x - p.x, dy = mouse.y - p.y;
-      const d = Math.sqrt(dx * dx + dy * dy);
-      if (d < 150) { p.vx += dx * 0.0005; p.vy += dy * 0.0005; }
-      // speed limit
-      const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-      if (speed > 1.5) { p.vx = (p.vx / speed) * 1.5; p.vy = (p.vy / speed) * 1.5; }
-      ctx.beginPath();
-      ctx.globalAlpha = 0.75;
-      ctx.fillStyle = 'rgba(255,255,255,0.85)';
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    ctx.globalAlpha = 1;
-
-    // Draw constellation lines
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const a = particles[i], b = particles[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist2 = dx * dx + dy * dy;
-        if (dist2 < 11000) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(127,90,240,${0.13 * (1 - dist2 / 11000)})`;
-          ctx.lineWidth = 1;
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-}
-
-// =====================================================
-//  INTERSECTION OBSERVER — FADE IN + COUNTERS + SKILL BARS
-// =====================================================
-const io = new IntersectionObserver((entries) => {
+const skillObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('in-view');
-
-      // Counters
-      entry.target.querySelectorAll('.count').forEach(el => {
-        if (!el.dataset.started) {
-          el.dataset.started = '1';
-          const target = +el.dataset.target;
-          let cur = 0;
-          const duration = 1400;
-          const step = target / (duration / 16);
-          const iv = setInterval(() => {
-            cur = Math.min(cur + step, target);
-            el.textContent = target >= 100
-              ? Math.floor(cur).toLocaleString()
-              : Math.floor(cur);
-            if (cur >= target) clearInterval(iv);
-          }, 16);
-        }
-      });
-
-      // Skill bars
-      entry.target.querySelectorAll('.skill-bar').forEach(bar => {
-        const fill = bar.querySelector('.skill-bar-fill');
-        if (fill) fill.style.width = bar.dataset.percent + '%';
-      });
-
-      // Animate timeline line height
-      const line = entry.target.querySelector('.timeline-line');
-      if (line) {
-        line.style.transition = 'height 1.5s ease';
-        line.style.height = '100%';
-      }
+      animate(entry.target);
+      skillObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.2 });
 
-document.querySelectorAll('.fade-in-up, .about-section, .timeline-section, .skills-section, .projects-section, .social-section, .contact-section')
-  .forEach(el => io.observe(el));
+document.querySelectorAll('#about, #skills').forEach(el => skillObserver.observe(el));
 
 // =====================================================
 //  PROJECT FILTER BUTTONS
@@ -302,150 +202,84 @@ document.querySelectorAll('.filter').forEach(btn => {
     document.querySelectorAll('.project-card').forEach(card => {
       const show = filter === 'all' || card.dataset.category === filter;
       card.style.display = show ? 'flex' : 'none';
-      if (show) {
-        card.style.animation = 'none';
-        requestAnimationFrame(() => {
-          card.style.animation = 'card-pop 0.3s ease forwards';
-        });
-      }
     });
   });
 });
 
 // =====================================================
-//  CONTACT FORM WITH VALIDATION
+//  CONTACT FORM WITH VALIDATION (Formspree)
 // =====================================================
 const form = document.getElementById('contact-form');
 if (form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const status = document.getElementById('form-status');
-    
-    // Get form values and trim whitespace
+    const setErr = (msg) => {
+      status.textContent = '✗ ' + msg;
+      status.style.color = '#ff6b6b';
+    };
+
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const subject = form.subject.value.trim();
     const message = form.message.value.trim();
 
-    // Clear previous messages
     status.textContent = '';
     status.style.color = '';
 
-    // ===== VALIDATION CHECKS =====
-    
-    // 1. Name validation
-    if (!name) {
-      status.textContent = '⚠ Name is required.';
-      status.style.color = '#f87171';
-      return;
-    }
-    if (name.length < 2) {
-      status.textContent = '⚠ Name must be at least 2 characters.';
-      status.style.color = '#f87171';
-      return;
-    }
-    if (name.length > 50) {
-      status.textContent = '⚠ Name must be less than 50 characters.';
-      status.style.color = '#f87171';
-      return;
-    }
-
-    // 2. Email validation
-    if (!email) {
-      status.textContent = '⚠ Email is required.';
-      status.style.color = '#f87171';
-      return;
-    }
+    if (!name || name.length < 2) return setErr('name is required (min 2 characters).');
+    if (name.length > 50) return setErr('name must be under 50 characters.');
+    if (!email) return setErr('email is required.');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      status.textContent = '⚠ Please enter a valid email address.';
-      status.style.color = '#f87171';
-      return;
-    }
+    if (!emailRegex.test(email)) return setErr('please enter a valid email address.');
+    if (!message || message.length < 5) return setErr('message is required (min 5 characters).');
+    if (message.length > 2000) return setErr('message must be under 2000 characters.');
+    if (subject && subject.length > 100) return setErr('subject must be under 100 characters.');
 
-    // 3. Message validation
-    if (!message) {
-      status.textContent = '⚠ Message is required.';
-      status.style.color = '#f87171';
-      return;
-    }
-    if (message.length < 5) {
-      status.textContent = '⚠ Message must be at least 5 characters.';
-      status.style.color = '#f87171';
-      return;
-    }
-    if (message.length > 2000) {
-      status.textContent = '⚠ Message must be less than 2000 characters.';
-      status.style.color = '#f87171';
-      return;
-    }
-
-    // 4. Subject validation (optional but check length if provided)
-    if (subject && subject.length > 100) {
-      status.textContent = '⚠ Subject must be less than 100 characters.';
-      status.style.color = '#f87171';
-      return;
-    }
-
-    // ===== ALL VALIDATIONS PASSED =====
-    // Disable button and show sending message
     const btn = form.querySelector('button[type="submit"]');
     if (btn) {
       btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> sending...';
     }
 
-    status.textContent = '';
-
-    // Send via AJAX (fetch) so the page never redirects to Formspree
     const formData = new FormData(form);
-
     fetch(form.action, {
       method: 'POST',
       body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
+      headers: { 'Accept': 'application/json' }
     })
       .then(response => {
         if (response.ok) {
-          status.textContent = '✅ Message sent successfully! Thank you, ' + name + '.';
-          status.style.color = '#2cb67d';
+          status.textContent = '✓ message sent! thank you, ' + name + '.';
+          status.style.color = 'var(--accent)';
           form.reset();
         } else {
           return response.json().then(data => {
             const msg = (data && data.errors)
-              ? data.errors.map(e => e.message).join(', ')
-              : 'Something went wrong. Please try again.';
-            status.textContent = '❌ ' + msg;
-            status.style.color = '#f87171';
+              ? data.errors.map(x => x.message).join(', ')
+              : 'something went wrong — try again.';
+            setErr(msg);
           });
         }
       })
-      .catch(() => {
-        status.textContent = '❌ Network error. Please check your connection and try again.';
-        status.style.color = '#f87171';
-      })
+      .catch(() => setErr('network error — check your connection and try again.'))
       .finally(() => {
         if (btn) {
           btn.disabled = false;
-          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> send message';
         }
       });
   });
 }
 
 // =====================================================
-//  BACK TO TOP
+//  BACK TO TOP + SCROLL PROGRESS
 // =====================================================
 const backBtn = document.getElementById('back-to-top');
 if (backBtn) {
   backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-// =====================================================
-//  SCROLL PROGRESS BAR
-// =====================================================
 window.addEventListener('scroll', () => {
   const el = document.getElementById('scroll-progress');
   if (!el) return;
@@ -455,48 +289,127 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // =====================================================
-//  CUSTOM CURSOR + TRAIL (desktop only)
+//  FOOTER YEAR
 // =====================================================
-if (window.matchMedia('(pointer:fine)').matches) {
-  const cursor = document.getElementById('cursor');
-  const trail = document.getElementById('cursor-trail');
-  const trailNodes = [];
-
-  for (let i = 0; i < 8; i++) {
-    const n = document.createElement('div');
-    const size = Math.max(2, 8 - i);
-    n.style.cssText = `width:${size}px;height:${size}px;border-radius:50%;position:fixed;pointer-events:none;background:rgba(127,90,240,${0.15 - i*0.015});z-index:9998;transform:translate(-50%,-50%)`;
-    document.body.appendChild(n);
-    trailNodes.push(n);
-  }
-
-  window.addEventListener('mousemove', e => {
-    if (cursor) { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; }
-    trailNodes.forEach((n, idx) => {
-      setTimeout(() => {
-        n.style.left = e.clientX + 'px';
-        n.style.top = e.clientY + 'px';
-      }, idx * 22);
-    });
-  }, { passive: true });
-}
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // =====================================================
-//  KONAMI CODE EASTER EGG
+//  ~/ask-me.sh CHAT WIDGET
 // =====================================================
 (() => {
-  const code = [38,38,40,40,37,39,37,39,66,65];
-  let k = 0;
-  window.addEventListener('keydown', e => {
-    if (e.keyCode === code[k]) {
-      k++;
-      if (k === code.length) {
-        k = 0;
-        document.body.classList.add('konami');
-        setTimeout(() => document.body.classList.remove('konami'), 4000);
-      }
-    } else k = 0;
+  const log = document.getElementById('chat-log');
+  const cform = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const chipsWrap = document.getElementById('chat-chips');
+  if (!log || !cform || !input) return;
+
+  const LIMIT = 30;
+  let busy = false;
+  let count = 0;
+
+  const chips = [
+    'what is your stack?',
+    'are you available for hire?',
+    'tell me about a recent project',
+    'what is your education?',
+    'how can I contact you?',
+  ];
+
+  chips.forEach(label => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.textContent = label;
+    b.addEventListener('click', () => send(label));
+    chipsWrap.appendChild(b);
   });
+
+  const answers = {
+    stack: 'My stack focuses on the frontend: HTML, CSS, and JavaScript, plus WordPress/WooCommerce for content sites. I also use Figma and Photoshop for design, and I\'m currently learning React and deepening my JS skills.',
+    hire: 'Yes — I\'m open to freelance work and new opportunities. Freelance or part-time frontend/content roles fit best with my BCA studies. Drop a message via the contact form below.',
+    project: 'A few things I\'ve built: this portfolio (vanilla HTML/CSS/JS with a working contact form), a WordPress + WooCommerce content site with SEO basics, and UI/UX design work in Figma and Photoshop. See the projects section above.',
+    education: 'I\'m studying for my BCA (Bachelor in Computer Applications) at Mega College since 2023, and before that I completed higher secondary (+2) there in 2021–2023.',
+    contact: 'You can email me at pradhansanskar86@gmail.com, find me on GitHub (@Sanskarpra07) or LinkedIn (Sanskar Pradhan), or use the contact form at the bottom of the page.',
+    default: 'Hmm, I\'m not sure about that one. Try one of the suggestions above — stack, availability, projects, education, or contact.',
+  };
+
+  const getAnswer = (text) => {
+    const t = text.toLowerCase();
+    if (/(stack|tech|technolog|language|what.*use|build.*with)/.test(t)) return answers.stack;
+    if (/(hire|available|work|freelance|opportunit|job|role)/.test(t)) return answers.hire;
+    if (/(project|portfolio|built|work you)/.test(t)) return answers.project;
+    if (/(education|study|degree|college|bca|school)/.test(t)) return answers.education;
+    if (/(contact|email|message|reach|linkedin|github|social)/.test(t)) return answers.contact;
+    return answers.default;
+  };
+
+  const addMessage = (who, body, animate) => {
+    const row = document.createElement('div');
+    row.className = `msg ${who}`;
+    const labels = { system: '// system', bot: '› sanskar-bot', user: '› you' };
+    const label = document.createElement('div');
+    label.className = 'msg-label';
+    label.textContent = labels[who];
+    row.appendChild(label);
+    const bodyEl = document.createElement('div');
+    bodyEl.className = 'msg-body';
+    bodyEl.textContent = body;
+    row.appendChild(bodyEl);
+    log.appendChild(row);
+    log.scrollTop = log.scrollHeight;
+
+    if (animate) {
+      bodyEl.textContent = '';
+      const dots = document.createElement('span');
+      dots.className = 'typing-dots';
+      dots.innerHTML = '<span></span><span></span><span></span>';
+      bodyEl.appendChild(dots);
+      log.scrollTop = log.scrollHeight;
+      setTimeout(() => {
+        bodyEl.textContent = body;
+        log.scrollTop = log.scrollHeight;
+      }, 900);
+    }
+  };
+
+  const setDisabled = (disabled) => {
+    input.disabled = disabled;
+    const sendBtn = cform.querySelector('.chat-send');
+    if (sendBtn) sendBtn.disabled = disabled;
+    document.querySelectorAll('.chip').forEach(c => (c.disabled = disabled));
+  };
+
+  const setPlaceholder = () => {
+    input.placeholder = count >= LIMIT ? 'conversation limit reached' : 'ask anything about sanskar…';
+  };
+
+  const send = (text) => {
+    text = (text || '').trim();
+    if (!text || busy) return;
+    if (count >= LIMIT) { addMessage('system', '// conversation limit reached — refresh to start over.'); return; }
+
+    busy = true;
+    setDisabled(true);
+    count += 1;
+    input.value = '';
+    addMessage('user', text);
+
+    const reply = getAnswer(text);
+    setTimeout(() => {
+      addMessage('bot', reply, true);
+      busy = false;
+      setDisabled(false);
+      setPlaceholder();
+    }, 400);
+  };
+
+  cform.addEventListener('submit', e => {
+    e.preventDefault();
+    send(input.value);
+  });
+
+  setDisabled(false);
 })();
 
 // =====================================================

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sanskar Man Pradhan — Frontend Developer & Portfolio</title>
+    <title>Sanskar Man Pradhan — Frontend Developer &amp; Content Writer</title>
     <meta
       name="description"
       content="Sanskar Man Pradhan — BCA student, frontend developer, and content writer based in Lalitpur, Nepal."
@@ -13,6 +13,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="alternate icon" href="favicon.svg" />
+    <meta name="theme-color" content="#0a0a0a" />
 
     <!-- Open Graph / social sharing -->
     <meta property="og:type" content="website" />
@@ -53,11 +54,11 @@
     }
     </script>
 
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <!-- Font Awesome (icons) -->
@@ -68,129 +69,45 @@
     />
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="css/style.css" />
-    <meta name="theme-color" content="#0a0a12" />
   </head>
-  <body class="theme-dark">
-    <!-- Skip link for accessibility -->
-    <a class="skip-link" href="#main">Skip to main content</a>
+  <body>
+    <!-- Layered background -->
+    <div class="bg-layer bg-grid" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-base" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-torch" aria-hidden="true"></div>
+    <div class="bg-layer bg-vignette" aria-hidden="true"></div>
 
-    <!-- Page loader: animated SVG logo -->
-    <div id="page-loader" aria-hidden="false">
-      <div class="loader-inner">
-        <div class="loader-logo">
-          <svg
-            width="64"
-            height="64"
-            viewBox="0 0 64 64"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#7f5af0" />
-                <stop offset="100%" stop-color="#2cb67d" />
-              </linearGradient>
-            </defs>
-            <rect
-              width="64"
-              height="64"
-              rx="16"
-              fill="url(#lg1)"
-              opacity="0.15"
-            />
-            <rect
-              x="2"
-              y="2"
-              width="60"
-              height="60"
-              rx="14"
-              stroke="url(#lg1)"
-              stroke-width="2"
-              fill="none"
-            />
-            <text
-              x="50%"
-              y="54%"
-              dominant-baseline="middle"
-              text-anchor="middle"
-              font-family="Space Grotesk, sans-serif"
-              font-weight="700"
-              font-size="22"
-              fill="url(#lg1)"
-            >
-              SMP
-            </text>
-          </svg>
-          <div class="loader-pulse"></div>
-        </div>
-      </div>
-    </div>
+    <a class="skip-link" href="#main">Skip to main content</a>
 
     <!-- Top scroll progress bar -->
     <div id="scroll-progress" aria-hidden="true"></div>
 
-    <!-- === NAVBAR === -->
-    <header id="site-header" class="nav-blur" role="banner">
+    <!-- Navbar -->
+    <header id="site-header" role="banner">
       <nav class="navbar container" aria-label="Primary navigation">
         <a href="#home" class="brand" aria-label="Homepage">
-          <span class="brand-initials" aria-hidden="true">
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="navLg" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#7f5af0" />
-                  <stop offset="100%" stop-color="#2cb67d" />
-                </linearGradient>
-              </defs>
-              <rect width="40" height="40" rx="10" fill="url(#navLg)" />
-              <text
-                x="50%"
-                y="54%"
-                dominant-baseline="middle"
-                text-anchor="middle"
-                font-family="Space Grotesk, sans-serif"
-                font-weight="700"
-                font-size="14"
-                fill="#fff"
-              >
-                SMP
-              </text>
-            </svg>
-          </span>
-          <span class="brand-name">Sanskar Man Pradhan</span>
+          <span class="brand-glyph" aria-hidden="true">~/</span>
+          <span class="brand-name">sanskar</span>
         </a>
 
-        <div class="nav-controls">
-          <button
-            id="theme-toggle"
-            class="icon-btn"
-            aria-label="Toggle theme"
-            title="Toggle theme"
-          >
-            <i class="fa-solid fa-moon"></i>
-          </button>
-          <button
-            id="hamburger"
-            class="hamburger"
-            aria-label="Open menu"
-            aria-expanded="false"
-          >
-            <span></span><span></span><span></span>
-          </button>
-        </div>
+        <button id="theme-toggle" class="nav-btn" aria-label="Toggle theme" title="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button
+          id="hamburger"
+          class="hamburger"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
 
         <ul class="nav-links" id="nav-links">
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#experience">Experience</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#social">Social</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -199,847 +116,473 @@
     <!-- Floating hire-me button -->
     <a id="hire-me" class="hire-me" href="#contact" aria-label="Hire me">
       <i class="fa-solid fa-paper-plane"></i>
-      <span>Hire Me</span>
+      <span>hire me</span>
     </a>
 
-    <!-- Custom cursor elements (desktop only) -->
-    <div id="cursor" aria-hidden="true"></div>
-    <div id="cursor-trail" aria-hidden="true"></div>
-
-    <!-- === HERO SECTION === -->
     <main id="main">
-      <section id="home" class="hero-section" aria-labelledby="hero-heading">
-        <canvas id="bg-canvas" aria-hidden="true"></canvas>
+      <!-- ============ HERO ============ -->
+      <section id="home" class="hero-section container" aria-labelledby="hero-heading">
+        <div class="hero-content">
+          <div class="availability">
+            <span class="dot" aria-hidden="true"></span>
+            <span>AVAILABLE · open to roles &amp; freelance</span>
+          </div>
 
-        <div class="hero-inner container">
-          <div class="hero-left">
-            <div class="hero-badge">
-              <i class="fa-solid fa-circle-dot hero-badge-dot"></i>
-              Available for work
-            </div>
-            <h1 id="hero-heading" class="hero-title">
-              <span class="gradient-text">Sanskar Man<br />Pradhan</span>
-            </h1>
-            <p class="hero-tagline">I build beautiful web experiences.</p>
+          <p class="hero-prefix">$ whoami</p>
+          <h1 id="hero-heading" class="hero-title">
+            <span class="accent">hi, I'm</span> Sanskar Man Pradhan
+          </h1>
+          <p class="hero-role">Frontend Developer · Content Writer · BCA Student</p>
+          <p class="hero-loc">Lalitpur, Nepal</p>
 
-            <div class="typewriter" aria-hidden="false">
-              <span id="typewriter-text"></span
-              ><span class="cursor-blink">|</span>
-            </div>
+          <p class="hero-summary">
+            I craft clean, responsive web experiences and write content that
+            connects. From WordPress and WooCommerce sites to hand-built
+            HTML/CSS/JS, I ship work that's designed to be used.
+          </p>
 
-            <div class="hero-ctas">
-              <a class="btn primary" href="#projects">
-                <i class="fa-solid fa-eye"></i>
-                See My Work
-              </a>
-              <a class="btn ghost" href="assets/Sanskar-Man-Pradhan-CV.pdf" download>
-                <i class="fa-solid fa-download"></i>
-                Download CV
-              </a>
-            </div>
+          <div class="typewriter" aria-hidden="false">
+            <span class="prompt">$</span>
+            <span id="typewriter-text"></span><span class="cursor-blink">▍</span>
+          </div>
 
-            <a href="#about" class="scroll-down" aria-label="Scroll down">
-              <i class="fa-solid fa-chevron-down"></i>
+          <div class="hero-ctas">
+            <a class="btn primary" href="#projects">
+              <i class="fa-solid fa-terminal"></i> ls projects/
+            </a>
+            <a class="btn ghost" href="#contact">
+              <i class="fa-solid fa-paper-plane"></i> get in touch
+            </a>
+            <a class="btn ghost" href="assets/Sanskar-Man-Pradhan-CV.pdf" download>
+              <i class="fa-solid fa-download"></i> cv.pdf
             </a>
           </div>
 
-          <aside class="hero-right">
-            <div class="profile-ring-wrap">
-              <div class="profile-ring"></div>
-              <div class="profile-photo" role="img" aria-label="Profile photo">
-                <picture>
-                  <source srcset="assets/Sanskar-Profile.jpg" type="image/jpg" />
-                  <img
-                    src="assets/Sanskar-Profile.jpg"
-                    alt="Sanskar Man Pradhan profile photo"
-                    loading="eager"
-                    fetchpriority="high"
-                    width="240"
-                    height="240"
-                  />
-                </picture>
+          <div class="hero-social">
+            <a href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" class="social-link"><i class="fa-brands fa-github"></i> github</a>
+            <a href="https://www.linkedin.com/in/sanskar-pradhan-246622282/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" class="social-link"><i class="fa-brands fa-linkedin-in"></i> linkedin</a>
+            <a href="mailto:pradhansanskar86@gmail.com" aria-label="Email" class="social-link"><i class="fa-solid fa-envelope"></i> email</a>
+          </div>
+        </div>
+
+        <aside class="hero-aside">
+          <figure class="profile-frame">
+            <img
+              src="assets/dp.webp"
+              alt="Sanskar Man Pradhan profile photo"
+              loading="eager"
+              fetchpriority="high"
+              width="220"
+              height="220"
+            />
+            <figcaption class="profile-caption">~/profile.png</figcaption>
+          </figure>
+
+          <!-- ~/ask-me.sh chat widget -->
+          <div id="chat" class="chat-widget" aria-label="Ask Sanskar anything">
+            <span class="chat-corner tl" aria-hidden="true"></span>
+            <span class="chat-corner tr" aria-hidden="true"></span>
+            <span class="chat-corner bl" aria-hidden="true"></span>
+            <span class="chat-corner br" aria-hidden="true"></span>
+
+            <div class="chat-titlebar">
+              <span class="chat-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="chat-file">~/ask-me.sh</span>
+              <span class="chat-ready"><span class="blip" aria-hidden="true"></span> ready</span>
+            </div>
+
+            <div class="chat-log" id="chat-log" aria-live="polite" aria-label="Chat messages">
+              <div class="msg system">
+                <div class="msg-label">// system</div>
+                <div class="msg-body">connected to sanskar.dev — ask anything.</div>
               </div>
             </div>
-          </aside>
-        </div>
+
+            <div class="chat-chips" id="chat-chips"></div>
+
+            <form id="chat-form" class="chat-form" novalidate>
+              <span class="chat-prompt" aria-hidden="true">›</span>
+              <input
+                id="chat-input"
+                type="text"
+                autocomplete="off"
+                placeholder="ask anything about sanskar…"
+                aria-label="Ask a question"
+              />
+              <button type="submit" class="chat-send">send ↵</button>
+            </form>
+          </div>
+        </aside>
       </section>
 
-      <!-- === ABOUT ME === -->
-      <section
-        id="about"
-        class="about-section container fade-in-up"
-        aria-labelledby="about-heading"
-      >
-        <div class="section-header">
-          <span class="section-tag"
-            ><i class="fa-solid fa-user"></i> About</span
-          >
-          <h2 id="about-heading">About Me</h2>
-          <div class="section-line"></div>
+      <!-- ============ ABOUT ============ -->
+      <section id="about" class="section container" aria-labelledby="about-heading">
+        <div class="section-head">
+          <span class="section-id">01</span>
+          <div>
+            <h2 id="about-heading">About</h2>
+            <p class="section-path">~/about</p>
+          </div>
         </div>
 
         <div class="about-grid">
-          <div class="about-photo glass">
-            <picture>
-              <source srcset="assets/Sanskar-Image.jpg" type="image/jpg" />
-              <img src="assets/Sanskar-Image.jpg"
-                alt="Sanskar Man Pradhan"
-                loading="lazy"
-                width="400"
-                height="400"
-              />
-            </picture>
-          </div>
-          <div class="about-content">
-            <ul class="about-meta">
-              <li>
-                <i class="fa-solid fa-cake-candles meta-icon"></i>
-                <strong>Birth date:</strong>&nbsp;May 13, 2005
-              </li>
-              <li>
-                <i class="fa-solid fa-house meta-icon"></i>
-                <strong>Hometown:</strong>&nbsp;Mangalbazzar
-              </li>
-              <li>
-                <i class="fa-solid fa-location-dot meta-icon"></i>
-                <strong>Current city:</strong>&nbsp;Lalitpur, Nepal
-              </li>
+          <figure class="about-photo">
+            <img src="assets/Sanskar-Image.jpg" alt="Sanskar Man Pradhan" loading="lazy" />
+          </figure>
+
+          <div class="about-body">
+            <ul class="meta-list">
+              <li><span class="k">location</span><span class="v">Lalitpur, Nepal · GMT+5:45</span></li>
+              <li><span class="k">study</span><span class="v">BCA — Mega College</span></li>
+              <li><span class="k">role</span><span class="v">Content Writer — Longtail E-Media</span></li>
+              <li><span class="k">status</span><span class="v"><span class="dot" aria-hidden="true"></span> open to work</span></li>
             </ul>
-            <p class="about-paragraph">
+
+            <p class="about-text">
               I'm a BCA student and frontend developer with hands-on experience
-              in WordPress, WooCommerce, and content management systems. I
-              create and manage website content, including hotel-related content
-              writing, and also work with tools like Photoshop to support visual
-              design and layout. Alongside development, I'm currently learning
-              React and improving my web development skills.
+              in WordPress, WooCommerce, and content management systems. I create
+              and manage website content — including hotel-related content writing —
+              and support visual design and layout with tools like Photoshop.
+              Alongside development work, I'm currently learning React and
+              deepening my web development skills.
             </p>
 
-            <div class="fun-facts">
-              <div class="stat glass">
-                <div class="stat-icon"><i class="fa-solid fa-code"></i></div>
-                <div class="count" data-target="1">0</div>
-                <div class="label">Years coding</div>
+            <div class="stats">
+              <div class="stat">
+                <div class="stat-num count" data-target="1">0</div>
+                <div class="stat-label">year coding</div>
               </div>
-              <div class="stat glass">
-                <div class="stat-icon">
-                  <i class="fa-solid fa-folder-open"></i>
-                </div>
-                <div class="count" data-target="3">0</div>
-                <div class="label">Projects</div>
+              <div class="stat">
+                <div class="stat-num count" data-target="3">0</div>
+                <div class="stat-label">projects shipped</div>
               </div>
-              <div class="stat glass">
-                <div class="stat-icon"><i class="fa-solid fa-mug-hot"></i></div>
-                <div class="count" data-target="999">0</div>
-                <div class="label">Cups of coffee</div>
+              <div class="stat">
+                <div class="stat-num count" data-target="2">0</div>
+                <div class="stat-label">years writing</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- === LIFE TIMELINE === -->
-      <section
-        id="timeline"
-        class="timeline-section container fade-in-up"
-        aria-labelledby="timeline-heading"
-      >
-        <div class="section-header">
-          <span class="section-tag"
-            ><i class="fa-solid fa-timeline"></i> Journey</span
-          >
-          <h2 id="timeline-heading">Life Timeline</h2>
-          <div class="section-line"></div>
+      <!-- ============ EXPERIENCE ============ -->
+      <section id="experience" class="section container" aria-labelledby="experience-heading">
+        <div class="section-head">
+          <span class="section-id">02</span>
+          <div>
+            <h2 id="experience-heading">Experience &amp; Education</h2>
+            <p class="section-path">~/experience</p>
+          </div>
         </div>
 
-        <div class="timeline">
-          <div class="timeline-line" aria-hidden="true"></div>
+        <div class="exp-grid">
+          <div class="exp-col">
+            <h3 class="exp-col-title"><i class="fa-solid fa-briefcase"></i> work</h3>
 
-          <article class="timeline-item left">
-            <div class="timeline-card glass">
-              <div class="tl-icon violet"><i class="fa-solid fa-baby"></i></div>
-              <time>2005</time>
-              <h3>Where It All Began</h3>
-              <p>The beginning of my story.</p>
-            </div>
-          </article>
-
-          <article class="timeline-item right">
-            <div class="timeline-card glass">
-              <div class="tl-icon cyan"><i class="fa-solid fa-school"></i></div>
-              <time>2021</time>
-              <h3>School Graduation</h3>
-              <p>
-                Completed secondary education and built a foundation in
-                academics and basic computer skills.
-              </p>
-            </div>
-          </article>
-
-          <article class="timeline-item left">
-            <div class="timeline-card glass">
-              <div class="tl-icon violet">
-                <i class="fa-solid fa-graduation-cap"></i>
+            <article class="exp-card">
+              <div class="exp-card-head">
+                <div>
+                  <h4>Content Writer</h4>
+                  <p class="exp-company">Longtail E-Media</p>
+                </div>
+                <span class="exp-date">Aug 2024 – Present</span>
               </div>
-              <time>2021</time>
-              <h3>College Journey Begins</h3>
-              <p>Joined Mega College for higher secondary education.</p>
-            </div>
-          </article>
+              <span class="exp-tag">remote</span>
+              <ul>
+                <li>Write and manage website content, including hotel-related content.</li>
+                <li>Support basic server management and technical tasks.</li>
+                <li>Collaborate on CMS and content delivery workflows.</li>
+              </ul>
+            </article>
 
-          <article class="timeline-item right">
-            <div class="timeline-card glass">
-              <div class="tl-icon cyan"><i class="fa-solid fa-award"></i></div>
-              <time>2023</time>
-              <h3>College Graduation</h3>
-              <p>
-                Successfully completed higher secondary studies from Mega
-                College.
-              </p>
-            </div>
-          </article>
-
-          <article class="timeline-item left">
-            <div class="timeline-card glass">
-              <div class="tl-icon violet">
-                <i class="fa-solid fa-briefcase"></i>
+            <article class="exp-card">
+              <div class="exp-card-head">
+                <div>
+                  <h4>Receptionist</h4>
+                  <p class="exp-company">First Job</p>
+                </div>
+                <span class="exp-date">Aug 2023 – Nov 2023</span>
               </div>
-              <time>Aug 2023 – Nov 2023</time>
-              <h3>First Job</h3>
-              <p>
-                Worked as a Receptionist, gaining experience in communication,
-                customer handling, and office operations.
-              </p>
-            </div>
-          </article>
+              <span class="exp-tag">office</span>
+              <ul>
+                <li>Handled customer service and communication.</li>
+                <li>Managed day-to-day office operations.</li>
+              </ul>
+            </article>
+          </div>
 
-          <article class="timeline-item right">
-            <div class="timeline-card glass">
-              <div class="tl-icon cyan">
-                <i class="fa-solid fa-laptop-code"></i>
-              </div>
-              <time>2023</time>
-              <h3>Bachelor's Degree Begins</h3>
-              <p>
-                Enrolled in BCA (Bachelor in Computer Applications) at Mega
-                College.
-              </p>
-            </div>
-          </article>
+          <div class="exp-col">
+            <h3 class="exp-col-title"><i class="fa-solid fa-graduation-cap"></i> education</h3>
 
-          <article class="timeline-item left">
-            <div class="timeline-card glass">
-              <div class="tl-icon violet">
-                <i class="fa-solid fa-rocket"></i>
+            <article class="exp-card">
+              <div class="exp-card-head">
+                <div>
+                  <h4>Bachelor in Computer Applications (BCA)</h4>
+                  <p class="exp-company">Mega College</p>
+                </div>
+                <span class="exp-date">2023 – Present</span>
               </div>
-              <time>Aug 2024 – Present</time>
-              <h3>Professional Growth</h3>
-              <p>
-                Joined Longtail E-Media as a Content Writer.<br />
-                Also involved in basic server management and technical tasks.
-              </p>
-            </div>
-          </article>
+              <span class="exp-tag">ongoing</span>
+              <ul>
+                <li>Studying computer applications, programming, and web development.</li>
+                <li>Focusing on frontend technologies and building real projects.</li>
+              </ul>
+            </article>
+
+            <article class="exp-card">
+              <div class="exp-card-head">
+                <div>
+                  <h4>Higher Secondary (+2)</h4>
+                  <p class="exp-company">Mega College</p>
+                </div>
+                <span class="exp-date">2021 – 2023</span>
+              </div>
+              <span class="exp-tag">completed</span>
+              <ul>
+                <li>Completed higher secondary education.</li>
+                <li>Built a foundation in academics and basic computer skills.</li>
+              </ul>
+            </article>
+          </div>
         </div>
       </section>
 
-      <!-- === SKILLS & TECHNOLOGIES === -->
-      <section
-        id="skills"
-        class="skills-section container fade-in-up"
-        aria-labelledby="skills-heading"
-      >
-        <div class="section-header">
-          <span class="section-tag"
-            ><i class="fa-solid fa-wand-magic-sparkles"></i> Expertise</span
-          >
-          <h2 id="skills-heading">Skills &amp; Technologies</h2>
-          <div class="section-line"></div>
+      <!-- ============ SKILLS ============ -->
+      <section id="skills" class="section container" aria-labelledby="skills-heading">
+        <div class="section-head">
+          <span class="section-id">03</span>
+          <div>
+            <h2 id="skills-heading">Skills &amp; Tools</h2>
+            <p class="section-path">~/skills</p>
+          </div>
         </div>
 
         <div class="skills-grid">
-          <!-- Languages -->
-          <div class="skills-group glass">
-            <h3><i class="fa-solid fa-code skill-group-icon"></i> Languages</h3>
+          <div class="skills-group">
+            <h3>languages</h3>
             <ul class="skill-list">
               <li>
-                <div class="skill-name">
-                  <i class="fa-brands fa-html5 skill-icon orange"></i>
-                  HTML <span class="skill-percent">70%</span>
-                </div>
-                <div class="skill-bar" data-percent="70">
-                  <div class="skill-bar-fill"></div>
-                </div>
+                <div class="skill-name"><span class="skill-ico fa-brands fa-html5"></span> HTML <span class="pct">70%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-percent="70"></div></div>
               </li>
               <li>
-                <div class="skill-name">
-                  <i class="fa-brands fa-css3-alt skill-icon blue"></i>
-                  CSS <span class="skill-percent">50%</span>
-                </div>
-                <div class="skill-bar" data-percent="50">
-                  <div class="skill-bar-fill"></div>
-                </div>
+                <div class="skill-name"><span class="skill-ico fa-brands fa-css3-alt"></span> CSS <span class="pct">50%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-percent="50"></div></div>
               </li>
               <li>
-                <div class="skill-name">
-                  <i class="fa-brands fa-js skill-icon yellow"></i>
-                  JavaScript <span class="skill-percent">40%</span>
-                </div>
-                <div class="skill-bar" data-percent="40">
-                  <div class="skill-bar-fill"></div>
-                </div>
+                <div class="skill-name"><span class="skill-ico fa-brands fa-js"></span> JavaScript <span class="pct">40%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-percent="40"></div></div>
               </li>
               <li>
-                <div class="skill-name">
-                  <i class="fa-brands fa-php skill-icon purple"></i>
-                  PHP (Basic) <span class="skill-percent">45%</span>
-                </div>
-                <div class="skill-bar" data-percent="45">
-                  <div class="skill-bar-fill"></div>
-                </div>
+                <div class="skill-name"><span class="skill-ico fa-brands fa-php"></span> PHP <span class="pct">45%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-percent="45"></div></div>
               </li>
             </ul>
           </div>
 
-          <!-- Technologies -->
-          <div class="skills-group glass">
-            <h3>
-              <i class="fa-solid fa-layer-group skill-group-icon"></i>
-              Technologies
-            </h3>
+          <div class="skills-group">
+            <h3>technologies</h3>
             <ul class="skill-list">
               <li>
-                <div class="skill-name">
-                  <i class="fa-brands fa-wordpress skill-icon blue"></i>
-                  WordPress / WooCommerce <span class="skill-percent">65%</span>
-                </div>
-                <div class="skill-bar" data-percent="65">
-                  <div class="skill-bar-fill"></div>
-                </div>
+                <div class="skill-name"><span class="skill-ico fa-brands fa-wordpress"></span> WordPress / WooCommerce <span class="pct">65%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-percent="65"></div></div>
               </li>
               <li>
-                <div class="skill-name">
-                  <i
-                    class="fa-solid fa-mobile-screen-button skill-icon cyan"
-                  ></i>
-                  Responsive Design <span class="skill-percent">50%</span>
-                </div>
-                <div class="skill-bar" data-percent="50">
-                  <div class="skill-bar-fill"></div>
-                </div>
+                <div class="skill-name"><span class="skill-ico fa-solid fa-mobile-screen-button"></span> Responsive Design <span class="pct">50%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-percent="50"></div></div>
               </li>
               <li>
-                <div class="skill-name">
-                  <i class="fa-solid fa-magnifying-glass skill-icon green"></i>
-                  SEO Basics <span class="skill-percent">55%</span>
-                </div>
-                <div class="skill-bar" data-percent="55">
-                  <div class="skill-bar-fill"></div>
-                </div>
+                <div class="skill-name"><span class="skill-ico fa-solid fa-magnifying-glass"></span> SEO Basics <span class="pct">55%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-percent="55"></div></div>
               </li>
               <li>
-                <div class="skill-name">
-                  <i class="fa-solid fa-server skill-icon purple"></i>
-                  PHP Scripting <span class="skill-percent">50%</span>
-                </div>
-                <div class="skill-bar" data-percent="50">
-                  <div class="skill-bar-fill"></div>
-                </div>
+                <div class="skill-name"><span class="skill-ico fa-solid fa-server"></span> PHP Scripting <span class="pct">50%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-percent="50"></div></div>
               </li>
             </ul>
           </div>
 
-          <!-- Tools -->
-          <div class="skills-group glass">
-            <h3><i class="fa-solid fa-toolbox skill-group-icon"></i> Tools</h3>
-            <div class="tool-badges">
-              <span class="badge badge-gh">
-                <i class="fa-brands fa-github"></i> GitHub
-              </span>
-              <span class="badge badge-figma">
-                <i class="fa-brands fa-figma"></i> Figma
-              </span>
-              <span class="badge badge-ps">
-                <i class="fa-solid fa-paintbrush"></i> Photoshop
-              </span>
-              <span class="badge badge-term">
-                <i class="fa-solid fa-terminal"></i> Terminal
-              </span>
-              <span class="badge badge-wp">
-                <i class="fa-brands fa-wordpress"></i> WordPress
-              </span>
+          <div class="skills-group">
+            <h3>tools</h3>
+            <div class="tool-chips">
+              <span class="tool-chip"><i class="fa-brands fa-github"></i> GitHub</span>
+              <span class="tool-chip"><i class="fa-brands fa-figma"></i> Figma</span>
+              <span class="tool-chip"><i class="fa-solid fa-paintbrush"></i> Photoshop</span>
+              <span class="tool-chip"><i class="fa-solid fa-terminal"></i> Terminal</span>
+              <span class="tool-chip"><i class="fa-brands fa-wordpress"></i> WordPress</span>
             </div>
           </div>
         </div>
 
-        <!-- Learning -->
-        <div class="learning-row glass">
-          <div class="learning-header">
-            <i class="fa-solid fa-book-open-reader learning-icon"></i>
-            <h4>Currently Learning</h4>
-          </div>
-          <div class="learning-badges">
-            <span class="badge learning">
-              <i class="fa-brands fa-react"></i> React
-            </span>
-            <span class="badge learning">
-              <i class="fa-brands fa-js"></i> Advanced JavaScript
-            </span>
-            <span class="badge learning">
-              <i class="fa-solid fa-database"></i> Databases
-            </span>
-          </div>
+        <div class="learning">
+          <span class="learning-label">currently learning →</span>
+          <span class="tool-chip"><i class="fa-brands fa-react"></i> React</span>
+          <span class="tool-chip"><i class="fa-brands fa-js"></i> Advanced JS</span>
+          <span class="tool-chip"><i class="fa-solid fa-database"></i> Databases</span>
         </div>
       </section>
 
-      <!-- === PROJECTS / WORK === -->
-      <section
-        id="projects"
-        class="projects-section container fade-in-up"
-        aria-labelledby="projects-heading"
-      >
-        <div class="section-header">
-          <span class="section-tag"
-            ><i class="fa-solid fa-folder-open"></i> Work</span
-          >
-          <h2 id="projects-heading">Projects</h2>
-          <div class="section-line"></div>
+      <!-- ============ PROJECTS ============ -->
+      <section id="projects" class="section container" aria-labelledby="projects-heading">
+        <div class="section-head">
+          <span class="section-id">04</span>
+          <div>
+            <h2 id="projects-heading">Selected Projects</h2>
+            <p class="section-path">~/projects</p>
+          </div>
         </div>
 
         <div class="project-filters">
-          <button class="filter active" data-filter="all">
-            <i class="fa-solid fa-border-all"></i> All
-          </button>
-          <button class="filter" data-filter="web">
-            <i class="fa-solid fa-globe"></i> Web
-          </button>
-          <button class="filter" data-filter="design">
-            <i class="fa-solid fa-pen-ruler"></i> Design
-          </button>
-          <button class="filter" data-filter="other">
-            <i class="fa-solid fa-ellipsis"></i> Other
-          </button>
+          <button class="filter active" data-filter="all">all</button>
+          <button class="filter" data-filter="web">web</button>
+          <button class="filter" data-filter="design">design</button>
+          <button class="filter" data-filter="other">other</button>
         </div>
 
         <div class="projects-grid">
-          <article class="project-card glass" data-category="web">
-            <div
-              class="thumb thumb-gradient-1"
-              role="img"
-              aria-label="Project One thumbnail"
-            >
-              <div class="thumb-overlay">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
+          <article class="project-card" data-category="web">
+            <div class="project-num">01</div>
+            <div class="project-title">
+              <h3>Portfolio Website</h3>
+              <span class="project-lang">HTML · CSS · JS</span>
             </div>
-            <div class="project-body">
-              <h3>Project One</h3>
-              <p>A beautiful web project built with modern technologies.</p>
-              <div class="tags">
-                <span class="tag"><i class="fa-brands fa-html5"></i> HTML</span>
-                <span class="tag"
-                  ><i class="fa-brands fa-css3-alt"></i> CSS</span
-                >
-                <span class="tag"><i class="fa-brands fa-js"></i> JS</span>
-                <span class="tag"><i class="fa-brands fa-php"></i> PHP</span>
-              </div>
-              <div class="project-ctas">
-                <a
-                  class="btn small primary"
-                  href="https://github.com/Sanskarpra07"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i class="fa-solid fa-play"></i> Live Demo
-                </a>
-                <a
-                  class="btn small ghost"
-                  href="https://github.com/Sanskarpra07"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i class="fa-brands fa-github"></i> GitHub
-                </a>
-              </div>
+            <p>
+              This very portfolio — a responsive single-page site with dynamic
+              themes, layered background effects, an interactive terminal chat,
+              and a working contact form built with vanilla HTML, CSS, and JS.
+            </p>
+            <div class="project-tags">
+              <span class="tag"><i class="fa-brands fa-html5"></i> HTML</span>
+              <span class="tag"><i class="fa-brands fa-css3-alt"></i> CSS</span>
+              <span class="tag"><i class="fa-brands fa-js"></i> JS</span>
+            </div>
+            <div class="project-ctas">
+              <a class="btn small primary" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> live</a>
+              <a class="btn small ghost" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> github</a>
             </div>
           </article>
 
-          <article class="project-card glass" data-category="design">
-            <div
-              class="thumb thumb-gradient-2"
-              role="img"
-              aria-label="Project Two thumbnail"
-            >
-              <div class="thumb-overlay">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
+          <article class="project-card" data-category="web">
+            <div class="project-num">02</div>
+            <div class="project-title">
+              <h3>WordPress Content Site</h3>
+              <span class="project-lang">WordPress · WooCommerce</span>
             </div>
-            <div class="project-body">
-              <h3>Project Two</h3>
-              <p>A design-focused UI/UX case study and prototype.</p>
-              <div class="tags">
-                <span class="tag"
-                  ><i class="fa-brands fa-figma"></i> Figma</span
-                >
-              </div>
-              <div class="project-ctas">
-                <a
-                  class="btn small primary"
-                  href="https://github.com/Sanskarpra07"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i class="fa-solid fa-play"></i> Live Demo
-                </a>
-                <a
-                  class="btn small ghost"
-                  href="https://github.com/Sanskarpra07"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i class="fa-brands fa-github"></i> GitHub
-                </a>
-              </div>
+            <p>
+              Custom WordPress and WooCommerce site with managed content, SEO
+              basics, and responsive theming — built and maintained for a client.
+            </p>
+            <div class="project-tags">
+              <span class="tag"><i class="fa-brands fa-wordpress"></i> WordPress</span>
+              <span class="tag"><i class="fa-solid fa-cart-shopping"></i> WooCommerce</span>
+              <span class="tag"><i class="fa-solid fa-magnifying-glass"></i> SEO</span>
+            </div>
+            <div class="project-ctas">
+              <a class="btn small primary" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> live</a>
+              <a class="btn small ghost" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> github</a>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="design">
+            <div class="project-num">03</div>
+            <div class="project-title">
+              <h3>UI/UX Design Work</h3>
+              <span class="project-lang">Figma · Photoshop</span>
+            </div>
+            <p>
+              Design and layout work using Figma and Photoshop — creating clean
+              interfaces and supporting visual assets for web projects.
+            </p>
+            <div class="project-tags">
+              <span class="tag"><i class="fa-brands fa-figma"></i> Figma</span>
+              <span class="tag"><i class="fa-solid fa-paintbrush"></i> Photoshop</span>
+            </div>
+            <div class="project-ctas">
+              <a class="btn small primary" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> live</a>
+              <a class="btn small ghost" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> github</a>
             </div>
           </article>
         </div>
       </section>
 
-<!-- === SOCIAL MEDIA & LINKS === -->
-      <section
-        id="social"
-        class="social-section container fade-in-up"
-        aria-labelledby="social-heading"
-      >
-        <div class="section-header">
-          <span class="section-tag"
-            ><i class="fa-solid fa-share-nodes"></i> Links</span
-          >
-          <h2 id="social-heading">Connect</h2>
-          <div class="section-line"></div>
-        </div>
-
-        <div class="social-grid">
-          <article class="social-card glass">
-            <div class="social-icon-wrap gh">
-              <i class="fa-brands fa-github"></i>
-            </div>
-            <div class="social-info">
-              <h3>GitHub</h3>
-              <p>@Sanskarpra07</p>
-            </div>
-            <a
-              class="btn small primary"
-              href="https://github.com/Sanskarpra07"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit GitHub Profile"
-            >
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              Visit Profile
-            </a>
-          </article>
-
-          <article class="social-card glass">
-            <div class="social-icon-wrap li">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </div>
-            <div class="social-info">
-              <h3>LinkedIn</h3>
-              <p>Sanskar Pradhan</p>
-            </div>
-            <a
-              class="btn small primary"
-              href="https://www.linkedin.com/in/sanskar-pradhan-246622282/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit LinkedIn Profile"
-            >
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              Visit Profile
-            </a>
-          </article>
-
-          <article class="social-card glass">
-            <div class="social-icon-wrap email">
-              <i class="fa-solid fa-envelope"></i>
-            </div>
-            <div class="social-info">
-              <h3>Email</h3>
-              <p>pradhansanskar86@gmail.com</p>
-            </div>
-            <a
-              class="btn small primary"
-              href="mailto:pradhansanskar86@gmail.com"
-              aria-label="Send Email"
-            >
-              <i class="fa-solid fa-paper-plane"></i>
-              Send Email
-            </a>
-          </article>
-
-          <!-- Facebook Card -->
-          <article class="social-card glass">
-            <div class="social-icon-wrap fb">
-              <i class="fa-brands fa-facebook-f"></i>
-            </div>
-            <div class="social-info">
-              <h3>Facebook</h3>
-              <p>Sanskar Man Pradhan</p>
-            </div>
-            <a
-              class="btn small primary"
-              href="https://www.facebook.com/sanskar.pradhan.5/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit Facebook Profile"
-            >
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              Visit Profile
-            </a>
-          </article>
-
-          <!-- Instagram Card -->
-          <article class="social-card glass">
-            <div class="social-icon-wrap ig">
-              <i class="fa-brands fa-instagram"></i>
-            </div>
-            <div class="social-info">
-              <h3>Instagram</h3>
-              <p>@theofficial_sanskar</p>
-            </div>
-            <a
-              class="btn small primary"
-              href="https://www.instagram.com/theofficial_sanskar/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit Instagram Profile"
-            >
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              Visit Profile
-            </a>
-          </article>
-        </div>
-      </section>
-
-      <!-- === CONTACT SECTION === -->
-      <section
-        id="contact"
-        class="contact-section container fade-in-up"
-        aria-labelledby="contact-heading"
-      >
-        <div class="section-header">
-          <span class="section-tag"
-            ><i class="fa-solid fa-envelope"></i> Contact</span
-          >
-          <h2 id="contact-heading">Get In Touch</h2>
-          <div class="section-line"></div>
+      <!-- ============ CONTACT ============ -->
+      <section id="contact" class="section container" aria-labelledby="contact-heading">
+        <div class="section-head">
+          <span class="section-id">05</span>
+          <div>
+            <h2 id="contact-heading">Get In Touch</h2>
+            <p class="section-path">~/contact</p>
+          </div>
         </div>
 
         <div class="contact-grid">
-          <div class="contact-details glass">
-            <h3>Let's work together</h3>
+          <div class="contact-info">
             <p class="contact-intro">
               Have a project in mind or want to collaborate? I'd love to hear
-              from you.
+              from you. <span class="accent">● replies in &lt; 24h</span>
             </p>
             <ul class="contact-list">
-              <li>
-                <div class="contact-list-icon">
-                  <i class="fa-solid fa-envelope"></i>
-                </div>
-                <div>
-                  <strong>Email</strong>
-                  <a href="mailto:pradhansanskar86@gmail.com"
-                    >pradhansanskar86@gmail.com</a
-                  >
-                </div>
-              </li>
-              <li>
-                <div class="contact-list-icon">
-                  <i class="fa-solid fa-location-dot"></i>
-                </div>
-                <div>
-                  <strong>Location</strong>
-                  <span>Lalitpur, Nepal</span>
-                </div>
-              </li>
-              <li>
-                <div class="contact-list-icon">
-                  <i class="fa-brands fa-github"></i>
-                </div>
-                <div>
-                  <strong>GitHub</strong>
-                  <a
-                    href="https://github.com/Sanskarpra07"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Sanskarpra07</a
-                  >
-                </div>
-              </li>
+              <li><span class="contact-key">email</span><a class="contact-val" href="mailto:pradhansanskar86@gmail.com">pradhansanskar86@gmail.com</a></li>
+              <li><span class="contact-key">location</span><span class="contact-val">Lalitpur, Nepal · GMT+5:45</span></li>
+              <li><span class="contact-key">status</span><span class="contact-val">accepting work</span></li>
+              <li><span class="contact-key">stack</span><span class="contact-val">HTML / CSS / JS / WordPress / Photoshop</span></li>
+              <li><span class="contact-key">github</span><a class="contact-val" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer">@Sanskarpra07</a></li>
+              <li><span class="contact-key">linkedin</span><a class="contact-val" href="https://www.linkedin.com/in/sanskar-pradhan-246622282/" target="_blank" rel="noopener noreferrer">Sanskar Pradhan</a></li>
             </ul>
           </div>
 
-         <form id="contact-form" class="contact-form glass" action="https://formspree.io/f/xvzedvlq" method="POST" novalidate>
-            <!-- Honeypot field: hidden from real users, catches simple bots -->
+          <form id="contact-form" class="contact-form" action="https://formspree.io/f/xvzedvlq" method="POST" novalidate>
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-            <div class="form-row">
-              <label for="name"> <i class="fa-solid fa-user"></i> Name </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Your name"
-                required
-              />
+            <div class="field">
+              <label for="name">name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
             </div>
-            <div class="form-row">
-              <label for="email">
-                <i class="fa-solid fa-envelope"></i> Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="your@email.com"
-                required
-              />
+            <div class="field">
+              <label for="email">email</label>
+              <input id="email" name="email" type="email" placeholder="your@email.com" required />
             </div>
-            <div class="form-row">
-              <label for="subject">
-                <i class="fa-solid fa-tag"></i> Subject
-              </label>
-              <input
-                id="subject"
-                name="subject"
-                type="text"
-                placeholder="What's this about?"
-              />
+            <div class="field">
+              <label for="subject">subject</label>
+              <input id="subject" name="subject" type="text" placeholder="What's this about?" />
             </div>
-            <div class="form-row">
-              <label for="message">
-                <i class="fa-solid fa-message"></i> Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                placeholder="Tell me about your project..."
-                required
-              ></textarea>
+            <div class="field">
+              <label for="message">message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
             </div>
-            <div class="form-row form-actions">
-              <button type="submit" class="btn primary btn-full">
-                <i class="fa-solid fa-paper-plane"></i>
-                Send Message
-              </button>
+            <div class="field-actions">
+              <button type="submit" class="btn primary btn-full"><i class="fa-solid fa-paper-plane"></i> send message</button>
               <div id="form-status" role="status" aria-live="polite"></div>
             </div>
           </form>
         </div>
       </section>
-
-      <!-- === FOOTER === -->
-      <footer class="site-footer" role="contentinfo">
-        <div class="footer-container container">
-          <div class="footer-brand">
-            <span class="footer-logo">
-              <svg
-                width="36"
-                height="36"
-                viewBox="0 0 40 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient
-                    id="footerLg"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                  >
-                    <stop offset="0%" stop-color="#7f5af0" />
-                    <stop offset="100%" stop-color="#2cb67d" />
-                  </linearGradient>
-                </defs>
-                <rect width="40" height="40" rx="10" fill="url(#footerLg)" />
-                <text
-                  x="50%"
-                  y="54%"
-                  dominant-baseline="middle"
-                  text-anchor="middle"
-                  font-family="Space Grotesk, sans-serif"
-                  font-weight="700"
-                  font-size="14"
-                  fill="#fff"
-                >
-                  SMP
-                </text>
-              </svg>
-            </span>
-            <div>
-              <div class="brand-footer">Sanskar Man Pradhan</div>
-              <div class="footer-tagline">
-                Building the web, one pixel at a time ✨
-              </div>
-            </div>
-          </div>
-
-          <nav class="footer-nav" aria-label="Footer navigation">
-            <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
-            <a href="#about"><i class="fa-solid fa-user"></i> About</a>
-            <a href="#projects"
-              ><i class="fa-solid fa-folder-open"></i> Projects</a
-            >
-            <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
-          </nav>
-
-          <div class="footer-social">
-            <a
-              href="https://github.com/Sanskarpra07"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              class="footer-social-btn gh"
-            >
-              <i class="fa-brands fa-github"></i>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/sanskar-pradhan-246622282/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              class="footer-social-btn li"
-            >
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-            <a
-              href="mailto:pradhansanskar86@gmail.com"
-              aria-label="Email"
-              class="footer-social-btn email"
-            >
-              <i class="fa-solid fa-envelope"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="footer-bottom container">
-          <small>
-            Crafted with <span class="heart">❤️</span> by Sanskar Man Pradhan
-            &bull;
-            <span id="year"></span>
-          </small>
-          <button
-            id="back-to-top"
-            class="back-top-btn"
-            aria-label="Back to top"
-          >
-            <i class="fa-solid fa-arrow-up"></i>
-          </button>
-        </div>
-      </footer>
     </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="brand-glyph" aria-hidden="true">~/</span>
+          <span>Sanskar Man Pradhan</span>
+        </div>
+
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#home">home</a>
+          <a href="#about">about</a>
+          <a href="#experience">experience</a>
+          <a href="#projects">projects</a>
+          <a href="#contact">contact</a>
+        </nav>
+
+        <div class="footer-meta">
+          <span>© <span id="year"></span></span>
+          <span class="separator">/</span>
+          <span>built fullstack · self-hosted</span>
+        </div>
+      </div>
+    </footer>
+
+    <button id="back-to-top" class="back-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
     <!-- Scripts -->
     <script src="js/main.js" defer></script>
