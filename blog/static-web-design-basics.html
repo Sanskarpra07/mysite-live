@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Static Web Design Basics: When Simple Beats Complex — Sanskar Man Pradhan</title>
+    <meta
+      name="description"
+      content="Fast, reliable, easy to maintain — why a static page is often the right call and how to design one that looks polished."
+    />
+    <link rel="canonical" href="https://sanskar-manpradhan.com.np/blog/static-web-design-basics.html" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Sanskar Man Pradhan — Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Static Web Design Basics: When Simple Beats Complex" />
+    <meta property="og:description" content="Fast, reliable, easy to maintain — why a static page is often the right call." />
+    <meta property="og:url" content="https://sanskar-manpradhan.com.np/blog/static-web-design-basics.html" />
+    <meta property="og:image" content="https://sanskar-manpradhan.com.np/assets/dp.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Static Web Design Basics: When Simple Beats Complex" />
+    <meta name="twitter:description" content="Fast, reliable, easy to maintain — why a static page is often the right call." />
+    <meta name="twitter:image" content="https://sanskar-manpradhan.com.np/assets/dp.webp" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="bg-layer bg-grid" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-base" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-torch" aria-hidden="true"></div>
+    <div class="bg-layer bg-vignette" aria-hidden="true"></div>
+
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header id="site-header" role="banner">
+      <nav class="navbar container" aria-label="Primary navigation">
+        <a href="../index.html#home" class="brand" aria-label="Homepage">
+          <span class="brand-glyph" aria-hidden="true">~/</span>
+          <span class="brand-name">sanskar</span>
+        </a>
+        <button id="theme-toggle" class="nav-btn" aria-label="Toggle theme" title="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="section container">
+      <a class="btn ghost back-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> back to blog</a>
+
+      <article class="post-article">
+        <header class="post-header">
+          <span class="section-id">/blog</span>
+          <h1>Static Web Design Basics: When Simple Beats Complex</h1>
+          <p class="post-meta">Sanskar Man Pradhan · Jan 2026 · <span class="tag">Design</span></p>
+        </header>
+
+        <div class="post-body">
+          <p>
+            Not every website needs a content management system, a login panel,
+            or a database. For a huge number of projects — a personal portfolio,
+            a landing page, a small business brochure site — a static web page
+            is faster, safer, and easier to maintain. Simple often beats
+            complex.
+          </p>
+
+          <h2>Why go static?</h2>
+          <ul>
+            <li><strong>Speed.</strong> No server-side processing — pages load almost instantly.</li>
+            <li><strong>Reliability.</strong> Nothing to update, patch, or break behind the scenes.</li>
+            <li><strong>Security.</strong> Far smaller attack surface than a dynamic site.</li>
+            <li><strong>Cost.</strong> Can be hosted free on static hosting like GitHub Pages.</li>
+          </ul>
+
+          <h2>Designing a static page that looks great</h2>
+          <p>
+            A static site can still feel modern and polished. A few principles go
+            a long way: a clear visual hierarchy, consistent spacing, a solid
+            type scale, and a restrained color palette. Good design isn't about
+            how much you add — it's about how well the few things you keep work
+            together.
+          </p>
+
+          <h2>When to move beyond static</h2>
+          <p>
+            If you need user accounts, frequent content updates, e-commerce, or
+            dynamic features, a static page won't cut it. But if your goal is to
+            present clear information well, static is often the smarter choice —
+            and I'm happy to help you build it.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="brand-glyph" aria-hidden="true">~/</span>
+          <span>Sanskar Man Pradhan</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="../index.html#home">home</a>
+          <a href="../index.html#about">about</a>
+          <a href="../index.html#projects">projects</a>
+          <a href="../index.html#contact">contact</a>
+          <a href="index.html">blog</a>
+        </nav>
+        <div class="footer-meta">
+          <span>© <span id="year"></span></span>
+          <span class="separator">/</span>
+          <span>content &amp; static web design · self-hosted</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/main.js" defer></script>
+  </body>
+</html>

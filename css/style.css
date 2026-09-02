@@ -783,6 +783,47 @@ a.contact-val:hover { color: var(--accent); }
 .focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
 /* =====================================================
+   BLOG
+   ===================================================== */
+.blog-intro { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 28px; max-width: 620px; }
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+.post-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex; flex-direction: column; gap: 10px;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.post-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.post-date { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-faint); }
+.post-title { font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
+.post-title a { color: var(--text-bright); text-decoration: none; }
+.post-title a:hover { color: var(--accent); }
+.post-excerpt { color: var(--text-dim); font-size: 0.88rem; line-height: 1.7; flex: 1; }
+.post-meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-faint); margin-bottom: 24px; }
+.back-home { margin-top: 28px; }
+.back-link { margin-bottom: 24px; }
+
+.post-article {
+  max-width: 760px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  background: var(--bg); /* placeholder; body bg already layered */
+}
+.post-header h1 { font-size: 1.7rem; line-height: 1.25; margin: 12px 0 8px; color: var(--text-bright); }
+.post-body { color: var(--text-dim); font-size: 1rem; line-height: 1.8; }
+.post-body p { margin-bottom: 18px; }
+.post-body h2 { font-family: var(--font-mono); font-size: 1.05rem; color: var(--accent); margin: 28px 0 10px; }
+.post-body ul { margin: 0 0 18px; padding-left: 20px; }
+.post-body li { margin-bottom: 8px; }
+.post-body strong { color: var(--text-bright); }
+
+/* =====================================================
    RESPONSIVE
    ===================================================== */
 @media (max-width: 960px) {

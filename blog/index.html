@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog — Sanskar Man Pradhan</title>
+    <meta
+      name="description"
+      content="Blog by Sanskar Man Pradhan — content writing, website content handling, and static web design tips."
+    />
+    <link rel="canonical" href="https://sanskar-manpradhan.com.np/blog/" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sanskar Man Pradhan — Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Blog — Sanskar Man Pradhan" />
+    <meta
+      property="og:description"
+      content="Content writing, website content handling, and static web design tips from Sanskar Man Pradhan."
+    />
+    <meta property="og:url" content="https://sanskar-manpradhan.com.np/blog/" />
+    <meta property="og:image" content="https://sanskar-manpradhan.com.np/assets/dp.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Blog — Sanskar Man Pradhan" />
+    <meta
+      name="twitter:description"
+      content="Content writing, website content handling, and static web design tips from Sanskar Man Pradhan."
+    />
+    <meta name="twitter:image" content="https://sanskar-manpradhan.com.np/assets/dp.webp" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="bg-layer bg-grid" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-base" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-torch" aria-hidden="true"></div>
+    <div class="bg-layer bg-vignette" aria-hidden="true"></div>
+
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header id="site-header" role="banner">
+      <nav class="navbar container" aria-label="Primary navigation">
+        <a href="../index.html#home" class="brand" aria-label="Homepage">
+          <span class="brand-glyph" aria-hidden="true">~/</span>
+          <span class="brand-name">sanskar</span>
+        </a>
+
+        <button id="theme-toggle" class="nav-btn" aria-label="Toggle theme" title="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button
+          id="hamburger"
+          class="hamburger"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-links" id="nav-links">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="section container">
+      <div class="section-head">
+        <span class="section-id">blog</span>
+        <div>
+          <h2 id="blog-heading">Blog</h2>
+          <p class="section-path">~/blog</p>
+        </div>
+      </div>
+
+      <p class="blog-intro">
+        Original writing on content, website content handling, and static web
+        design. New posts regularly.
+      </p>
+
+      <div class="blog-grid">
+        <article class="post-card">
+          <div class="post-date">Feb 2026</div>
+          <h3 class="post-title"><a href="why-content-handling-matters.html">Why Content Handling Matters for Your Website</a></h3>
+          <p class="post-excerpt">
+            Structured, maintained content is what keeps a website useful and
+            findable. A look at how content handling affects SEO and user trust.
+          </p>
+          <span class="tag"><i class="fa-solid fa-pen"></i> Content</span>
+        </article>
+
+        <article class="post-card">
+          <div class="post-date">Jan 2026</div>
+          <h3 class="post-title"><a href="static-web-design-basics.html">Static Web Design Basics: When Simple Beats Complex</a></h3>
+          <p class="post-excerpt">
+            Fast, reliable, easy to maintain — why a static page is often the
+            right call and how to design one that looks polished.
+          </p>
+          <span class="tag"><i class="fa-solid fa-palette"></i> Design</span>
+        </article>
+      </div>
+
+      <div class="back-home">
+        <a class="btn ghost" href="../index.html"><i class="fa-solid fa-terminal"></i> back to home</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="brand-glyph" aria-hidden="true">~/</span>
+          <span>Sanskar Man Pradhan</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="../index.html#home">home</a>
+          <a href="../index.html#about">about</a>
+          <a href="../index.html#projects">projects</a>
+          <a href="../index.html#contact">contact</a>
+          <a href="index.html">blog</a>
+        </nav>
+        <div class="footer-meta">
+          <span>© <span id="year"></span></span>
+          <span class="separator">/</span>
+          <span>content &amp; static web design · self-hosted</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/main.js" defer></script>
+  </body>
+</html>
