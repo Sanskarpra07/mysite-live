@@ -1,6 +1,6 @@
 # Sanskar Man Pradhan — Personal Portfolio
 
-Single-page personal portfolio for Sanskar Man Pradhan (BCA student, frontend developer, and content writer, Lalitpur, Nepal), built with vanilla HTML, CSS and JavaScript. Live at [sanskar-manpradhan.com.np](https://sanskar-manpradhan.com.np/).
+Single-page personal portfolio for Sanskar Man Pradhan (BCA student, content writer/content handler, and static web designer, Lalitpur, Nepal), built with vanilla HTML, CSS and JavaScript. Live at [sanskar-manpradhan.com.np](https://sanskar-manpradhan.com.np/).
 
 ## Files
 
