@@ -175,7 +175,10 @@ const animate = (target) => {
     }, 16);
   });
 
-  target.querySelectorAll('.skill-bar .skill-fill').forEach(fill => {
+  target.querySelectorAll('.skill-bar').forEach((bar, i) => {
+    const fill = bar.querySelector('.skill-fill');
+    if (!fill) return;
+    fill.style.transitionDelay = `${i * 90}ms`;
     fill.style.width = fill.dataset.percent + '%';
   });
 };
