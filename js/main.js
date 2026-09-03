@@ -165,14 +165,17 @@ const animate = (target) => {
     if (el.dataset.started) return;
     el.dataset.started = '1';
     const goal = +el.dataset.target;
-    let cur = 0;
     const duration = 1400;
-    const step = goal / (duration / 16);
-    const iv = setInterval(() => {
-      cur = Math.min(cur + step, goal);
-      el.textContent = goal >= 100 ? Math.floor(cur).toLocaleString() : Math.floor(cur);
-      if (cur >= goal) clearInterval(iv);
-    }, 16);
+    let start = null;
+    const tick = (now) => {
+      if (start === null) start = now;
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(goal * eased);
+      el.textContent = goal >= 100 ? value.toLocaleString() : value;
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
   });
 
   target.querySelectorAll('.skill-bar').forEach((bar, i) => {
