@@ -218,6 +218,7 @@
                 <thead>
                   <tr>
                     <th>URL</th>
+                    <th class="hide-mobile">Last modified</th>
                     <th class="hide-mobile">Priority</th>
                     <th>Frequency</th>
                   </tr>
@@ -226,6 +227,7 @@
                   <xsl:for-each select="sm:urlset/sm:url">
                     <tr>
                       <td class="loc"><a href="{sm:loc}"><xsl:value-of select="sm:loc" /></a></td>
+                      <td class="muted hide-mobile"><xsl:value-of select="sm:lastmod" /></td>
                       <td class="muted hide-mobile"><xsl:value-of select="sm:priority" /></td>
                       <td><span class="tag"><xsl:value-of select="sm:changefreq" /></span></td>
                     </tr>
