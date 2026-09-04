@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>404 — page not found · Sanskar Man Pradhan</title>
+    <meta
+      name="description"
+      content="The page you're looking for doesn't exist. Head back to Sanskar Man Pradhan's portfolio."
+    />
+    <link rel="canonical" href="https://sanskar-manpradhan.com.np/404.html" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="robots" content="noindex" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sanskar Man Pradhan — Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="404 — page not found" />
+    <meta property="og:url" content="https://sanskar-manpradhan.com.np/404.html" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="404 — page not found" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --surface: #111111;
+        --surface-2: #161616;
+        --border: #2e2e2e;
+        --text: #e5e5e5;
+        --text-bright: #ffffff;
+        --text-dim: #9a9a9a;
+        --text-faint: #5a5a5a;
+        --accent: #00ff88;
+        --accent-ink: #001a0e;
+        --accent-dim: rgba(0, 255, 136, 0.12);
+        --accent-glow: rgba(0, 255, 136, 0.35);
+        --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+        --radius: 12px;
+        --radius-sm: 8px;
+      }
+      [data-theme="light"] {
+        --bg: #fafaf7;
+        --surface: #ffffff;
+        --surface-2: #f4f4f0;
+        --border: #e5e3dd;
+        --text: #1a1a1a;
+        --text-bright: #000000;
+        --text-dim: #6b6b6b;
+        --text-faint: #b0b0b0;
+        --accent: #00a85a;
+        --accent-ink: #ffffff;
+        --accent-dim: rgba(0, 168, 90, 0.12);
+        --accent-glow: rgba(0, 168, 90, 0.3);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: var(--font-sans);
+        background: var(--bg); color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        display: flex; flex-direction: column;
+        overflow-x: hidden;
+      }
+      a { color: inherit; text-decoration: none; }
+
+      .bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+      .bg-grid {
+        background-image:
+          linear-gradient(to right, var(--grid-line, rgba(255,255,255,0.05)) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--grid-line, rgba(255,255,255,0.05)) 1px, transparent 1px);
+        background-position: -1px -1px;
+        background-size: 96px 96px;
+      }
+      .bg-dots-base {
+        background-image: radial-gradient(circle, var(--dot-base, rgba(255,255,255,0.07)) 1px, transparent 1.4px);
+        background-size: 24px 24px;
+      }
+      .bg-vignette {
+        background: radial-gradient(ellipse at top, transparent 0%, var(--bg) 78%);
+        opacity: 0.8;
+      }
+      [data-theme="light"] {
+        --grid-line: rgba(0,0,0,0.06);
+        --dot-base: rgba(0,0,0,0.09);
+      }
+
+      #site-header {
+        position: sticky; top: 0; z-index: 500;
+        background: var(--bg); border-bottom: 1px solid var(--border);
+      }
+      .navbar {
+        max-width: 1100px; margin: 0 auto;
+        padding: 14px clamp(18px, 4vw, 32px);
+        display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      }
+      .brand {
+        display: flex; align-items: center; gap: 6px;
+        font-family: var(--font-mono); font-weight: 600; font-size: 0.95rem;
+        color: var(--text);
+      }
+      .brand-glyph { color: var(--accent); }
+      .nav-btn {
+        display: flex; align-items: center; justify-content: center;
+        width: 38px; height: 38px;
+        background: transparent; border: 1px solid var(--border);
+        border-radius: var(--radius-sm); color: var(--text-dim); font-size: 0.95rem;
+        cursor: pointer; transition: color 0.2s, border-color 0.2s;
+      }
+      .nav-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+      main { position: relative; z-index: 1; flex: 1; display: flex; align-items: center; }
+
+      .terminal {
+        max-width: 680px; width: 100%;
+        margin: 0 auto;
+        padding: clamp(40px, 8vw, 80px) clamp(18px, 6vw, 48px);
+      }
+      .term-window {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--surface);
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      }
+      .term-bar {
+        display: flex; align-items: center; gap: 8px;
+        padding: 12px 16px;
+        background: var(--surface-2);
+        border-bottom: 1px solid var(--border);
+        font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);
+      }
+      .term-dots { display: inline-flex; gap: 5px; }
+      .term-dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--text-faint); }
+      .term-dots i:last-child { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+      .term-file { margin-left: 6px; }
+      .term-body { padding: 24px 28px; font-family: var(--font-mono); }
+      .line { color: var(--text-dim); font-size: 0.85rem; word-break: break-all; }
+      .line .prompt { color: var(--accent); }
+      .code-404 {
+        font-size: clamp(3.2rem, 12vw, 6rem);
+        font-weight: 700; letter-spacing: -0.04em;
+        color: var(--accent); line-height: 1; margin: 16px 0 8px;
+        text-shadow: 0 0 30px var(--accent-glow);
+      }
+      .msg {
+        color: var(--text-bright); font-size: 1.05rem;
+        margin-bottom: 6px; font-family: var(--font-mono);
+      }
+      .hint { color: var(--text-faint); font-size: 0.78rem; margin: 18px 0 26px; line-height: 1.8; }
+      .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 11px 18px; border-radius: var(--radius-sm);
+        font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600;
+        border: 1px solid transparent; cursor: pointer; transition: all 0.2s;
+      }
+      .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+      .btn.primary:hover { box-shadow: 0 6px 24px var(--accent-glow); transform: translateY(-1px); }
+      .btn.ghost { background: transparent; border-color: var(--border); color: var(--text); }
+      .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+      .blink { animation: blink 1s steps(2, start) infinite; color: var(--accent); }
+      @keyframes blink { 50% { opacity: 0; } }
+
+      @media (max-width: 480px) {
+        .term-body { padding: 18px 16px; }
+        .actions { flex-direction: column; }
+        .actions .btn { justify-content: center; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-layer bg-grid" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-base" aria-hidden="true"></div>
+    <div class="bg-layer bg-vignette" aria-hidden="true"></div>
+
+    <header id="site-header" role="banner">
+      <nav class="navbar" aria-label="Primary navigation">
+        <a href="/" class="brand" aria-label="Homepage">
+          <span class="brand-glyph" aria-hidden="true">~/</span>
+          <span class="brand-name">sanskar</span>
+        </a>
+        <button id="theme-toggle" class="nav-btn" aria-label="Toggle theme" title="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <div class="terminal">
+        <div class="term-window" role="alert">
+          <div class="term-bar">
+            <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="term-file">~/404.sh</span>
+          </div>
+          <div class="term-body">
+            <div class="line"><span class="prompt">$</span> ls ./requested/page</div>
+            <div class="line" style="color:var(--text-faint)">ls: cannot access 'page': No such file or directory</div>
+            <div class="code-404">404</div>
+            <div class="msg">nothing found here.</div>
+            <p class="hint">
+              the page you're looking for doesn't exist — it may have moved,
+              been renamed, or never existed. the files you're probably after are below.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="/"><i class="fa-solid fa-terminal"></i> cd ~/</a>
+              <a class="btn ghost" href="/blog/"><i class="fa-solid fa-pen"></i> blog</a>
+              <a class="btn ghost" href="/sitemap.xml"><i class="fa-solid fa-list"></i> sitemap</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script>
+    const t = document.getElementById('theme-toggle');
+    const icon = t ? t.querySelector('i') : null;
+    const root = document.documentElement;
+    const apply = (theme) => {
+      root.setAttribute('data-theme', theme);
+      if (icon) { icon.classList.toggle('fa-moon', theme !== 'light'); icon.classList.toggle('fa-sun', theme === 'light'); }
+    };
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') apply('light');
+    if (t) t.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      apply(next);
+      localStorage.setItem('theme', next);
+    });
+  </script>
+  <script data-goatcounter="https://sanskar.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</html>
