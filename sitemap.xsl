@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="noindex" />
         <meta name="theme-color" content="#0a0a0a" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <title>~/sitemap — Sanskar Man Pradhan</title>
         <style>
           /* ===== design tokens (match site) ===== */
