@@ -1,86 +1,79 @@
-# Sanskar Man Pradhan — Personal Portfolio
+# Sanskar Man Pradhan — Portfolio
 
-A personal portfolio website for **Sanskar Man Pradhan** — BCA student, content
-writer/content handler, and static web designer based in Lalitpur, Nepal.
-
-Built with **plain HTML, CSS and JavaScript** (no frameworks). Designed with a
-dark, terminal-inspired developer theme. Live at
+My personal portfolio site. Content writer, content handler, and static web
+designer based in Lalitpur, Nepal. Built with plain HTML, CSS, and JavaScript —
+no frameworks, no build tools, just files served as-is. Live at
 [sanskar-manpradhan.com.np](https://sanskar-manpradhan.com.np/).
 
 ---
 
-## Pages & Structure
+## What's on the site
 
-| Page | Purpose |
+- **Single-page portfolio** — Hero, About, Experience & Education, Skills,
+  Projects, Contact. Everything on one page.
+- **Blog** — a separate section with articles on content handling and static web
+  design.
+
+| Page | What it does |
 | --- | --- |
-| `index.html` | Single-page portfolio: Hero, About, Experience & Education, Skills, Projects, Contact. |
+| `index.html` | The portfolio itself — all sections, one scroll. |
 | `blog/index.html` | Blog landing page listing all posts. |
-| `blog/why-content-handling-matters.html` | Blog post on content structure & SEO. |
-| `blog/static-web-design-basics.html` | Blog post on building clean static pages. |
-
-Every major section is commented in the source so it is easy to find and edit.
+| `blog/why-content-handling-matters.html` | Why content structure and maintenance matter more than design. |
+| `blog/static-web-design-basics.html` | Why a static page is the right call for most small projects. |
 
 ---
 
 ## Files
 
-- `index.html` — page structure and content (one comment per section).
-- `css/style.css` — all styling. Colors and fonts are driven by CSS variables in
-  `:root`; `[data-theme="light"]` holds the light-mode overrides.
-- `js/main.js` — theme toggle, mobile menu, smooth scroll, animated
-  mouse-tracking background, stats counters, scroll progress bar, and the
-  built-in chat assistant.
+- `index.html` — the page. Sections are commented so they're easy to find.
+- `css/style.css` — all styling. Colors and fonts live in CSS variables in
+  `:root`; `[data-theme="light"]` handles the light mode overrides.
+- `js/main.js` — theme toggle, mobile menu, smooth scroll, mouse-tracking
+  background, stats counters, scroll progress bar, and the chat assistant.
 - `assets/` — profile photos, downloadable CV (PDF), and supporting images.
-- `blog/` — blog landing page and individual post pages.
-- `sitemap.xml` — SEO crawl config listing every page for the live domain.
-- `sitemap.xsl` — stylesheet that renders `sitemap.xml` in the browser with the
-  same design as the site.
+- `blog/` — blog pages.
+- `404.html` — custom 404 page.
+- `sitemap.xml` — every page listed for search crawlers.
+- `sitemap.xsl` — makes `sitemap.xml` render as a clean table in the browser.
 - `robots.txt` — points crawlers to the sitemap.
-- `favicon.svg` — site favicon.
+- `favicon.png` — site favicon.
+- `favicon.svg` — vector version.
+- `CNAME` — custom domain config for GitHub Pages.
 
 ---
 
 ## Features
 
-- **Dark / light theme toggle**, persisted in `localStorage` via the
-  `data-theme` attribute on `<html>`.
-- **Terminal-style visual theme** — layered grid and dot backgrounds with a
-  green accent, plus a mouse-tracking spot effect on the hero.
-- **Fully responsive** layout with a hamburger mobile menu.
-- **Live chat assistant** — a small terminal-style AI chat built into the
-  Contact section (no external widget).
-- **Blog** for sharing content-writing and web-development articles.
-- **SEO-friendly**:
-  - JSON-LD **`Person` + `WebSite`** structured data linking the site to all
-    social profiles (GitHub, LinkedIn, Facebook, Instagram, email) for
-    search-engine entity recognition.
-  - Open Graph / Twitter Card meta tags for nice social-sharing previews.
-  - `canonical` URL, `robots.txt`, and a complete `sitemap.xml`.
-- **Styled sitemap** — viewed in a browser, `sitemap.xml` renders as a
-  clean, on-brand table thanks to `sitemap.xsl`.
-- Downloadable **CV** and real profile imagery.
+- **Dark / light theme** — toggled via `data-theme` on `<html>`, persisted in
+  `localStorage`.
+- **Terminal-style look** — layered grid and dot backgrounds, green accent, mouse
+  tracking spot on the hero.
+- **Fully responsive** — hamburger menu on mobile, fluid layout throughout.
+- **Chat assistant** — a terminal-style widget in the Contact section. No
+  external service, just JavaScript.
+- **Blog** — for content writing and web development articles.
+- **SEO** — JSON-LD structured data (Person + WebSite), Open Graph and Twitter
+  Card meta tags, canonical URLs, robots.txt, and a full sitemap.
+- **Styled sitemap** — open `sitemap.xml` in a browser and it renders as an
+  on-brand table.
+- **Downloadable CV** and real profile photos, not stock images.
 
 ---
 
-## Styling
+## How it's built
 
-Fonts are loaded from Google Fonts: **JetBrains Mono** for the terminal/dev text
-and **Inter** for body copy. Icons come from **Font Awesome** via CDN.
+Fonts come from Google Fonts — JetBrains Mono for terminal/developer text, Inter
+for body copy. Icons are from Font Awesome via CDN. Everything else is hand-coded.
 
----
+The contact form posts to Formspree. A fake `_gotcha` field filters bots.
 
-## Accessibility & Performance
-
-- Semantic HTML, skip-to-content link, and `aria-label`s throughout.
-- Images set `loading="lazy"` (the hero image loads eagerly with
-  `fetchpriority="high"`) and include `width`/`height` to avoid layout shift.
-- The contact form posts to **Formspree**; a fake `_gotcha` honeypot filters
-  bots.
+Semantic HTML throughout — skip-to-content link, `aria-label`s on interactive
+elements, `loading="lazy"` on images (the hero loads eagerly with
+`fetchpriority="high"`), and `width`/`height` set to prevent layout shift.
 
 ---
 
-## Deployment
+## Hosting
 
-Static site hosted on **GitHub Pages** with a custom domain configured via the
-`CNAME` file. To push updates, commit and push to the deployed branch — GitHub
-Pages serves the published files automatically.
+Static site on GitHub Pages with a custom domain. Push to the deployed branch
+and GitHub Pages serves it automatically — no build step, no deployment pipeline.
