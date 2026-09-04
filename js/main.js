@@ -21,6 +21,9 @@ if (themeToggle) {
     const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     applyTheme(next);
     localStorage.setItem('theme', next);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    root.classList.add('theme-fading');
+    setTimeout(() => root.classList.remove('theme-fading'), 350);
   });
 }
 
