@@ -180,6 +180,44 @@ button { font-family: inherit; cursor: pointer; }
 .nav-links a:hover { color: var(--text-bright); background: var(--surface-2); }
 .nav-links a.active { color: var(--accent); }
 
+/* Nav dropdown (submenu) */
+.nav-drop { position: relative; }
+.nav-drop-toggle { display: inline-flex; align-items: center; gap: 6px; }
+.nav-drop .nav-caret { font-size: 0.62rem; color: var(--text-faint); transition: transform 0.2s ease; }
+.nav-drop:hover .nav-caret,
+.nav-drop:focus-within .nav-caret,
+.nav-drop.open .nav-caret { transform: rotate(180deg); }
+
+.nav-drop-menu {
+  display: none;
+  position: absolute; top: calc(100% + 8px); left: 0;
+  min-width: 210px; padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+  z-index: 600;
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop:focus-within .nav-drop-menu,
+.nav-drop.open .nav-drop-menu { display: block; }
+.nav-drop-menu li { flex: none; }
+.nav-drop-menu a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px !important;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem !important;
+  color: var(--text-dim);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.nav-drop-menu a:hover { color: var(--text-bright); background: var(--surface-2); }
+.nav-drop-menu .drop-ico {
+  width: 16px; text-align: center;
+  color: var(--accent); font-size: 0.85rem; flex-shrink: 0;
+}
+.nav-drop-menu span { display: flex; flex-direction: column; line-height: 1.35; }
+.nav-drop-menu small { font-size: 0.68rem; color: var(--text-faint); }
+
 /* Nav buttons */
 .nav-btn {
   display: flex; align-items: center; justify-content: center;
@@ -224,6 +262,22 @@ button { font-family: inherit; cursor: pointer; }
     overflow-y: auto;
   }
   .nav-mobile-open a { padding: 10px 12px; }
+
+  /* Dropdown becomes an inline accordion in the mobile menu */
+  .nav-drop { width: 100%; }
+  .nav-drop-toggle { width: 100%; justify-content: space-between; padding: 10px 12px !important; }
+  .nav-drop:hover .nav-drop-menu,
+  .nav-drop:focus-within .nav-drop-menu { display: none; }
+  .nav-drop.open .nav-drop-menu { display: block; }
+  .nav-drop-menu {
+    position: static;
+    min-width: 0; margin: 0 0 4px;
+    padding: 4px 0 4px 12px;
+    background: transparent;
+    border: 0; border-top: 1px dashed var(--border);
+    border-radius: 0; box-shadow: none;
+  }
+  .nav-drop-menu a { padding: 8px 12px !important; }
 }
 
 /* =====================================================
