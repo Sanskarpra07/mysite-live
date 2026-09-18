@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Mini Projects — Sanskar Man Pradhan</title>
+    <meta
+      name="description"
+      content="Small experiments by Sanskar Man Pradhan — pomodoro timer, to-do list, calculator, password generator, dice roller, and word counter. All hand-built with vanilla JavaScript."
+    />
+    <link rel="canonical" href="https://sanskar-manpradhan.com.np/mini-projects.html" />
+    <link rel="icon" type="image/png" href="../favicon.png" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sanskar Man Pradhan — Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Mini Projects — Sanskar Man Pradhan" />
+    <meta
+      property="og:description"
+      content="Small experiments — pomodoro timer, to-do list, calculator, password generator, dice roller, and word counter."
+    />
+    <meta property="og:url" content="https://sanskar-manpradhan.com.np/mini-projects.html" />
+    <meta property="og:image" content="https://sanskar-manpradhan.com.np/assets/dp.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mini Projects — Sanskar Man Pradhan" />
+    <meta
+      name="twitter:description"
+      content="Small experiments by Sanskar Man Pradhan, hand-built with vanilla JavaScript."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mini-projects.css" />
+  </head>
+  <body>
+    <div class="bg-layer bg-grid" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-base" aria-hidden="true"></div>
+    <div class="bg-layer bg-dots-torch" aria-hidden="true"></div>
+    <div class="bg-layer bg-vignette" aria-hidden="true"></div>
+
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header id="site-header" role="banner">
+      <nav class="navbar container" aria-label="Primary navigation">
+        <a href="../index.html#home" class="brand" aria-label="Homepage">
+          <span class="brand-glyph" aria-hidden="true">~/</span>
+          <span class="brand-name">sanskar</span>
+        </a>
+
+        <button id="theme-toggle" class="nav-btn" aria-label="Toggle theme" title="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button id="hamburger" class="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="nav-links" id="nav-links">
+          <li><a href="../index.html#home">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li class="nav-drop">
+            <a href="../index.html#projects" class="nav-drop-toggle" aria-expanded="false" aria-haspopup="true">
+              Projects <i class="fa-solid fa-chevron-down nav-caret" aria-hidden="true"></i>
+            </a>
+            <ul class="nav-drop-menu" aria-label="Projects submenu">
+              <li><a href="../index.html#projects"><i class="fa-solid fa-layer-group drop-ico" aria-hidden="true"></i><span>selected projects<small>featured work</small></span></a></li>
+              <li><a href="../mini-projects.html"><i class="fa-solid fa-flask drop-ico" aria-hidden="true"></i><span>mini projects<small>small experiments</small></span></a></li>
+            </ul>
+          </li>
+          <li><a href="../index.html#contact">Contact</a></li>
+          <li><a href="../blog/index.html">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="section container">
+      <div class="section-head">
+        <span class="section-id">mp</span>
+        <div>
+          <h2 id="mini-heading">Mini Projects</h2>
+          <p class="section-path">~/mini-projects</p>
+        </div>
+      </div>
+
+      <p class="blog-intro">
+        Small, self-contained experiments I build to practise JavaScript and
+        design — no frameworks, just vanilla code. Tinker with each one below.
+      </p>
+
+      <div class="mp-grid">
+
+        <!-- ============ POMODORO ============ -->
+        <article class="mp-card" id="pomodoro">
+          <div class="mp-bar"><span class="mp-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mp-file">pomodoro.js</span></div>
+          <div class="mp-body">
+            <div class="mp-title">
+              <h3>Pomodoro Timer</h3>
+              <span class="mp-lang">js</span>
+            </div>
+            <div class="demo" data-demo="pomodoro">
+              <div class="pt-session">focus</div>
+              <div class="pt-time">25:00</div>
+              <div class="pt-modes">
+                <button type="button" class="pt-mode active" data-mode="focus">25m</button>
+                <button type="button" class="pt-mode" data-mode="short">5m</button>
+                <button type="button" class="pt-mode" data-mode="long">15m</button>
+              </div>
+              <div class="pt-actions">
+                <button type="button" class="pt-start">start</button>
+                <button type="button" class="pt-reset">reset</button>
+              </div>
+            </div>
+            <p class="mp-desc">A focused work timer with short and long break modes, built on a drift-free countdown.</p>
+            <div class="mp-tags"><span class="tag">timer</span><span class="tag">js</span></div>
+            <a class="mp-src" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> source</a>
+          </div>
+        </article>
+
+        <!-- ============ TO-DO ============ -->
+        <article class="mp-card" id="todo">
+          <div class="mp-bar"><span class="mp-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mp-file">todo.js</span></div>
+          <div class="mp-body">
+            <div class="mp-title">
+              <h3>To-do List</h3>
+              <span class="mp-lang">js</span>
+            </div>
+            <div class="demo" data-demo="todo">
+              <form class="td-form">
+                <input class="td-input" type="text" placeholder="add a task…" aria-label="New task" />
+                <button type="submit" class="td-add">add</button>
+              </form>
+              <ul class="td-list"></ul>
+              <div class="td-foot"><span class="td-count">0 open</span><span class="td-note">saved locally</span></div>
+            </div>
+            <p class="mp-desc">Add, complete, and delete tasks — persisted with localStorage so it survives a refresh.</p>
+            <div class="mp-tags"><span class="tag">storage</span><span class="tag">js</span></div>
+            <a class="mp-src" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> source</a>
+          </div>
+        </article>
+
+        <!-- ============ CALCULATOR ============ -->
+        <article class="mp-card" id="calculator">
+          <div class="mp-bar"><span class="mp-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mp-file">calc.js</span></div>
+          <div class="mp-body">
+            <div class="mp-title">
+              <h3>Calculator</h3>
+              <span class="mp-lang">js</span>
+            </div>
+            <div class="demo" data-demo="calculator">
+              <div class="calc-display" tabindex="0" aria-live="polite">0</div>
+              <div class="calc-grid">
+                <button type="button" data-k="C" data-c="cls">C</button>
+                <button type="button" data-k="("> (</button>
+                <button type="button" data-k=")"> )</button>
+                <button type="button" data-k="/" data-c="op">÷</button>
+                <button type="button" data-k="7">7</button>
+                <button type="button" data-k="8">8</button>
+                <button type="button" data-k="9">9</button>
+                <button type="button" data-k="*" data-c="op">×</button>
+                <button type="button" data-k="4">4</button>
+                <button type="button" data-k="5">5</button>
+                <button type="button" data-k="6">6</button>
+                <button type="button" data-k="-" data-c="op">−</button>
+                <button type="button" data-k="1">1</button>
+                <button type="button" data-k="2">2</button>
+                <button type="button" data-k="3">3</button>
+                <button type="button" data-k="+" data-c="op">+</button>
+                <button type="button" data-k="0" class="calc-wide">0</button>
+                <button type="button" data-k=".">. </button>
+                <button type="button" data-k="=" data-c="eq">=</button>
+              </div>
+            </div>
+            <p class="mp-desc">A small four-function calculator with a hand-written expression parser — no eval.</p>
+            <div class="mp-tags"><span class="tag">math</span><span class="tag">parser</span></div>
+            <a class="mp-src" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> source</a>
+          </div>
+        </article>
+
+        <!-- ============ PASSWORD GENERATOR ============ -->
+        <article class="mp-card" id="password-gen">
+          <div class="mp-bar"><span class="mp-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mp-file">passgen.js</span></div>
+          <div class="mp-body">
+            <div class="mp-title">
+              <h3>Password Generator</h3>
+              <span class="mp-lang">js</span>
+            </div>
+            <div class="demo" data-demo="password">
+              <div class="pg-out-wrap">
+                <input class="pg-out" type="text" readonly aria-label="Generated password" />
+                <button type="button" class="pg-copy" aria-label="Copy password"><i class="fa-solid fa-copy"></i></button>
+              </div>
+              <div class="pg-row">
+                <label for="pg-len">length: <span class="pg-len-val">16</span></label>
+                <input class="pg-len" id="pg-len" type="range" min="8" max="32" value="16" />
+              </div>
+              <div class="pg-checks">
+                <label><input type="checkbox" data-set="upper" checked /> A–Z</label>
+                <label><input type="checkbox" data-set="lower" checked /> a–z</label>
+                <label><input type="checkbox" data-set="numbers" checked /> 0–9</label>
+                <label><input type="checkbox" data-set="symbols" /> !@#</label>
+              </div>
+              <div class="pg-strength"><span class="pg-strength-label">strength</span><span class="pg-strength-bar"><i></i></span><span class="pg-strength-txt">medium</span></div>
+              <div class="pg-actions">
+                <button type="button" class="pg-gen">generate</button>
+              </div>
+            </div>
+            <p class="mp-desc">Random secure passwords with selectable character sets and a live strength meter.</p>
+            <div class="mp-tags"><span class="tag">crypto</span><span class="tag">js</span></div>
+            <a class="mp-src" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> source</a>
+          </div>
+        </article>
+
+        <!-- ============ DICE ============ -->
+        <article class="mp-card" id="dice">
+          <div class="mp-bar"><span class="mp-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mp-file">dice.js</span></div>
+          <div class="mp-body">
+            <div class="mp-title">
+              <h3>Dice Roller</h3>
+              <span class="mp-lang">js</span>
+            </div>
+            <div class="demo" data-demo="dice">
+              <div class="dc-dice">
+                <span class="dc-die" aria-label="Die 1">⚀</span>
+                <span class="dc-die" aria-label="Die 2">⚀</span>
+              </div>
+              <div class="dc-total">total: 2</div>
+              <div class="dc-actions">
+                <button type="button" class="dc-roll">roll dice</button>
+                <button type="button" class="dc-clear">clear</button>
+              </div>
+              <ul class="dc-history" aria-label="Roll history"></ul>
+            </div>
+            <p class="mp-desc">Roll two dice with a quick shake animation and a history of recent rolls.</p>
+            <div class="mp-tags"><span class="tag">random</span><span class="tag">js</span></div>
+            <a class="mp-src" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> source</a>
+          </div>
+        </article>
+
+        <!-- ============ WORD COUNTER ============ -->
+        <article class="mp-card" id="word-counter">
+          <div class="mp-bar"><span class="mp-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mp-file">counter.js</span></div>
+          <div class="mp-body">
+            <div class="mp-title">
+              <h3>Word Counter</h3>
+              <span class="mp-lang">js</span>
+            </div>
+            <div class="demo" data-demo="counter">
+              <textarea class="wc-input" rows="4" placeholder="Paste or type your text here…" aria-label="Text to analyze"></textarea>
+              <div class="wc-stats">
+                <div class="wc-stat"><span class="wc-num" data-kind="words">0</span><span>words</span></div>
+                <div class="wc-stat"><span class="wc-num" data-kind="chars">0</span><span>chars</span></div>
+                <div class="wc-stat"><span class="wc-num" data-kind="sentences">0</span><span>sentences</span></div>
+                <div class="wc-stat"><span class="wc-num" data-kind="mins">0</span><span>min read</span></div>
+              </div>
+            </div>
+            <p class="mp-desc">Live word, character, sentence, and reading-time counts as you type — handy for writers.</p>
+            <div class="mp-tags"><span class="tag">writing</span><span class="tag">js</span></div>
+            <a class="mp-src" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> source</a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="back-home">
+        <a class="btn ghost" href="../index.html"><i class="fa-solid fa-terminal"></i> back to home</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="brand-glyph" aria-hidden="true">~/</span>
+          <span>Sanskar Man Pradhan</span>
+        </div>
+        <nav class="footer-social" aria-label="Social media">
+          <a href="https://www.facebook.com/sanskar.pradhan.5/" target="_blank" rel="me noopener noreferrer" aria-label="Facebook profile"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://github.com/Sanskarpra07" target="_blank" rel="me noopener noreferrer" aria-label="GitHub profile"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.instagram.com/theofficial_sanskar/" target="_blank" rel="me noopener noreferrer" aria-label="Instagram profile"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/sanskar-pradhan-246622282/" target="_blank" rel="me noopener noreferrer" aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin-in"></i></a>
+        </nav>
+        <div class="footer-meta">
+          <span>© <span id="year"></span></span>
+          <span class="separator">/</span>
+          <span>content &amp; static web design · self-hosted</span>
+        </div>
+      </div>
+    </footer>
+
+    <button id="back-to-top" class="back-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script src="../js/main.js" defer></script>
+    <script src="../js/mini-projects.js" defer></script>
+
+    <script data-goatcounter="https://sanskar.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+  </body>
+</html>
