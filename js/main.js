@@ -38,6 +38,11 @@ const closeMenu = () => {
   mobileMenuOpen = false;
   if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
   if (navLinks) { navLinks.classList.remove('nav-mobile-open'); navLinks.style.display = ''; }
+  document.querySelectorAll('.nav-drop.open').forEach(dd => {
+    dd.classList.remove('open');
+    const t = dd.querySelector('.nav-drop-toggle');
+    if (t) t.setAttribute('aria-expanded', 'false');
+  });
 };
 
 if (hamburger && navLinks) {
@@ -53,7 +58,13 @@ if (hamburger && navLinks) {
     }
   });
 
-  navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Mobile dropdown toggles expand their submenu instead of closing the menu.
+      if (link.classList.contains('nav-drop-toggle') && window.innerWidth <= 900) return;
+      closeMenu();
+    });
+  });
   document.addEventListener('click', (e) => {
     if (mobileMenuOpen && !hamburger.contains(e.target) && !navLinks.contains(e.target)) closeMenu();
   });
@@ -64,11 +75,28 @@ window.addEventListener('resize', () => {
 });
 
 // =====================================================
+//  NAV DROPDOWN SUBMENUS ("Projects ▾")
+// =====================================================
+document.querySelectorAll('.nav-drop').forEach(drop => {
+  const toggle = drop.querySelector('.nav-drop-toggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', (e) => {
+    // On mobile/tablet the submenu opens as an accordion instead of scrolling.
+    if (window.innerWidth <= 900) {
+      e.preventDefault();
+      const open = drop.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+  });
+});
+
+// =====================================================
 //  SMOOTH SCROLL (accounting for sticky header)
 // =====================================================
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
     const href = a.getAttribute('href');
+    if (a.classList.contains('nav-drop-toggle') && window.innerWidth <= 900) return;
     if (href && href.startsWith('#') && href.length > 1) {
       const target = document.querySelector(href);
       if (target) {
@@ -86,7 +114,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 //  ACTIVE NAV LINK ON SCROLL
 // =====================================================
 const sections = document.querySelectorAll('section[id]');
-const navItems = document.querySelectorAll('.nav-links a');
+const navItems = document.querySelectorAll('.nav-links > li > a');
 
 const navObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
