@@ -586,14 +586,14 @@ const musicTracks = [
   };
 
   const go = (dir) => {
-    if (current === -1) { select(dir === 1 ? 0 : musicTracks.length - 1); return; }
+    if (current === -1) { select(dir === 1 ? 0 : musicTracks.length - 1, true); return; }
     const nxt = pickIndex(dir);
     if (nxt === -1) {
       setStatus(dir === 1 ? '// end of playlist' : '// start of playlist');
       if (dir === 1 && repeatMode === 'off') { setPlaying(false); audio.currentTime = 0; }
       return;
     }
-    select(nxt);
+    select(nxt, true);
   };
 
   // Preload durations so the list shows every track's length up front
@@ -636,14 +636,14 @@ const musicTracks = [
         if (audio.paused) audio.play().catch(() => {});
         else audio.pause();
       } else {
-        select(i);
+        select(i, true);
       }
     });
     list.appendChild(row);
   });
 
   toggle.addEventListener('click', () => {
-    if (current === -1) { select(0); return; }
+    if (current === -1) { select(0, true); return; }
     if (audio.paused) audio.play().catch(() => {});
     else audio.pause();
   });
@@ -710,7 +710,7 @@ const musicTracks = [
       setStatus('// end of playlist — press play or repeat to loop');
       return;
     }
-    select(nxt);
+    select(nxt, true);
   });
   audio.addEventListener('loadedmetadata', () => {
     if (current < 0) return;
@@ -724,14 +724,14 @@ const musicTracks = [
     const name = current >= 0 ? musicTracks[current].title : 'this track';
     setStatus('// could not load "' + name + '" — skipping');
     const nxt = pickIndex(1);
-    if (nxt !== -1 && nxt !== current) setTimeout(() => select(nxt), 500);
+    if (nxt !== -1 && nxt !== current) setTimeout(() => select(nxt, true), 500);
     else setPlaying(false);
   });
 
   audio.addEventListener('timeupdate', updateProgress);
 
   progress.addEventListener('click', (e) => {
-    if (!audio.duration) { if (current === -1) select(0); return; }
+    if (!audio.duration) { if (current === -1) select(0, true); return; }
     const rect = progress.getBoundingClientRect();
     const pct = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
     seek(pct * audio.duration);
@@ -751,7 +751,7 @@ const musicTracks = [
     switch (e.key) {
       case ' ':
         e.preventDefault();
-        if (current === -1) select(0);
+        if (current === -1) select(0, true);
         else if (audio.paused) audio.play().catch(() => {});
         else audio.pause();
         break;
