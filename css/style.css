@@ -1134,6 +1134,16 @@ a.contact-val:hover { color: var(--accent); }
   border: 1px solid var(--border); border-radius: var(--radius);
   background: var(--surface);
 }
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
 .field { margin-bottom: 18px; display: flex; flex-direction: column; gap: 7px; }
 .field label {
   font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim);
