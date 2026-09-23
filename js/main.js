@@ -256,6 +256,14 @@ if (form) {
       status.style.color = '#ff6b6b';
     };
 
+    const trap = form.querySelector('input[name="_gotcha"]');
+    const trap2 = form.querySelector('input[name="website"]');
+    if ((trap && trap.value) || (trap2 && trap2.value)) {
+      status.textContent = '✓ message sent! thank you.';
+      status.style.color = 'var(--accent)';
+      return;
+    }
+
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const subject = form.subject.value.trim();
