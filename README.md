@@ -13,10 +13,13 @@ no frameworks, no build tools, just files served as-is. Live at
   Projects, Contact. Everything on one page.
 - **Blog** — a separate section with articles on content handling and static web
   design.
+- **Music** — a dedicated page with a self-hosted audio player for recorded
+  tracks. Served at `music.html` (reachable directly by URL).
 
 | Page | What it does |
 | --- | --- |
 | `index.html` | The portfolio itself — all sections, one scroll. |
+| `music.html` | Music player page for recorded tracks (reachable directly by URL). |
 | `blog/index.html` | Blog landing page listing all posts. |
 | `blog/why-content-handling-matters.html` | Why content structure and maintenance matter more than design. |
 | `blog/static-web-design-basics.html` | Why a static page is the right call for most small projects. |
@@ -51,6 +54,9 @@ no frameworks, no build tools, just files served as-is. Live at
 - **Fully responsive** — hamburger menu on mobile, fluid layout throughout.
 - **Chat assistant** — a terminal-style widget in the Contact section. No
   external service, just JavaScript.
+- **Music** — a self-hosted audio player on `music.html`. Recorded tracks live
+  in `assets/audio/`; add an entry in the `musicTracks` list in `js/main.js`
+  and the track list renders itself. Shows a "coming soon" state until then.
 - **Blog** — for content writing and web development articles.
 - **SEO** — JSON-LD structured data (Person + WebSite), Open Graph and Twitter
   Card meta tags, canonical URLs, robots.txt, and a full sitemap.
