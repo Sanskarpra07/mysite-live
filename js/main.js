@@ -450,6 +450,345 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
 
 // =====================================================
+//  MUSIC PLAYER
+//  To publish a track: save the file under assets/audio/,
+//  then add one line to the list below, e.g.
+//    { title: 'My Song', file: 'assets/audio/my-song.mp3' }
+//  The track list and player render automatically.
+// =====================================================
+const musicTracks = [
+  { title: 'behos', file: 'assets/audio/behos.mp3' },
+  { title: 'mayalu', file: 'assets/audio/mayalu.mp3' },
+  { title: 'sarangi', file: 'assets/audio/sarangi.mp3' },
+  { title: 'syndicate', file: 'assets/audio/syndicate.mp3' },
+  { title: 'thamana', file: 'assets/audio/thamana.mp3' },
+];
+
+(function () {
+  const shell = document.getElementById('music-shell');
+  const empty = document.getElementById('music-empty');
+  const audio = document.getElementById('music-audio');
+  const list = document.getElementById('music-list');
+  if (!shell || !empty || !audio || !list) return;
+
+  if (!musicTracks.length) {
+    empty.hidden = false;
+    return;
+  }
+
+  empty.hidden = true;
+  shell.hidden = false;
+
+  const toggle = document.getElementById('player-toggle');
+  const prevBtn = document.getElementById('player-prev');
+  const nextBtn = document.getElementById('player-next');
+  const repeatBtn = document.getElementById('player-repeat');
+  const shuffleBtn = document.getElementById('player-shuffle');
+  const muteBtn = document.getElementById('player-mute');
+  const volumeEl = document.getElementById('player-volume');
+  const statusEl = document.getElementById('music-status');
+  const titleEl = document.getElementById('player-title');
+  const currentEl = document.getElementById('player-current');
+  const durationEl = document.getElementById('player-duration');
+  const fillEl = document.getElementById('player-progress-fill');
+  const progress = document.getElementById('player-progress');
+
+  let current = -1;
+  let repeatMode = 'off'; // 'off' | 'all' | 'one'
+  let shuffle = false;
+  const durationCache = new Array(musicTracks.length).fill(0);
+
+  const fmt = (s) => {
+    if (!isFinite(s) || s < 0) return '0:00';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return m + ':' + String(sec).padStart(2, '0');
+  };
+
+  const setStatus = (msg) => {
+    if (!statusEl) return;
+    statusEl.textContent = msg;
+    statusEl.hidden = false;
+    clearTimeout(setStatus._t);
+    setStatus._t = setTimeout(() => { statusEl.hidden = true; }, 3400);
+  };
+
+  const setPlaying = (playing) => {
+    const icon = toggle.querySelector('i');
+    if (icon) icon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+    toggle.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    const box = toggle.closest('.music-player');
+    if (box) box.classList.toggle('playing', playing);
+  };
+
+  const updateProgress = () => {
+    const dur = durationCache[current] || audio.duration || 0;
+    const pct = dur ? (audio.currentTime / dur) * 100 : 0;
+    fillEl.style.width = pct + '%';
+    currentEl.textContent = fmt(audio.currentTime);
+    if (progress) {
+      progress.setAttribute('aria-valuenow', String(Math.round(pct)));
+      progress.setAttribute('aria-valuetext', fmt(audio.currentTime) + ' of ' + fmt(dur));
+    }
+  };
+
+  const setRowDuration = (i, seconds) => {
+    const rows = list.querySelectorAll('.music-row-dur');
+    if (rows[i]) rows[i].textContent = fmt(seconds);
+  };
+
+  const syncControls = () => {
+    if (!repeatBtn) return;
+    repeatBtn.classList.toggle('active', repeatMode === 'all');
+    repeatBtn.classList.toggle('is-one', repeatMode === 'one');
+    repeatBtn.classList.toggle('active-off', repeatMode === 'off');
+    repeatBtn.setAttribute('aria-label', repeatMode === 'one' ? 'Repeat: one' : repeatMode === 'all' ? 'Repeat: all' : 'Repeat: off');
+    if (shuffleBtn) {
+      shuffleBtn.classList.toggle('active', shuffle);
+      shuffleBtn.setAttribute('aria-label', shuffle ? 'Shuffle on' : 'Shuffle off');
+    }
+  };
+
+  const pickIndex = (dir) => {
+    const n = musicTracks.length;
+    if (!n) return -1;
+    if (shuffle) {
+      const others = [];
+      for (let i = 0; i < n; i++) if (i !== current) others.push(i);
+      if (!others.length) return current;
+      return others[Math.floor(Math.random() * others.length)];
+    }
+    const base = current === -1 ? (dir === 1 ? 0 : n - 1) : current;
+    let next = base + dir;
+    if (next < 0) next = repeatMode === 'all' ? n - 1 : -1;
+    if (next >= n) next = repeatMode === 'all' ? 0 : -1;
+    return next;
+  };
+
+  const select = (i, autoplay) => {
+    if (i < 0 || i >= musicTracks.length) return;
+    current = i;
+    audio.src = musicTracks[i].file;
+    audio.load();
+    titleEl.textContent = musicTracks[i].title || musicTracks[i].file;
+    const dur = durationCache[i] || 0;
+    durationEl.textContent = dur ? fmt(dur) : '--:--';
+    if (dur) setRowDuration(i, dur);
+    list.querySelectorAll('.music-row').forEach((row, idx) => row.classList.toggle('active', idx === i));
+    if (autoplay) audio.play().catch(() => setStatus('// play blocked — click play to start'));
+    try { localStorage.setItem('music-track', String(i)); } catch (e) {}
+  };
+
+  const seek = (t) => {
+    if (!audio.duration) { if (current === -1) select(0); return; }
+    audio.currentTime = Math.min(Math.max(t, 0), audio.duration);
+    updateProgress();
+  };
+
+  const go = (dir) => {
+    if (current === -1) { select(dir === 1 ? 0 : musicTracks.length - 1); return; }
+    const nxt = pickIndex(dir);
+    if (nxt === -1) {
+      setStatus(dir === 1 ? '// end of playlist' : '// start of playlist');
+      if (dir === 1 && repeatMode === 'off') { setPlaying(false); audio.currentTime = 0; }
+      return;
+    }
+    select(nxt);
+  };
+
+  // Preload durations so the list shows every track's length up front
+  musicTracks.forEach((track, i) => {
+    const probe = new Audio();
+    probe.preload = 'metadata';
+    probe.addEventListener('loadedmetadata', () => {
+      durationCache[i] = probe.duration;
+      setRowDuration(i, probe.duration);
+      if (i === current) durationEl.textContent = fmt(probe.duration);
+    }, { once: true });
+    probe.src = track.file;
+  });
+
+  musicTracks.forEach((track, i) => {
+    const row = document.createElement('button');
+    row.type = 'button';
+    row.className = 'music-row';
+    row.setAttribute('aria-label', 'Play ' + track.title);
+
+    const play = document.createElement('span');
+    play.className = 'music-row-play';
+    play.innerHTML = '<i class="fa-solid fa-play"></i>';
+
+    const num = document.createElement('span');
+    num.className = 'music-row-num';
+    num.textContent = String(i + 1).padStart(2, '0');
+
+    const title = document.createElement('span');
+    title.className = 'music-row-title';
+    title.textContent = track.title;
+
+    const dur = document.createElement('span');
+    dur.className = 'music-row-dur';
+    dur.textContent = '--:--';
+
+    row.append(play, num, title, dur);
+    row.addEventListener('click', () => {
+      if (current === i) {
+        if (audio.paused) audio.play().catch(() => {});
+        else audio.pause();
+      } else {
+        select(i);
+      }
+    });
+    list.appendChild(row);
+  });
+
+  toggle.addEventListener('click', () => {
+    if (current === -1) { select(0); return; }
+    if (audio.paused) audio.play().catch(() => {});
+    else audio.pause();
+  });
+
+  if (nextBtn) nextBtn.addEventListener('click', () => go(1));
+  if (prevBtn) prevBtn.addEventListener('click', () => {
+    if (current !== -1 && audio.currentTime > 3) { seek(0); return; }
+    go(-1);
+  });
+
+  if (repeatBtn) repeatBtn.addEventListener('click', () => {
+    repeatMode = repeatMode === 'off' ? 'all' : repeatMode === 'all' ? 'one' : 'off';
+    syncControls();
+    setStatus('// repeat: ' + repeatMode);
+  });
+
+  if (shuffleBtn) shuffleBtn.addEventListener('click', () => {
+    shuffle = !shuffle;
+    syncControls();
+    setStatus(shuffle ? '// shuffle on' : '// shuffle off');
+  });
+
+  if (volumeEl && muteBtn) {
+    let lastVol = 0.8;
+    const syncVolume = () => {
+      const v = audio.muted ? 0 : audio.volume;
+      volumeEl.value = String(Math.round(v * 100));
+      const icon = muteBtn.querySelector('i');
+      if (icon) {
+        icon.className = 'fa-solid ' + (v === 0 ? 'fa-volume-xmark' : v < 0.5 ? 'fa-volume-low' : 'fa-volume-high');
+      }
+      muteBtn.setAttribute('aria-label', v === 0 ? 'Unmute' : 'Mute');
+    };
+    let vol = parseFloat(localStorage.getItem('music-volume'));
+    audio.volume = vol >= 0 && vol <= 1 ? vol : 0.8;
+    volumeEl.addEventListener('input', () => {
+      audio.volume = volumeEl.value / 100;
+      audio.muted = audio.volume === 0;
+      lastVol = audio.volume || lastVol;
+      try { localStorage.setItem('music-volume', String(audio.volume)); } catch (e) {}
+      syncVolume();
+    });
+    muteBtn.addEventListener('click', () => {
+      if (audio.muted || audio.volume === 0) {
+        audio.volume = lastVol || 0.8;
+        audio.muted = false;
+      } else {
+        lastVol = audio.volume;
+        audio.muted = true;
+      }
+      syncVolume();
+    });
+    syncVolume();
+  }
+
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => {
+    if (repeatMode === 'one') { audio.currentTime = 0; audio.play().catch(() => {}); return; }
+    const nxt = pickIndex(1);
+    if (nxt === -1) {
+      setPlaying(false);
+      audio.currentTime = 0;
+      setStatus('// end of playlist — press play or repeat to loop');
+      return;
+    }
+    select(nxt);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    if (current < 0) return;
+    durationCache[current] = audio.duration;
+    durationEl.textContent = fmt(audio.duration);
+    setRowDuration(current, audio.duration);
+    updateProgress();
+  });
+
+  audio.addEventListener('error', () => {
+    const name = current >= 0 ? musicTracks[current].title : 'this track';
+    setStatus('// could not load "' + name + '" — skipping');
+    const nxt = pickIndex(1);
+    if (nxt !== -1 && nxt !== current) setTimeout(() => select(nxt), 500);
+    else setPlaying(false);
+  });
+
+  audio.addEventListener('timeupdate', updateProgress);
+
+  progress.addEventListener('click', (e) => {
+    if (!audio.duration) { if (current === -1) select(0); return; }
+    const rect = progress.getBoundingClientRect();
+    const pct = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+    seek(pct * audio.duration);
+  });
+
+  progress.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') seek(audio.currentTime + 5);
+    else if (e.key === 'ArrowLeft') seek(audio.currentTime - 5);
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    const tag = e.target && e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === ' ' && tag === 'BUTTON') return;
+    switch (e.key) {
+      case ' ':
+        e.preventDefault();
+        if (current === -1) select(0);
+        else if (audio.paused) audio.play().catch(() => {});
+        else audio.pause();
+        break;
+      case 'ArrowRight':
+        if (progress === document.activeElement) return;
+        seek(audio.currentTime + 5);
+        break;
+      case 'ArrowLeft':
+        if (progress === document.activeElement) return;
+        seek(audio.currentTime - 5);
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        if (volumeEl) { volumeEl.value = Math.min(100, +volumeEl.value + 5); volumeEl.dispatchEvent(new Event('input')); }
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        if (volumeEl) { volumeEl.value = Math.max(0, +volumeEl.value - 5); volumeEl.dispatchEvent(new Event('input')); }
+        break;
+      case 'r': case 'R': if (repeatBtn) repeatBtn.click(); break;
+      case 's': case 'S': if (shuffleBtn) shuffleBtn.click(); break;
+      case 'm': case 'M': if (muteBtn) muteBtn.click(); break;
+      case 'n': case 'N': if (nextBtn) nextBtn.click(); break;
+      case 'p': case 'P': if (prevBtn) prevBtn.click(); break;
+    }
+  });
+
+  // Restore the last-played track (highlighted, without autoplay)
+  try {
+    const saved = parseInt(localStorage.getItem('music-track'), 10);
+    if (saved >= 0 && saved < musicTracks.length) select(saved, false);
+  } catch (e) {}
+
+  syncControls();
+})();
+
+// =====================================================
 //  KEYBOARD FOCUS STYLES
 // =====================================================
 let usingMouse = false;
