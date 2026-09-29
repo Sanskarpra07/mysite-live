@@ -209,7 +209,7 @@
               <span class="section-id">07</span>
               <div>
                 <h1 id="sitemap-heading">Sitemap</h1>
-                <p class="section-path"><xsl:value-of select="count(sm:urlset/sm:url)" /> urls · sanskar-manpradhan.com.np</p>
+                <p class="section-path"><xsl:value-of select="count(sm:urlset/sm:url)" /> urls · sanskarmanpradhan.com.np</p>
               </div>
             </div>
 
