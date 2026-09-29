@@ -3,7 +3,7 @@
 My personal portfolio site. Content writer, content handler, and static web
 designer based in Lalitpur, Nepal. Built with plain HTML, CSS, and JavaScript —
 no frameworks, no build tools, just files served as-is. Live at
-[sanskar-manpradhan.com.np](https://sanskar-manpradhan.com.np/).
+[sanskarmanpradhan.com.np](https://sanskarmanpradhan.com.np/).
 
 ---
 
