@@ -13,14 +13,21 @@ const applyTheme = (theme) => {
   }
 };
 
-const savedTheme = localStorage.getItem('theme');
+const readStoredValue = (key) => {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+};
+const writeStoredValue = (key, value) => {
+  try { localStorage.setItem(key, value); } catch (e) { /* storage may be unavailable */ }
+};
+
+const savedTheme = readStoredValue('theme');
 if (savedTheme === 'light') applyTheme('light');
 
 if (themeToggle) {
   themeToggle.addEventListener('click', () => {
     const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     applyTheme(next);
-    localStorage.setItem('theme', next);
+    writeStoredValue('theme', next);
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     root.classList.add('theme-fading');
     setTimeout(() => root.classList.remove('theme-fading'), 350);
@@ -36,7 +43,10 @@ let mobileMenuOpen = false;
 
 const closeMenu = () => {
   mobileMenuOpen = false;
-  if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+  if (hamburger) {
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open menu');
+  }
   if (navLinks) { navLinks.classList.remove('nav-mobile-open'); navLinks.style.display = ''; }
   document.querySelectorAll('.nav-drop.open').forEach(dd => {
     dd.classList.remove('open');
@@ -49,6 +59,7 @@ if (hamburger && navLinks) {
   hamburger.addEventListener('click', () => {
     mobileMenuOpen = !mobileMenuOpen;
     hamburger.setAttribute('aria-expanded', String(mobileMenuOpen));
+    hamburger.setAttribute('aria-label', mobileMenuOpen ? 'Close menu' : 'Open menu');
     if (mobileMenuOpen) {
       navLinks.classList.add('nav-mobile-open');
       navLinks.style.display = 'flex';
@@ -347,7 +358,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   const cform = document.getElementById('chat-form');
   const input = document.getElementById('chat-input');
   const chipsWrap = document.getElementById('chat-chips');
-  if (!log || !cform || !input) return;
+  if (!log || !cform || !input || !chipsWrap) return;
 
   const LIMIT = 30;
   let busy = false;
@@ -685,13 +696,13 @@ const musicTracks = [
       }
       muteBtn.setAttribute('aria-label', v === 0 ? 'Unmute' : 'Mute');
     };
-    let vol = parseFloat(localStorage.getItem('music-volume'));
+    let vol = parseFloat(readStoredValue('music-volume'));
     audio.volume = vol >= 0 && vol <= 1 ? vol : 0.8;
     volumeEl.addEventListener('input', () => {
       audio.volume = volumeEl.value / 100;
       audio.muted = audio.volume === 0;
       lastVol = audio.volume || lastVol;
-      try { localStorage.setItem('music-volume', String(audio.volume)); } catch (e) {}
+      writeStoredValue('music-volume', String(audio.volume));
       syncVolume();
     });
     muteBtn.addEventListener('click', () => {
@@ -752,6 +763,9 @@ const musicTracks = [
 
   // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
+    // Run shortcuts only when focus is on the page itself. Native keyboard
+    // behavior remains available to links, buttons, and other controls.
+    if (e.target !== document.body && e.target !== document.documentElement) return;
     const tag = e.target && e.target.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -789,7 +803,7 @@ const musicTracks = [
 
   // Restore the last-played track (highlighted, without autoplay)
   try {
-    const saved = parseInt(localStorage.getItem('music-track'), 10);
+    const saved = parseInt(readStoredValue('music-track'), 10);
     if (saved >= 0 && saved < musicTracks.length) select(saved, false);
   } catch (e) {}
 

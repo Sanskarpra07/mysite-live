@@ -14,12 +14,13 @@ no frameworks, no build tools, just files served as-is. Live at
 - **Blog** — a separate section with articles on content handling and static web
   design.
 - **Music** — a dedicated page with a self-hosted audio player for recorded
-  tracks. Served at `/music` (reachable directly by URL).
+  tracks, available at `/music.html`.
 
 | Page | What it does |
 | --- | --- |
 | `index.html` | The portfolio itself — all sections, one scroll. |
-| `music.html` | Music player page for recorded tracks (access via `/music`). |
+| `music.html` | Music player page for recorded tracks (access via `/music.html`). |
+| `mini-projects.html` | Interactive mini-project demos. |
 | `blog/index.html` | Blog landing page listing all posts. |
 | `blog/why-content-handling-matters.html` | Why content structure and maintenance matter more than design. |
 | `blog/static-web-design-basics.html` | Why a static page is the right call for most small projects. |

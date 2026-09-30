@@ -89,7 +89,16 @@
 
   const KEY = 'smp-mini-todos';
   let todos = [];
-  try { todos = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { todos = []; }
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY));
+    todos = Array.isArray(saved)
+      ? saved.filter(t => t && typeof t.text === 'string').map(t => ({
+          id: t.id,
+          text: t.text,
+          done: Boolean(t.done),
+        }))
+      : [];
+  } catch (e) { todos = []; }
 
   const save = () => {
     try { localStorage.setItem(KEY, JSON.stringify(todos)); } catch (e) { /* ignore */ }
@@ -267,13 +276,15 @@
     symbols: '!@#$%^&*()-_=+[]{};:,.<>?',
   };
 
+  const secureRandomAvailable = Boolean(window.crypto && typeof crypto.getRandomValues === 'function');
   const randInt = (max) => {
-    if (window.crypto && crypto.getRandomValues) {
-      const b = new Uint32Array(1);
-      crypto.getRandomValues(b);
-      return b[0] % max;
-    }
-    return Math.floor(Math.random() * max);
+    if (!secureRandomAvailable) throw new Error('Secure randomness is unavailable');
+    // Reject the small out-of-range tail so every result has equal probability.
+    const range = 0x100000000;
+    const limit = range - (range % max);
+    const b = new Uint32Array(1);
+    do { crypto.getRandomValues(b); } while (b[0] >= limit);
+    return b[0] % max;
   };
 
   const shuffle = arr => {
@@ -287,6 +298,10 @@
   const selectedSets = () => [...checks].filter(c => c.checked).map(c => c.dataset.set);
 
   const generate = () => {
+    if (!secureRandomAvailable) {
+      out.value = 'secure randomness unavailable';
+      return;
+    }
     const sets = selectedSets();
     if (!sets.length) {
       out.value = 'pick at least one set';
@@ -323,7 +338,7 @@
 
   const copy = async () => {
     const value = out.value;
-    if (!value || value === 'pick at least one set') return;
+    if (!value || value === 'pick at least one set' || value === 'secure randomness unavailable') return;
     let ok = false;
     try { await navigator.clipboard.writeText(value); ok = true; }
     catch (e) {
