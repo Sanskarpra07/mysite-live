@@ -1223,8 +1223,16 @@ a.contact-val:hover { color: var(--accent); }
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius-sm); color: var(--text-dim);
   font-size: 0.95rem;
-  transition: all 0.2s;
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s, border-color 0.2s, color 0.2s;
   touch-action: manipulation;
+  opacity: 0; visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+.back-top.is-visible {
+  opacity: 1; visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .back-top:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
 

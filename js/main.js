@@ -333,14 +333,39 @@ if (form) {
 // =====================================================
 const backBtn = document.getElementById('back-to-top');
 if (backBtn) {
-  backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const BACK_TOP_SHOW_AT = 400;
+  let backTopVisible = null;
+
+  const renderBackTop = () => {
+    const show = window.scrollY > BACK_TOP_SHOW_AT;
+    if (show === backTopVisible) return;
+    backTopVisible = show;
+    backBtn.classList.toggle('is-visible', show);
+    // Keep the hidden control out of the tab order and off screen readers.
+    backBtn.setAttribute('aria-hidden', String(!show));
+    backBtn.tabIndex = show ? 0 : -1;
+  };
+
+  backBtn.classList.remove('is-visible');
+  backBtn.setAttribute('aria-hidden', 'true');
+  backBtn.tabIndex = -1;
+
+  backBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+  });
+
+  // Re-evaluate on resize too: a short page can stop being scrollable.
+  window.addEventListener('scroll', renderBackTop, { passive: true });
+  window.addEventListener('resize', renderBackTop, { passive: true });
+  renderBackTop();
 }
 
 window.addEventListener('scroll', () => {
   const el = document.getElementById('scroll-progress');
   if (!el) return;
   const max = document.body.scrollHeight - window.innerHeight;
-  const pct = (window.scrollY / max) * 100;
+  const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
   el.style.width = Math.min(100, Math.max(0, pct)) + '%';
 }, { passive: true });
 
