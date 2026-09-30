@@ -572,6 +572,7 @@ button { font-family: inherit; cursor: pointer; }
   font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700;
   color: var(--text-faint); padding-top: 6px;
 }
+.section-head h1,
 .section-head h2 {
   font-size: clamp(1.6rem, 3.5vw, 2.2rem);
   font-weight: 700; color: var(--text-bright);
