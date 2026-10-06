@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ======== <head> ======== -->
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Shoes - MegaFoot</title>
+    <meta name="description" content="Browse and filter our full collection of running, casual, sports, formal shoes and boots by category, brand, price and color.">
+    <meta name="keywords" content="shoes, sneakers, running shoes, casual shoes, sports shoes, footwear">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sanskarmanpradhan.com.np/shoe-store/shop.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Shop Shoes - MegaFoot">
+    <meta property="og:url" content="https://sanskarmanpradhan.com.np/shoe-store/shop.html">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/frontend.css" rel="stylesheet">
+</head>
+<body><div class="sd-banner"><span class="sd-chip">static demo</span><span>MegaFoot is a real PHP + MySQL store &mdash; browse the catalogue here; cart, checkout, accounts and payments need the live site.</span><a href="https://github.com/Sanskarpra07/shoe_store" target="_blank" rel="noopener">source <i class="bi bi-github"></i></a></div>
+<style>
+.sd-banner{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;background:#0f172a;color:#cbd5e1;padding:9px 14px;font:600 12px/1.5 ui-monospace,Menlo,Consolas,monospace;text-align:center}
+.sd-banner .sd-chip{background:#7c6cff;color:#fff;border-radius:99px;padding:1px 9px;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.sd-banner a{color:#8ab4ff;text-decoration:none}
+.sd-banner a:hover{text-decoration:underline}
+</style>
+
+<!-- ======== Navbar ======== -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <!-- Brand / logo -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/img/megafoot.jpg" alt="MegaFoot" class="navbar-logo"></a>
+
+            <!-- Mobile toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Primary page links -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link " href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link " href="track_order.html">Track Order</a></li>
+                    <li class="nav-item"><a class="nav-link " href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link " href="contact.html">Contact</a></li>
+                </ul>
+
+                <!-- Right side: cart + account/login links -->
+                <ul class="navbar-nav align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">
+                            <i class="bi bi-cart3 me-1"></i>Cart
+                                                    </a>
+                    </li>
+
+                                            <!-- Guest login / register links -->
+                        <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person me-1"></i>Login</a></li>
+                        <li class="nav-item ms-lg-1">
+                            <a class="btn btn-outline-light btn-sm px-3" href="register.html"><i class="bi bi-person-plus me-1"></i>Register</a>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+    
+<!-- ======== Page Header & Filters ======== -->
+<div class="container py-5">
+    <h2 class="section-title">Shop Our Collection</h2>
+
+    <!-- Search & Filters -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <form method="GET" action="shop.html">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search shoes..."
+                           value="">
+                    <button class="btn btn-dark" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select" onchange="window.location='shop.html'+this.value">
+                <option value="">All Categories</option>
+                                    <option value="Boots" >
+                        Boots                    </option>
+                                    <option value="Casual" >
+                        Casual                    </option>
+                                    <option value="Formal" >
+                        Formal                    </option>
+                                    <option value="Running" >
+                        Running                    </option>
+                                    <option value="Sports" >
+                        Sports                    </option>
+                            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select" onchange="window.location='shop.html'+this.value">
+                <option value="">All Brands</option>
+                                    <option value="Adidas" >
+                        Adidas                    </option>
+                                    <option value="New Balance" >
+                        New Balance                    </option>
+                                    <option value="Nike" >
+                        Nike                    </option>
+                                    <option value="Puma" >
+                        Puma                    </option>
+                                    <option value="Reebok" >
+                        Reebok                    </option>
+                            </select>
+        </div>
+        <div class="col-md-2">
+            <a href="shop.html" class="btn btn-outline-secondary w-100">Clear Filters</a>
+        </div>
+    </div>
+
+    
+    <!-- ======== Products Grid ======== -->
+    <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <div class="card-img-top img-placeholder"><i class="bi bi-basket text-muted" style="font-size:4rem;"></i></div>
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Puma</span>
+                                                                                <span class="badge bg-danger">-99%</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">test</h6>
+                    <small class="text-muted">Boots</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Black</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 55.00</span>
+                            <span class="old-price ms-2">NPR 4,514.00</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (74)</span>
+                                            </div>
+                    <a href="product-13.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <div class="card-img-top img-placeholder"><i class="bi bi-basket text-muted" style="font-size:4rem;"></i></div>
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Nike</span>
+                                                                                <span class="badge bg-danger">-0%</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Nike Air Max 270</h6>
+                    <small class="text-muted">Running</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Black</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 1.00</span>
+                            <span class="old-price ms-2">NPR 1.00</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (41)</span>
+                                            </div>
+                    <a href="product-1.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/adidas_ultraboost.jpg" class="card-img-top" alt="Adidas Ultraboost 22" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Adidas</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Adidas Ultraboost 22</h6>
+                    <small class="text-muted">Running</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>White</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 10.00</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (30)</span>
+                                            </div>
+                    <a href="product-2.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/puma_rsx.jpg" class="card-img-top" alt="Puma RS-X" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Puma</span>
+                                                                                <span class="badge bg-danger">-25%</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Puma RS-X</h6>
+                    <small class="text-muted">Casual</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Blue</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 5.99</span>
+                            <span class="old-price ms-2">NPR 7.99</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-danger stock-badge">Out of Stock</span>
+                                            </div>
+                    <a href="product-3.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/nike_dunk_low.jpg" class="card-img-top" alt="Nike Dunk Low" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Nike</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Nike Dunk Low</h6>
+                    <small class="text-muted">Casual</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Red</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 8.50</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (25)</span>
+                                            </div>
+                    <a href="product-4.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/adidas_stan_smith.jpg" class="card-img-top" alt="Adidas Stan Smith" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Adidas</span>
+                                                                                <span class="badge bg-danger">-14%</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Adidas Stan Smith</h6>
+                    <small class="text-muted">Casual</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Green</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 5.99</span>
+                            <span class="old-price ms-2">NPR 6.99</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (54)</span>
+                                            </div>
+                    <a href="product-5.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/reebok_nano_x.jpg" class="card-img-top" alt="Reebok Nano X" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Reebok</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Reebok Nano X</h6>
+                    <small class="text-muted">Sports</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Black</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 8.99</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (20)</span>
+                                            </div>
+                    <a href="product-6.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/nike_react_infinity.jpg" class="card-img-top" alt="Nike React Infinity" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Nike</span>
+                                                                                <span class="badge bg-danger">-20%</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Nike React Infinity</h6>
+                    <small class="text-muted">Running</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Grey</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 7.99</span>
+                            <span class="old-price ms-2">NPR 9.99</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (15)</span>
+                                            </div>
+                    <a href="product-7.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/new_balance_574.jpg" class="card-img-top" alt="New Balance 574" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">New Balance</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">New Balance 574</h6>
+                    <small class="text-muted">Casual</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Navy</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 6.50</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (70)</span>
+                                            </div>
+                    <a href="product-8.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/puma_future_rider.jpg" class="card-img-top" alt="Puma Future Rider" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Puma</span>
+                                                                                <span class="badge bg-danger">-18%</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Puma Future Rider</h6>
+                    <small class="text-muted">Casual</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>White</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 4.49</span>
+                            <span class="old-price ms-2">NPR 5.49</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (40)</span>
+                                            </div>
+                    <a href="product-9.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/adidas_terrex.jpg" class="card-img-top" alt="Adidas Terrex" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Adidas</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Adidas Terrex</h6>
+                    <small class="text-muted">Boots</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Brown</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 9.50</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (18)</span>
+                                            </div>
+                    <a href="product-10.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/nike_air_force_1.jpg" class="card-img-top" alt="Nike Air Force 1" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Nike</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Nike Air Force 1</h6>
+                    <small class="text-muted">Casual</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>White</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 8.00</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (80)</span>
+                                            </div>
+                    <a href="product-11.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+                <div class="col-md-6 col-lg-3">
+            <div class="card product-card shadow-sm">
+                                    <img src="assets/img/reebok_club_c.jpg" class="card-img-top" alt="Reebok Club C" loading="lazy">
+                                <div class="card-body d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-brand align-self-start">Reebok</span>
+                                                                                <span class="badge bg-danger">-20%</span>
+                                            </div>
+                    <h6 class="card-title fw-bold mb-1">Reebok Club C</h6>
+                    <small class="text-muted">Casual</small>
+                                            <small class="text-muted mt-1"><i class="bi bi-palette me-1"></i>Cream</small>
+                                        <div class="mt-2">
+                                                    <span class="price">NPR 3.99</span>
+                            <span class="old-price ms-2">NPR 4.99</span>
+                                            </div>
+                    <div class="mt-2 mb-3">
+                                                    <span class="badge bg-success stock-badge">In Stock (35)</span>
+                                            </div>
+                    <a href="product-12.html" class="btn btn-accent btn-sm w-100 mt-auto add-to-cart">View Details</a>
+                </div>
+            </div>
+        </div>
+        
+            </div>
+</div>
+
+<!-- ======== Footer ======== -->
+    <footer class="footer pt-5 mt-5">
+        <div class="container">
+            <div class="row gy-4">
+                <!-- About / brand blurb + social links -->
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h5 class="mb-3"><i class="bi bi-bag-heart me-2"></i>MegaFoot</h5>
+                    <p class="small pe-lg-4">Your one-stop destination for premium footwear from the world's best brands. Quality you can feel, style you can trust.</p>
+                    <div class="d-flex gap-2 justify-content-center justify-content-md-start mt-3">
+                        <a href="https://facebook.com" class="social-link" title="Facebook" target="_blank" rel="noopener"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com" class="social-link" title="Instagram" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>
+                        <a href="https://twitter.com" class="social-link" title="Twitter" target="_blank" rel="noopener"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://youtube.com" class="social-link" title="YouTube" target="_blank" rel="noopener"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick links column -->
+                <div class="col-lg-4 col-md-6 text-center text-md-start">
+                    <h6 class="mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="small"><i class="bi bi-chevron-right me-1" style="font-size:.7rem;"></i>Home</a></li>
+                        <li class="mb-2"><a href="shop.html" class="small"><i class="bi bi-chevron-right me-1" style="font-size:.7rem;"></i>Shop All Shoes</a></li>
+                        <li class="mb-2"><a href="track_order.html" class="small"><i class="bi bi-chevron-right me-1" style="font-size:.7rem;"></i>Track Order</a></li>
+                        <li class="mb-2"><a href="contact.html" class="small"><i class="bi bi-chevron-right me-1" style="font-size:.7rem;"></i>Contact Us</a></li>
+                        <li class="mb-2"><a href="about.html" class="small"><i class="bi bi-chevron-right me-1" style="font-size:.7rem;"></i>About Us</a></li>
+                        <li class="mb-2"><a href="my_account.php" class="small"><i class="bi bi-chevron-right me-1" style="font-size:.7rem;"></i>My Account</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact info column -->
+                <div class="col-lg-4 col-md-12 text-center text-lg-start">
+                    <h6 class="mb-3">Contact Us</h6>
+                    <p class="small mb-2"><i class="bi bi-geo-alt me-2"></i>Durbar Marg, Kathmandu, Nepal</p>
+                    <p class="small mb-2"><i class="bi bi-envelope me-2"></i>info@megafoot.com</p>
+                    <p class="small mb-2"><i class="bi bi-telephone me-2"></i>+977-1-456789</p>
+                    <p class="small"><i class="bi bi-clock me-2"></i>Sun - Fri: 9:00 AM - 8:00 PM</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright bar -->
+        <div class="border-top border-secondary mt-4 py-3">
+            <div class="container">
+                <p class="text-center small mb-0">&copy; 2026 MegaFoot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global alert scripts (also used by data-confirm prompts) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/js/notify.js"></script>
+    
+<!-- ======== Scripts ======== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  var MSG='Static demo - cart, checkout, accounts and payments run on the live PHP + MySQL site.';
+  function toast(msg){
+    var t=document.getElementById('sd-toast');
+    if(!t){t=document.createElement('div');t.id='sd-toast';document.body.appendChild(t);}
+    t.textContent=msg;t.classList.add('show');
+    clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show');},3200);
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;
+    if(!a)return;
+    var h=a.getAttribute('href')||'';
+    if(/\.php([?#]|$)/.test(h)){e.preventDefault();toast(MSG);}
+  },true);
+  document.addEventListener('submit',function(e){e.preventDefault();toast(MSG);},true);
+})();
+</script>
+<style>
+#sd-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#0f172a;color:#e2e8f0;border:1px solid #334155;padding:11px 16px;border-radius:10px;font:600 13px/1.45 ui-monospace,Menlo,Consolas,monospace;opacity:0;pointer-events:none;transition:.25s;z-index:9999;max-width:92vw;text-align:center}
+#sd-toast.show{opacity:1;transform:translate(-50%,0)}
+</style></body>
+</html>

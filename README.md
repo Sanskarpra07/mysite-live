@@ -19,6 +19,7 @@ Live at [sanskarmanpradhan.com.np](https://sanskarmanpradhan.com.np/).
 | `blog/index.html` | The blog, listing every post. |
 | `blog/why-content-handling-matters.html` | Why content structure and upkeep matter more than design. |
 | `blog/static-web-design-basics.html` | Why a plain static page is the right call for most small projects. |
+| `shoe-store/` | Static demo of MegaFoot, my PHP + MySQL shoe store (linked from the projects section). |
 | `404.html` | A custom "page not found" page, styled like a terminal error. |
 
 ### The mini projects

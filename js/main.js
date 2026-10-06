@@ -409,7 +409,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   const answers = {
     stack: 'My focus is on content: writing, managing, and delivering website content, plus WordPress/WooCommerce for content sites. I also design static web pages with HTML/CSS and handle layout with Figma and Photoshop, and I\'m currently learning React to deepen my web skills.',
     hire: 'Yes — I\'m open to freelance work and new opportunities. Freelance or part-time content roles fit best with my BCA studies, and I also take on static web page design. Drop a message via the contact form below.',
-    project: 'A few things I\'ve worked on: this static portfolio site (hand-built with HTML/CSS/JS and a working contact form), a WordPress + WooCommerce content site with SEO basics, and content/design work in Figma and Photoshop. See the projects section above.',
+    project: 'A few things I\'ve worked on: this static portfolio site (hand-built with HTML/CSS/JS and a working contact form), MegaFoot — a PHP + MySQL shoe store with cart, wishlist, order tracking and an admin panel (live demo in the projects section above), and a WordPress + WooCommerce content site with SEO basics.',
     education: 'I\'m studying for my BCA (Bachelor in Computer Applications) at Mega College since 2023, and before that I completed higher secondary (+2) there in 2021–2023.',
     contact: 'You can email me at pradhansanskar86@gmail.com, find me on GitHub (@Sanskarpra07) or LinkedIn (Sanskar Pradhan), or use the contact form at the bottom of the page.',
     default: 'Hmm, I\'m not sure about that one. Try one of the suggestions above — stack, availability, projects, education, or contact.',
