@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://sanskarmanpradhan.com.np/</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://sanskarmanpradhan.com.np/assets/sanskar-man-pradhan.jpg</image:loc>
+      <image:title>Sanskar Man Pradhan portrait</image:title>
+      <image:caption>Sanskar Man Pradhan — content writer and content handler in Lalitpur, Nepal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://sanskarmanpradhan.com.np/assets/sanskar-man-pradhan-portrait.jpg</image:loc>
+      <image:title>Sanskar Man Pradhan</image:title>
+      <image:caption>Sanskar Man Pradhan, BCA student and content writer</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://sanskarmanpradhan.com.np/blog/index.html</loc>
