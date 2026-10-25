@@ -5,7 +5,7 @@ designer based in Lalitpur, Nepal. The site is built with plain HTML, CSS, and
 JavaScript — no frameworks, no build tools. Every file is served exactly as it
 is written.
 
-Live at [sanskarmanpradhan.com.np](https://sanskarmanpradhan.com.np/).
+Live at [www.sanskarmanpradhan.com.np](https://www.sanskarmanpradhan.com.np/).
 
 ---
 
@@ -132,6 +132,35 @@ its own track list from that array.
 **Write a blog post** — copy an existing file in `blog/`, rename it, and update
 the `<title>`, meta description, canonical URL, and Open Graph tags. Then add a
 card to the grid in `blog/index.html` and a new entry in `sitemap.xml`.
+
+---
+
+## Security and privacy follow-up
+
+These are future improvements to work through; the site remains a static GitHub
+Pages site, so it has no site-side login or database.
+
+- [ ] **Add a privacy notice.** Explain that contact form submissions (name,
+  email, subject, and message) are sent to Formspree. Disclose GoatCounter
+  analytics and its aggregate data collection, and link to the providers'
+  privacy information.
+- [ ] **Review public personal information.** Check the downloadable CV for
+  details and PDF metadata that should not be public. Review the published email,
+  photographs, and social links as well.
+- [ ] **Reduce third-party requests.** Consider self-hosting Google Fonts,
+  Font Awesome, Bootstrap, and SweetAlert assets used by the portfolio and
+  shoe-store demo. If CDN assets remain, pin exact versions and add Subresource
+  Integrity to externally hosted scripts and styles where supported.
+- [ ] **Plan a Content Security Policy.** The pages contain inline scripts and
+  load assets from several external providers, so inventory those dependencies
+  and move inline scripts into files before enforcing a restrictive policy.
+  Start with a report-only policy if the hosting setup allows it.
+- [ ] **Check deployment security settings.** Confirm GitHub Pages has Enforce
+  HTTPS enabled. Review the response headers the hosting setup can provide;
+  GitHub Pages does not use `.htaccess`.
+- [ ] **Use the `www` hostname consistently.** Update canonical URLs, Open Graph
+  URLs, structured data, sitemap entries, and internal absolute links to
+  `https://www.sanskarmanpradhan.com.np/` after confirming the redirect works.
 
 ---
 
