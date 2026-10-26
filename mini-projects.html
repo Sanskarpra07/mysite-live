@@ -6,7 +6,7 @@
     <title>Mini Projects — Sanskar Man Pradhan</title>
     <meta
       name="description"
-      content="Small experiments by Sanskar Man Pradhan — pomodoro timer, to-do list, calculator, password generator, dice roller, and word counter. All hand-built with vanilla JavaScript."
+      content="Small experiments by Sanskar Man Pradhan — pomodoro timer, to-do list, calculator, password generator, MD5 cracker, dice roller, and word counter. All hand-built with vanilla JavaScript."
     />
     <link rel="canonical" href="https://sanskarmanpradhan.com.np/mini-projects.html" />
     <link rel="icon" type="image/png" href="../favicon.png" />
@@ -30,7 +30,7 @@
     <meta property="og:title" content="Mini Projects — Sanskar Man Pradhan" />
     <meta
       property="og:description"
-      content="Small experiments — pomodoro timer, to-do list, calculator, password generator, dice roller, and word counter."
+      content="Small experiments — pomodoro timer, to-do list, calculator, password generator, MD5 cracker, dice roller, and word counter."
     />
     <meta property="og:url" content="https://sanskarmanpradhan.com.np/mini-projects.html" />
     <meta property="og:image" content="https://sanskarmanpradhan.com.np/assets/sanskar-man-pradhan.jpg" />
@@ -55,7 +55,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/style.css?v=3" />
-    <link rel="stylesheet" href="../css/mini-projects.css?v=3" />
+    <link rel="stylesheet" href="../css/mini-projects.css?v=5" />
   </head>
   <body>
     <div class="bg-layer bg-grid" aria-hidden="true"></div>
@@ -235,6 +235,47 @@
           </div>
         </article>
 
+        <!-- ============ MD5 CRACKER ============ -->
+        <article class="mp-card" id="md5-cracker">
+          <div class="mp-bar"><span class="mp-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mp-file">md5.js</span></div>
+          <div class="mp-body">
+            <div class="mp-title">
+              <h3>MD5 Cracker</h3>
+              <span class="mp-lang">js</span>
+            </div>
+            <div class="demo" data-demo="md5">
+              <form class="md5-form">
+                <input class="md5-in" type="text" autocomplete="off" spellcheck="false" placeholder="paste a 32-char md5 hash…" aria-label="MD5 hash" />
+                <button type="submit" class="md5-btn">crack</button>
+              </form>
+              <div class="md5-result" aria-live="polite">
+                <span class="md5-label">plaintext</span>
+                <span class="md5-out">—</span>
+              </div>
+              <div class="md5-foot">
+                <span class="md5-status">ready · dictionary + numeric PINs</span>
+                <button type="button" class="md5-try">try sample</button>
+              </div>
+              <details class="md5-list">
+                <summary><span>custom wordlist</span><span class="md5-list-count">0 words</span></summary>
+                <div class="md5-list-body">
+                  <textarea class="md5-words" rows="4" spellcheck="false" autocomplete="off" placeholder="paste candidates, one per line…" aria-label="Custom wordlist"></textarea>
+                  <div class="md5-list-foot">
+                    <label class="md5-file-label">
+                      <i class="fa-solid fa-file-arrow-up" aria-hidden="true"></i> load .txt
+                      <input class="md5-file" type="file" accept=".txt,text/plain" />
+                    </label>
+                    <span class="md5-list-hint">max 5 MB · 500k words</span>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <p class="mp-desc">Recover weak MD5 passwords with a built-in dictionary, your own wordlist, and numeric brute force — everything runs client-side.</p>
+            <div class="mp-tags"><span class="tag">hashing</span><span class="tag">js</span></div>
+            <a class="mp-src" href="https://github.com/Sanskarpra07" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+          </div>
+        </article>
+
         <!-- ============ DICE ============ -->
         <article class="mp-card" id="dice">
           <div class="mp-bar"><span class="mp-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mp-file">dice.js</span></div>
@@ -314,7 +355,7 @@
     <button id="back-to-top" class="back-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
     <script src="../js/main.js?v=3" defer></script>
-    <script src="../js/mini-projects.js?v=3" defer></script>
+    <script src="../js/mini-projects.js?v=5" defer></script>
 
     <script data-goatcounter="https://sanskar.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>

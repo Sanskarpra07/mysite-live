@@ -437,3 +437,306 @@
   input.addEventListener('input', update);
   update();
 })();
+
+// =====================================================
+//  MD5 CRACKER (dictionary + numeric brute force)
+// =====================================================
+(() => {
+  const root = document.querySelector('.demo[data-demo="md5"]');
+  if (!root) return;
+
+  const form = root.querySelector('.md5-form');
+  const input = root.querySelector('.md5-in');
+  const btn = root.querySelector('.md5-btn');
+  const out = root.querySelector('.md5-out');
+  const status = root.querySelector('.md5-status');
+  const tryBtn = root.querySelector('.md5-try');
+  const wordsEl = root.querySelector('.md5-words');
+  const fileEl = root.querySelector('.md5-file');
+  const listCount = root.querySelector('.md5-list-count');
+
+  // Compact, dependency-free MD5 (works on UTF-8 bytes).
+  const md5 = (() => {
+    const S = [
+      7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,
+      5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,
+      4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,
+      6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21,
+    ];
+    const K = new Int32Array(64);
+    for (let i = 0; i < 64; i++) K[i] = Math.floor(Math.abs(Math.sin(i + 1)) * 4294967296) | 0;
+    const enc = new TextEncoder();
+    const hex = x => {
+      let s = '';
+      for (let i = 0; i < 4; i++) s += ((x >>> (i * 8)) & 0xff).toString(16).padStart(2, '0');
+      return s;
+    };
+    return str => {
+      const bytes = enc.encode(str);
+      const len = bytes.length;
+      const buf = new Uint8Array((((len + 8) >> 6) + 1) << 6);
+      buf.set(bytes);
+      buf[len] = 0x80;
+      const view = new DataView(buf.buffer);
+      const bits = len * 8;
+      view.setUint32(buf.length - 8, bits >>> 0, true);
+      view.setUint32(buf.length - 4, Math.floor(bits / 4294967296), true);
+
+      let a0 = 0x67452301 | 0;
+      let b0 = 0xefcdab89 | 0;
+      let c0 = 0x98badcfe | 0;
+      let d0 = 0x10325476 | 0;
+      const M = new Int32Array(16);
+
+      for (let off = 0; off < buf.length; off += 64) {
+        for (let i = 0; i < 16; i++) M[i] = view.getInt32(off + i * 4, true);
+        let A = a0, B = b0, C = c0, D = d0;
+        for (let i = 0; i < 64; i++) {
+          let F, g;
+          if (i < 16) { F = (B & C) | (~B & D); g = i; }
+          else if (i < 32) { F = (D & B) | (~D & C); g = (5 * i + 1) & 15; }
+          else if (i < 48) { F = B ^ C ^ D; g = (3 * i + 5) & 15; }
+          else { F = C ^ (B | ~D); g = (7 * i) & 15; }
+          F = (F + A + K[i] + M[g]) | 0;
+          A = D; D = C; C = B;
+          const s = S[i];
+          B = (B + ((F << s) | (F >>> (32 - s)))) | 0;
+        }
+        a0 = (a0 + A) | 0;
+        b0 = (b0 + B) | 0;
+        c0 = (c0 + C) | 0;
+        d0 = (d0 + D) | 0;
+      }
+      return hex(a0) + hex(b0) + hex(c0) + hex(d0);
+    };
+  })();
+
+  const WORDS = `
+    123456 password 12345678 qwerty 123456789 12345 1234 111111 1234567
+    dragon 123123 baseball abc123 football monkey letmein shadow master 666666
+    qwertyuiop 123321 mustang 1234567890 michael 654321 superman 1qaz2wsx
+    7777777 121212 000000 qazwsx 123qwe killer trustno1 jordan jennifer
+    zxcvbnm asdfgh hunter buster soccer harley batman andrew tigger sunshine
+    iloveyou 2000 charlie robert thomas hockey ranger daniel starwars klaster
+    112233 george computer michelle jessica pepper 1111 zxcvbn 555555 11111111
+    131313 freedom 777777 pass maggie 159753 aaaaaa ginger princess joshua
+    cheese amanda summer love ashley 6969 nicole chelsea biteme matthew access
+    yankees 987654321 dallas austin thunder taylor matrix montana moon moscow
+    1234qwer admin root welcome login guest test test123 password1 password123
+    password12 password2 passw0rd p@ssw0rd qwerty123 qwerty1 iloveyou1 admin123
+    root123 abcdef abcdefg abcd1234 1q2w3e4r 1q2w3e 1qaz2wsx3edc zaq12wsx
+    qazxsw asdf asdfghjkl asdf1234 qwer1234 welcome1 letmein1 sunshine1
+    princess1 football1 baseball1 dragon1 master1 shadow1 monkey1 superman1
+    batman1 hello hello123 whatever nothing secret secret123 default changeme
+    letmein123 mypassword mypass pass1234 testing demo demo123 sample temp
+    temporary 123abc abc1234 111222 121314 12344321 159357 246810 135790
+    102030 123654 147258 2580 11223344 87654321 99999999 88888888 77777777
+    66666666 55555555 44444444 33333333 22222222 00000000 12341234 1122 1212
+    1313 4321 2222 3333 4444 5555 7777 8888 9999 1004 2001 2020 2021 2022
+    2023 2024 2025 2026 nepal kathmandu pokhara himalaya everest sanskar
+    pradhan john james david mary sarah jessica michael jennifer
+  `.trim().split(/\s+/);
+
+  const MAX_WORDS = 500000;
+  const MAX_FILE = 5 * 1024 * 1024;
+
+  const wordVariants = w => {
+    const list = [w, w + '1', w + '123', w + '1234', w + '!'];
+    if (/^[a-z]/.test(w)) {
+      list.push(w[0].toUpperCase() + w.slice(1));
+      list.push(w.toUpperCase());
+    }
+    return [...new Set(list)];
+  };
+
+  let busy = false;
+  let token = 0;
+  let customWords = [];
+  let countTimer = null;
+
+  const setStatus = t => { status.textContent = t; };
+  const setOut = (t, found) => {
+    out.textContent = t;
+    out.classList.toggle('found', Boolean(found));
+  };
+
+  const finish = (plain, message) => {
+    busy = false;
+    btn.disabled = false;
+    btn.textContent = 'crack';
+    if (plain === null) setOut('not found', false);
+    else setOut(plain, true);
+    setStatus(message);
+  };
+
+  const readyStatus = () => {
+    setStatus(customWords.length
+      ? `ready · built-in + ${customWords.length.toLocaleString()} custom words + PINs`
+      : 'ready · dictionary + numeric PINs');
+  };
+
+  const readCustom = () => {
+    const seen = new Set();
+    const list = [];
+    const lines = wordsEl.value.split(/\r?\n/);
+    for (let i = 0; i < lines.length; i++) {
+      const w = lines[i].trim();
+      if (w && !seen.has(w)) {
+        seen.add(w);
+        list.push(w);
+        if (list.length >= MAX_WORDS) break;
+      }
+    }
+    customWords = list;
+    listCount.textContent = list.length.toLocaleString() + ' word' +
+      (list.length === 1 ? '' : 's') +
+      (list.length >= MAX_WORDS ? ' (limit)' : '');
+    if (!busy) readyStatus();
+  };
+
+  const scheduleRead = () => {
+    clearTimeout(countTimer);
+    countTimer = setTimeout(readCustom, 200);
+  };
+
+  const crack = () => {
+    const hash = input.value.trim().toLowerCase();
+    if (!/^[a-f0-9]{32}$/.test(hash)) {
+      setOut('—', false);
+      setStatus('enter a valid 32-character md5 hash');
+      return;
+    }
+
+    clearTimeout(countTimer);
+    readCustom();
+
+    const myToken = ++token;
+    busy = true;
+    btn.disabled = true;
+    btn.textContent = 'cracking…';
+    setOut('…', false);
+    setStatus('checking built-in dictionary…');
+
+    const runWords = (words, label, next) => {
+      let i = 0;
+      const STEP = 600;
+      const tick = () => {
+        if (myToken !== token) return;
+        const stop = Math.min(i + STEP, words.length);
+        for (; i < stop; i++) {
+          const variants = wordVariants(words[i]);
+          for (let v = 0; v < variants.length; v++) {
+            if (md5(variants[v]) === hash) {
+              finish(variants[v], `match found · ${label} #${i + 1}`);
+              return;
+            }
+          }
+        }
+        if (i < words.length) {
+          setStatus(`checking ${label}… ${Math.floor((i / words.length) * 100)}%`);
+          setTimeout(tick, 0);
+        } else {
+          next();
+        }
+      };
+      tick();
+    };
+
+    const runNumeric = () => {
+      if (myToken !== token) return;
+      const LIMIT = 1000000;
+      const STEP = 6000;
+      let n = 0;
+
+      const tick = () => {
+        if (myToken !== token) return;
+        const stop = Math.min(n + STEP, LIMIT);
+        for (; n < stop; n++) {
+          const plain = String(n);
+          if (md5(plain) === hash) {
+            finish(plain, `match found · numeric candidate ${plain}`);
+            return;
+          }
+          if (n < 10000) {
+            const pin = plain.padStart(4, '0');
+            if (pin !== plain && md5(pin) === hash) {
+              finish(pin, `match found · numeric candidate ${pin}`);
+              return;
+            }
+          }
+          if (n < 100000) {
+            const padded = plain.padStart(6, '0');
+            if (md5(padded) === hash) {
+              finish(padded, `match found · numeric candidate ${padded}`);
+              return;
+            }
+          }
+        }
+        if (n < LIMIT) {
+          setStatus(`checking numeric PINs… ${Math.floor((n / LIMIT) * 100)}%`);
+          setTimeout(tick, 0);
+        } else {
+          finish(null, customWords.length
+            ? 'no match in built-in list, custom list, or 0–999999'
+            : 'no match in dictionary or 0–999999');
+        }
+      };
+
+      tick();
+    };
+
+    runWords(WORDS, 'built-in dictionary', () => {
+      if (myToken !== token) return;
+      if (customWords.length) {
+        setStatus(`checking custom list (${customWords.length.toLocaleString()} words)…`);
+        runWords(customWords, 'custom list', runNumeric);
+      } else {
+        runNumeric();
+      }
+    });
+  };
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    crack();
+  });
+
+  input.addEventListener('input', () => {
+    token++;
+    if (busy) {
+      busy = false;
+      btn.disabled = false;
+      btn.textContent = 'crack';
+    }
+    setOut('—', false);
+    readyStatus();
+  });
+
+  wordsEl.addEventListener('input', scheduleRead);
+
+  fileEl.addEventListener('change', async () => {
+    const file = fileEl.files && fileEl.files[0];
+    if (!file) return;
+    if (file.size > MAX_FILE) {
+      setStatus('file too large · max 5 MB');
+      fileEl.value = '';
+      return;
+    }
+    try {
+      wordsEl.value = await file.text();
+      clearTimeout(countTimer);
+      readCustom();
+      setStatus(`loaded ${file.name} · ${customWords.length.toLocaleString()} words`);
+    } catch (e) {
+      setStatus('could not read that file');
+    }
+    fileEl.value = '';
+  });
+
+  tryBtn.addEventListener('click', () => {
+    input.value = '5f4dcc3b5aa765d61d8327deb882cf99';
+    crack();
+  });
+
+  readCustom();
+})();

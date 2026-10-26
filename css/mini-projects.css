@@ -279,6 +279,107 @@
 .wc-num { font-size: 1.25rem; font-weight: 700; color: var(--accent); line-height: 1.1; }
 
 /* =====================================================
+   MD5 CRACKER
+   ===================================================== */
+.md5-form { display: flex; gap: 8px; }
+.md5-in {
+  flex: 1; min-width: 0;
+  font-family: var(--font-mono); font-size: 0.8rem; color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 12px;
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.md5-in::placeholder { color: var(--text-faint); }
+.md5-in:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+.md5-btn {
+  flex-shrink: 0;
+  background: var(--accent) !important; border-color: var(--accent) !important;
+  color: var(--accent-ink) !important; font-weight: 600;
+}
+.md5-btn:hover { box-shadow: 0 6px 20px var(--accent-glow); }
+.md5-btn:disabled { opacity: 0.6; cursor: progress; box-shadow: none; }
+
+.md5-result {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  margin-top: 12px; padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+.md5-label {
+  font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-faint);
+}
+.md5-out {
+  font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-dim);
+  word-break: break-all;
+}
+.md5-out.found { color: var(--accent); font-weight: 700; }
+
+.md5-foot {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-faint);
+}
+.md5-status { min-width: 0; }
+.md5-try {
+  flex-shrink: 0;
+  background: transparent !important; border: 0 !important;
+  padding: 0 !important;
+  font-family: var(--font-mono) !important; font-size: 0.68rem !important;
+  color: var(--accent) !important;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+.md5-list {
+  margin-top: 12px; padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.md5-list > summary {
+  display: flex; align-items: center; gap: 8px;
+  list-style: none; cursor: pointer; user-select: none;
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);
+}
+.md5-list > summary::-webkit-details-marker { display: none; }
+.md5-list > summary > span:first-child::before {
+  content: "+"; margin-right: 6px; color: var(--accent);
+}
+.md5-list[open] > summary > span:first-child::before { content: "−"; }
+.md5-list-count { margin-left: auto; color: var(--text-faint); }
+
+.md5-list-body { margin-top: 10px; }
+.md5-words {
+  width: 100%; min-height: 84px;
+  font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.5; color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 10px 12px;
+  outline: none; resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.md5-words::placeholder { color: var(--text-faint); }
+.md5-words:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+
+.md5-list-foot {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  flex-wrap: wrap; margin-top: 8px;
+  font-family: var(--font-mono); font-size: 0.66rem; color: var(--text-faint);
+}
+.md5-file-label {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 10px;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface-2); color: var(--text-dim);
+  cursor: pointer; transition: color 0.2s, border-color 0.2s;
+}
+.md5-file-label:hover { border-color: var(--accent); color: var(--accent); }
+.md5-file-label i { color: var(--accent); }
+.md5-file { display: none; }
+
+/* =====================================================
    RESPONSIVE
    ===================================================== */
 @media (max-width: 560px) {
