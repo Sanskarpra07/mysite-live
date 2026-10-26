@@ -30,26 +30,11 @@
             Swal.fire({
                 position: 'top-end',
                 icon: icon,
-                title: text,
+                text: text,
                 showConfirmButton: false,
                 timer: timerDuration,
                 timerProgressBar: true,
-                toast: true,
-                html: '<span style="font-size:13px;">' + text + '</span><br><small id="swal-timer-text" style="opacity:0.7;font-size:11px;"></small>',
-                didOpen: function () {
-                    var timerEl = document.getElementById('swal-timer-text');
-                    var remaining = timerDuration;
-                    var interval = setInterval(function () {
-                        remaining -= 100;
-                        if (remaining <= 0) {
-                            clearInterval(interval);
-                            return;
-                        }
-                        if (timerEl) {
-                            timerEl.textContent = Math.ceil(remaining / 1000) + 's';
-                        }
-                    }, 100);
-                }
+                toast: true
             });
             if (msg.closest && msg.closest('form')) {
                 /* keep live validation blocks in the DOM */

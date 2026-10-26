@@ -137,30 +137,37 @@ card to the grid in `blog/index.html` and a new entry in `sitemap.xml`.
 
 ## Security and privacy follow-up
 
-These are future improvements to work through; the site remains a static GitHub
-Pages site, so it has no site-side login or database.
+Repository review on 2026-10-26: these items are still open unless noted below.
+The site is static GitHub Pages content, with no site-side login or database.
+Fixed in this review: the shoe-store notification helper now displays message
+content as text instead of injecting it as HTML, preventing markup-based script
+injection through notification messages.
 
 - [ ] **Add a privacy notice.** Explain that contact form submissions (name,
   email, subject, and message) are sent to Formspree. Disclose GoatCounter
-  analytics and its aggregate data collection, and link to the providers'
-  privacy information.
+  analytics and link to both providers' privacy information. No notice was
+  found in the site pages.
 - [ ] **Review public personal information.** Check the downloadable CV for
   details and PDF metadata that should not be public. Review the published email,
-  photographs, and social links as well.
+  photographs, and social links as well. This review has not been documented.
 - [ ] **Reduce third-party requests.** Consider self-hosting Google Fonts,
   Font Awesome, Bootstrap, and SweetAlert assets used by the portfolio and
-  shoe-store demo. If CDN assets remain, pin exact versions and add Subresource
-  Integrity to externally hosted scripts and styles where supported.
+  shoe-store demo. Bootstrap references use version 5.3.3 and Bootstrap Icons
+  1.11.3, but SweetAlert uses the floating `@11` version; externally hosted
+  resources found in the pages do not have Subresource Integrity attributes.
 - [ ] **Plan a Content Security Policy.** The pages contain inline scripts and
   load assets from several external providers, so inventory those dependencies
   and move inline scripts into files before enforcing a restrictive policy.
-  Start with a report-only policy if the hosting setup allows it.
+  No CSP or documented CSP plan was found. Start with a report-only policy if
+  the hosting setup allows it.
 - [ ] **Check deployment security settings.** Confirm GitHub Pages has Enforce
   HTTPS enabled. Review the response headers the hosting setup can provide;
-  GitHub Pages does not use `.htaccess`.
-- [ ] **Use the `www` hostname consistently.** Update canonical URLs, Open Graph
-  URLs, structured data, sitemap entries, and internal absolute links to
-  `https://www.sanskarmanpradhan.com.np/` after confirming the redirect works.
+  this cannot be confirmed from the repository. GitHub Pages does not use
+  `.htaccess`.
+- [ ] **Use the `www` hostname consistently.** `CNAME` is set to
+  `www.sanskarmanpradhan.com.np`, but canonical URLs, Open Graph URLs, structured
+  data, the sitemap, and other absolute links still use the apex hostname.
+  Update them to `https://www.sanskarmanpradhan.com.np/` and confirm the redirect.
 
 ---
 
