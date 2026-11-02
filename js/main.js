@@ -240,19 +240,98 @@ const skillObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('#about, #skills').forEach(el => skillObserver.observe(el));
 
 // =====================================================
-//  PROJECT FILTER BUTTONS
+//  PROJECTS CAROUSEL
 // =====================================================
-document.querySelectorAll('.filter').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('.project-card').forEach(card => {
-      const show = filter === 'all' || card.dataset.category === filter;
-      card.style.display = show ? 'flex' : 'none';
-    });
+const projectsCarousel = document.querySelector('.projects-carousel');
+const projectsTrack = document.querySelector('[data-projects-track]');
+const carouselPrev = document.querySelector('[data-carousel-prev]');
+const carouselNext = document.querySelector('[data-carousel-next]');
+
+if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
+  const cardStep = () => {
+    const card = projectsTrack.querySelector('.project-card');
+    if (!card) return projectsCarousel.clientWidth;
+    const gap = parseFloat(getComputedStyle(projectsTrack).columnGap) || 0;
+    return card.getBoundingClientRect().width + gap;
+  };
+
+  const updateCarouselState = () => {
+    const maxScroll = projectsCarousel.scrollWidth - projectsCarousel.clientWidth - 1;
+    carouselPrev.disabled = projectsCarousel.scrollLeft <= 0;
+    carouselNext.disabled = projectsCarousel.scrollLeft >= maxScroll;
+  };
+
+  carouselPrev.addEventListener('click', () => {
+    projectsCarousel.scrollBy({ left: -cardStep(), behavior: 'smooth' });
   });
-});
+  carouselNext.addEventListener('click', () => {
+    projectsCarousel.scrollBy({ left: cardStep(), behavior: 'smooth' });
+  });
+
+  // Swipe / drag support
+  let isPointerDown = false;
+  let isSwiping = false;
+  let suppressClick = false;
+  let startX = 0;
+  let startY = 0;
+  let startScrollLeft = 0;
+
+  projectsCarousel.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    isPointerDown = true;
+    isSwiping = false;
+    suppressClick = false;
+    startX = e.clientX;
+    startY = e.clientY;
+    startScrollLeft = projectsCarousel.scrollLeft;
+    projectsCarousel.style.scrollBehavior = 'auto';
+  });
+
+  projectsCarousel.addEventListener('pointermove', (e) => {
+    if (!isPointerDown) return;
+    const deltaX = e.clientX - startX;
+    const deltaY = e.clientY - startY;
+    if (!isSwiping) {
+      if (Math.abs(deltaX) < 8 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+      isSwiping = true;
+      projectsCarousel.classList.add('dragging');
+      if (projectsCarousel.setPointerCapture) {
+        projectsCarousel.setPointerCapture(e.pointerId);
+      }
+    }
+    e.preventDefault();
+    projectsCarousel.scrollLeft = startScrollLeft - deltaX;
+  });
+
+  const endPointer = () => {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    projectsCarousel.style.scrollBehavior = 'smooth';
+    projectsCarousel.classList.remove('dragging');
+    if (!isSwiping) return;
+    isSwiping = false;
+    suppressClick = true;
+    const step = cardStep();
+    if (step > 0) {
+      const target = Math.round(projectsCarousel.scrollLeft / step) * step;
+      projectsCarousel.scrollTo({ left: target, behavior: 'smooth' });
+    }
+  };
+
+  projectsCarousel.addEventListener('pointerup', endPointer);
+  projectsCarousel.addEventListener('pointercancel', endPointer);
+  projectsCarousel.addEventListener('click', (e) => {
+    if (!suppressClick) return;
+    e.preventDefault();
+    e.stopPropagation();
+    suppressClick = false;
+  }, true);
+
+  projectsCarousel.addEventListener('scroll', updateCarouselState, { passive: true });
+  window.addEventListener('resize', updateCarouselState);
+
+  updateCarouselState();
+}
 
 // =====================================================
 //  CONTACT FORM WITH VALIDATION (Formspree)

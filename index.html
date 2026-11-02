@@ -142,7 +142,7 @@
       crossorigin="anonymous"
     />
     <!-- Main stylesheet -->
-    <link rel="stylesheet" href="css/style.css?v=3" />
+    <link rel="stylesheet" href="css/style.css?v=4" />
     <link rel="preload" as="image" href="assets/sanskar-man-pradhan.webp" />
   </head>
   <body>
@@ -338,7 +338,7 @@
                 <div class="stat-label">year coding</div>
               </div>
               <div class="stat">
-                <div class="stat-num count" data-target="3">0</div>
+                <div class="stat-num count" data-target="4">0</div>
                 <div class="stat-label">projects shipped</div>
               </div>
               <div class="stat">
@@ -517,13 +517,15 @@
           </div>
         </div>
 
-        <div class="project-filters">
-          <button class="filter active" data-filter="all">all</button>
-          <button class="filter" data-filter="web">web</button>
-          <button class="filter" data-filter="other">other</button>
+        <div class="projects-toolbar">
+          <div class="carousel-nav">
+            <button class="carousel-btn" type="button" data-carousel-prev aria-label="Previous project"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <button class="carousel-btn" type="button" data-carousel-next aria-label="Next project"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
         </div>
 
-        <div class="projects-grid">
+        <div class="projects-carousel">
+          <div class="projects-grid" data-projects-track>
           <article class="project-card" data-category="web">
             <div class="project-num">01</div>
             <div class="project-title">
@@ -592,6 +594,31 @@
               <a class="btn small ghost" href="https://github.com/Sanskarpra07/shoe_store" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> github</a>
             </div>
           </article>
+
+          <article class="project-card" data-category="web">
+            <div class="project-num">04</div>
+            <div class="project-title">
+              <h3>Daura &amp; Co. Clothing Store</h3>
+              <span class="project-lang">HTML · CSS · JS · Bootstrap 5</span>
+            </div>
+            <p>
+              A responsive static clothing storefront for Daura &amp; Co. —
+              modern apparel catalogue with product grids, category sections,
+              cart interactions and a clean mobile-first layout, built with
+              HTML, CSS, JavaScript and Bootstrap 5.
+            </p>
+            <div class="project-tags">
+              <span class="tag"><i class="fa-brands fa-html5"></i> HTML</span>
+              <span class="tag"><i class="fa-brands fa-css3-alt"></i> CSS</span>
+              <span class="tag"><i class="fa-brands fa-bootstrap"></i> Bootstrap</span>
+              <span class="tag"><i class="fa-solid fa-shirt"></i> E-commerce</span>
+            </div>
+            <div class="project-ctas">
+              <a class="btn small primary" href="https://dauraandco.vercel.app" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> live</a>
+              <a class="btn small ghost" href="https://github.com/Sanskarpra07/clothes-store" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> github</a>
+            </div>
+          </article>
+          </div>
         </div>
       </section>
 
@@ -677,7 +704,7 @@
     <button id="back-to-top" class="back-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
     <!-- Scripts -->
-    <script src="js/main.js?v=3" defer></script>
+    <script src="js/main.js?v=4" defer></script>
 
     <!-- Visitor analytics (GoatCounter — privacy-friendly, cookie-free)
          Replace YOUR-CODE with your GoatCounter site code, then remove this comment.
