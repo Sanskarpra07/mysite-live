@@ -470,10 +470,12 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   const chips = [
     'what is your stack?',
+    'what services do you offer?',
     'are you available for hire?',
-    'tell me about a recent project',
+    'tell me about MegaFoot',
+    'what is your work experience?',
     'what is your education?',
-    'how can I contact you?',
+    'where are you based?',
   ];
 
   chips.forEach(label => {
@@ -486,24 +488,39 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   });
 
   const answers = {
-    stack: 'My focus is on content: writing, managing, and delivering website content, plus WordPress/WooCommerce for content sites. I also design static web pages with HTML/CSS and handle layout with Figma and Photoshop, and I\'m currently learning React to deepen my web skills.',
-    hire: 'Yes — I\'m open to freelance work and new opportunities. Freelance or part-time content roles fit best with my BCA studies, and I also take on static web page design. Drop a message via the contact form below.',
-    project: 'A few things I\'ve worked on: this static portfolio site (hand-built with HTML/CSS/JS and a working contact form), MegaFoot — a PHP + MySQL shoe store with cart, wishlist, order tracking and an admin panel (live demo in the projects section above), and a WordPress + WooCommerce content site with SEO basics.',
-    education: 'I\'m studying for my BCA (Bachelor in Computer Applications) at Mega College since 2023, and before that I completed higher secondary (+2) there in 2021–2023.',
-    contact: 'You can email me at pradhansanskar86@gmail.com, find me on GitHub (@Sanskarpra07) or LinkedIn (Sanskar Pradhan), or use the contact form at the bottom of the page.',
-    default: 'Hmm, I\'m not sure about that one. Try one of the suggestions above — stack, availability, projects, education, or contact.',
+    intro: 'I\'m Sanskar Man Pradhan, a content writer and content handler based in Lalitpur, Nepal. I also build static web pages and am studying for a Bachelor in Computer Applications (BCA) at Mega College.',
+    stack: 'My tools and skills include content writing and management, WordPress and WooCommerce, HTML, CSS, JavaScript, PHP, MySQL, responsive web design, and SEO basics. I use Figma and Photoshop for design work, and I\'m currently learning React.',
+    services: 'I can help with writing and managing website content, content delivery workflows, WordPress/WooCommerce content sites, and clean static web pages. I can also help with page layouts using Figma or Photoshop and basic SEO.',
+    hire: 'Yes, I\'m accepting work. I\'m open to freelance projects and new opportunities in content writing/handling and static web design. You can reach me through the contact form or email me at pradhansanskar86@gmail.com.',
+    experience: 'I\'ve worked as a Content Writer at Longtail E-Media since August 2024, writing and managing website content, including hotel-related content, and supporting CMS/content workflows and basic technical tasks. I also worked as a Receptionist at Swornim Multipurpose Co-operative from August to November 2023.',
+    education: 'I\'m studying for a Bachelor in Computer Applications (BCA) at Mega College, where I started in 2023. I completed higher secondary (+2) there from 2021 to 2023.',
+    location: 'I\'m based in Lalitpur, Nepal (Nepal Time, UTC+5:45).',
+    projects: 'My featured projects include this responsive portfolio built with HTML, CSS, and JavaScript; Medical-IMS, a PHP/MySQL inventory system; MegaFoot, a PHP/MySQL shoe store; and Daura & Co., a responsive static clothing storefront built with HTML, CSS, JavaScript, and Bootstrap 5. You can find links and details in the Projects section.',
+    megafoot: 'MegaFoot is a PHP and MySQL shoe store project. It includes product/category/brand filters, a cart, wishlist, order tracking, customer accounts with OTP login, an admin panel, and eSewa/Khalti sandbox checkout. The Projects section links to a browsable storefront demo and the source on GitHub.',
+    medical: 'Medical-IMS is a PHP and MySQL medical inventory management system with a stock dashboard, product and category management, stock logs, and authenticated user accounts. The Projects section links to its GitHub repository; it does not have a live demo.',
+    daura: 'Daura & Co. is a responsive static clothing storefront built with HTML, CSS, JavaScript, and Bootstrap 5. It has product grids, category sections, cart interactions, and a mobile-first layout. See the Projects section for its live site and GitHub links.',
+    portfolio: 'This portfolio is a responsive static site built with HTML, CSS, and JavaScript. It includes light/dark themes, interactive page effects, a contact form, and this scripted FAQ chat widget.',
+    contact: 'Email me at pradhansanskar86@gmail.com, use the contact form, or find me on GitHub as @Sanskarpra07 and on LinkedIn as Sanskar Pradhan. My social links are also listed in the Contact section.',
+    default: 'I can answer questions about Sanskar\'s background, skills, services, work experience, education, projects, availability, location, and contact details. Try asking about one of those topics.',
   };
 
   const getAnswer = (text) => {
-    const t = text.toLowerCase();
-    if (/(stack|tech|technolog|language|what.*use|build.*with)/.test(t)) return answers.stack;
-    if (/(hire|available|work|freelance|opportunit|job|role)/.test(t)) return answers.hire;
-    if (/(project|portfolio|built|work you)/.test(t)) return answers.project;
-    if (/(education|study|degree|college|bca|school)/.test(t)) return answers.education;
-    if (/(contact|email|message|reach|linkedin|github|social)/.test(t)) return answers.contact;
+    const t = text.toLowerCase().replace(/[^\w\s&.-]/g, ' ');
+    if (/(mega\s*foot|shoe store|shoe shop)/.test(t)) return answers.megafoot;
+    if (/(medical[\s-]*ims|inventory system|medical inventory)/.test(t)) return answers.medical;
+    if (/(daura|clothing store|clothes store|fashion store)/.test(t)) return answers.daura;
+    if (/(portfolio|this website|this site|your website)/.test(t)) return answers.portfolio;
+    if (/(contact|email|message|reach|linkedin|github|social|instagram|facebook)/.test(t)) return answers.contact;
+    if (/(education|study|degree|college|bca|school|student|qualifications)/.test(t)) return answers.education;
+    if (/(experience|career|previous job|work history|where.*work|work.*experience|worked|employment|longtail|receptionist)/.test(t)) return answers.experience;
+    if (/(where|location|located|based|live|from)/.test(t)) return answers.location;
+    if (/(service|offer|help with|do for me|what do you do|speciali[sz]|hire for)/.test(t)) return answers.services;
+    if (/(hire|available|freelance|opportunit|job|role|accepting work|open to work)/.test(t)) return answers.hire;
+    if (/(stack|tech|technolog|language|skill|good at|strength|tool|wordpress|woocommerce|html|css|javascript|\bjs\b|\bphp\b|mysql|react|figma|photoshop|seo|what.*use|build.*with)/.test(t)) return answers.stack;
+    if (/(project|built|work you|what have you made|what have you worked on)/.test(t)) return answers.projects;
+    if (/(who are you|who.*sanskar|about you|tell me about yourself|introduce yourself|your background)/.test(t)) return answers.intro;
     return answers.default;
   };
-
   const addMessage = (who, body, animate) => {
     const row = document.createElement('div');
     row.className = `msg ${who}`;
