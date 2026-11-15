@@ -18,7 +18,7 @@ the portfolio's projects section, so visitors can see it.
 | Item | Status |
 | --- | --- |
 | `shoe_store` made portable for shared hosting | pushed — `Sanskarpra07/shoe_store` @ `231bb17` |
-| Static, browsable demo of the storefront | live — https://sanskarmanpradhan.com.np/shoe-store/ |
+| Static, browsable demo of the storefront | live — https://www.sanskarmanpradhan.com.np/shoe-store/ |
 | Portfolio project card 03 (was "UI/UX Design Work") | replaced with MegaFoot, live + github links |
 | Portfolio pushed | `Sanskarpra07/mysite-live` @ `828a671` |
 
@@ -53,7 +53,7 @@ sensitive paths.
 4. phpMyAdmin → select the database → Import → `database/setup.sql`.
 5. Smoke test: `/` , `/shop.php`, `/admin/login.php` (admin / `password`).
 6. Switch the portfolio card 03 **live** link from
-   `https://sanskarmanpradhan.com.np/shoe-store/` to the real dynamic site URL.
+   `https://www.sanskarmanpradhan.com.np/shoe-store/` to the real dynamic site URL.
 
 ### Rebuild the upload package on another machine
 

@@ -3,41 +3,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://sanskarmanpradhan.com.np/</loc>
+    <loc>https://www.sanskarmanpradhan.com.np/</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://sanskarmanpradhan.com.np/assets/sanskar-man-pradhan.jpg</image:loc>
+      <image:loc>https://www.sanskarmanpradhan.com.np/assets/sanskar-man-pradhan.jpg</image:loc>
       <image:title>Sanskar Man Pradhan portrait</image:title>
       <image:caption>Sanskar Man Pradhan — content writer and content handler in Lalitpur, Nepal</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://sanskarmanpradhan.com.np/assets/sanskar-man-pradhan-portrait.jpg</image:loc>
+      <image:loc>https://www.sanskarmanpradhan.com.np/assets/sanskar-man-pradhan-portrait.jpg</image:loc>
       <image:title>Sanskar Man Pradhan</image:title>
       <image:caption>Sanskar Man Pradhan, BCA student and content writer</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://sanskarmanpradhan.com.np/blog/index.html</loc>
+    <loc>https://www.sanskarmanpradhan.com.np/blog/index.html</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sanskarmanpradhan.com.np/mini-projects.html</loc>
+    <loc>https://www.sanskarmanpradhan.com.np/mini-projects.html</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sanskarmanpradhan.com.np/blog/why-content-handling-matters.html</loc>
+    <loc>https://www.sanskarmanpradhan.com.np/blog/why-content-handling-matters.html</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sanskarmanpradhan.com.np/blog/static-web-design-basics.html</loc>
+    <loc>https://www.sanskarmanpradhan.com.np/blog/static-web-design-basics.html</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
