@@ -338,9 +338,19 @@ if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
 // =====================================================
 const form = document.getElementById('contact-form');
 if (form) {
+  let successTimeout;
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const status = document.getElementById('form-status');
+    clearTimeout(successTimeout);
+    const showSuccess = (message) => {
+      status.textContent = message;
+      status.style.color = 'var(--accent)';
+      successTimeout = setTimeout(() => {
+        status.textContent = '';
+        status.style.color = '';
+      }, 5000);
+    };
     const setErr = (msg) => {
       status.textContent = '✗ ' + msg;
       status.style.color = '#ff6b6b';
@@ -349,8 +359,7 @@ if (form) {
     const trap = form.querySelector('input[name="_gotcha"]');
     const trap2 = form.querySelector('input[name="website"]');
     if ((trap && trap.value) || (trap2 && trap2.value)) {
-      status.textContent = '✓ message sent! thank you.';
-      status.style.color = 'var(--accent)';
+      showSuccess('✓ message sent! thank you.');
       return;
     }
 
@@ -385,8 +394,7 @@ if (form) {
     })
       .then(response => {
         if (response.ok) {
-          status.textContent = '✓ message sent! thank you, ' + name + '.';
-          status.style.color = 'var(--accent)';
+          showSuccess('✓ message sent! thank you, ' + name + '.');
           form.reset();
         } else {
           return response.json().then(data => {
