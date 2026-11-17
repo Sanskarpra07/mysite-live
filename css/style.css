@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../assets/fonts/inter-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+}
+
 /* =====================================================
    DESIGN TOKENS — dark terminal/dev theme
    ===================================================== */
@@ -368,6 +383,14 @@ button { font-family: inherit; cursor: pointer; }
   margin-bottom: 14px;
 }
 .hero-title .accent { color: var(--accent); }
+.hero-title-role {
+  display: block;
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0;
+  margin-top: 8px;
+}
 .hero-role {
   font-size: clamp(1rem, 2vw, 1.15rem);
   font-weight: 600; color: var(--text);
@@ -1371,7 +1394,7 @@ a.contact-val:hover { color: var(--accent); }
   }
   .hero-aside { max-width: 340px; }
   .about-grid { grid-template-columns: 180px 1fr; gap: 24px; }
-  .about-photo img { aspect-ratio: 1; }
+  .about-photo img { aspect-ratio: 3 / 4; }
   .exp-card { padding: 20px; }
   .skills-grid { gap: 16px; }
   .skills-group { padding: 20px; }

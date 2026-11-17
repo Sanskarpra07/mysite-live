@@ -10,8 +10,8 @@
     />
     <link rel="canonical" href="https://www.sanskarmanpradhan.com.np/" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1VE7BB62MY"></script>
     <meta name="theme-color" content="#0a0a0a" />
     <script>
       // Apply the saved theme before first paint so light-theme visitors
@@ -25,6 +25,25 @@
         }
       } catch (e) {}
     </script>
+    <style>
+@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:swap;src:url('assets/fonts/inter-latin.woff2') format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:100 900;font-display:swap;src:url('assets/fonts/jetbrains-mono-latin.woff2') format('woff2')}
+:root{--bg:#0a0a0a;--surface:#111111;--surface-2:#161616;--border:#2e2e2e;--text:#e5e5e5;--text-bright:#ffffff;--text-dim:#9a9a9a;--text-faint:#5a5a5a;--accent:#00ff88;--accent-ink:#001a0e;--accent-dim:rgba(0,255,136,.12);--accent-glow:rgba(0,255,136,.35);--font-mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;--font-sans:Inter,system-ui,-apple-system,sans-serif;--container:1100px;--radius:12px;--radius-sm:8px}
+[data-theme=light]{--bg:#fafaf7;--surface:#ffffff;--surface-2:#f4f4f0;--border:#e5e3dd;--text:#1a1a1a;--text-bright:#000000;--text-dim:#6b6b6b;--text-faint:#b0b0b0;--accent:#00a85a;--accent-ink:#ffffff;--accent-dim:rgba(0,168,90,.12);--accent-glow:rgba(0,168,90,.3)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}a{color:inherit;text-decoration:none}ul{list-style:none}button{font-family:inherit;cursor:pointer}
+.container{max-width:var(--container);margin:0 auto;padding:0 clamp(18px,4vw,32px)}
+.bg-layer{position:fixed;inset:0;pointer-events:none;z-index:0}.bg-grid{background-image:linear-gradient(to right,rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.05) 1px,transparent 1px);background-size:96px 96px}.bg-dots-base{background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1.4px);background-size:24px 24px}.bg-vignette{background:radial-gradient(ellipse at top,transparent 0%,var(--bg) 78%);opacity:.8}
+#site-header{position:sticky;top:0;z-index:500;background:var(--bg);border-bottom:1px solid var(--border)}.navbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}.brand{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-weight:600}.brand-glyph,.accent{color:var(--accent)}
+main{position:relative;z-index:1}.hero-section{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-columns:1fr auto;gap:clamp(32px,5vw,64px);align-items:center;padding:clamp(80px,12vh,120px) 0 60px}.hero-content{max-width:620px;min-width:0}.hero-title{font-size:clamp(2.2rem,5.5vw,3.4rem);font-weight:700;line-height:1.15;letter-spacing:-.03em;color:var(--text-bright);margin-bottom:14px}.hero-title-role{display:block;font-size:clamp(1rem,2.2vw,1.35rem);font-weight:600;color:var(--text);letter-spacing:0;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:var(--radius-sm);font-family:var(--font-mono);font-size:.82rem;font-weight:600;border:1px solid transparent}.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.hero-aside{display:flex;flex-direction:column;gap:28px;max-width:360px;min-width:0}.profile-frame{text-align:center}.profile-frame img{width:180px;height:180px;border-radius:50%;object-fit:cover;object-position:center top;margin:0 auto}
+.section{position:relative;z-index:1;padding:clamp(64px,10vw,110px) 0;border-top:1px solid var(--border)}.section-head{display:flex;gap:18px;margin-bottom:clamp(36px,6vw,56px)}.section-head h2{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:700;color:var(--text-bright)}
+.about-grid{display:grid;grid-template-columns:260px 1fr;gap:clamp(28px,4vw,56px);align-items:start}.about-photo{overflow:hidden;border:1px solid var(--border);border-radius:var(--radius)}.about-photo img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top}
+.skip-link{position:absolute;left:-9999px;top:auto}.skip-link:focus{left:10px;top:10px;padding:10px 16px;background:var(--accent);color:var(--accent-ink);z-index:10000}
+@media(max-width:960px){.hero-section{grid-template-columns:1fr}.hero-aside{max-width:380px;margin:0 auto;width:100%}.about-grid{grid-template-columns:200px 1fr}}
+@media(max-width:680px){.profile-frame img{width:150px;height:150px}.about-grid{grid-template-columns:1fr}.about-photo{max-width:220px}}
+    </style>
 
     <!-- Open Graph / social sharing -->
     <meta property="og:type" content="website" />
@@ -128,22 +147,15 @@
     }
     </script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Font Awesome (icons) -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      crossorigin="anonymous"
-    />
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="css/style.css?v=4" />
-    <link rel="preload" as="image" href="assets/sanskar-man-pradhan.webp" />
+    <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/sanskar-man-pradhan-180.webp" as="image" type="image/webp" />
+    <link rel="preload" href="css/font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="preload" href="css/style.css?v=5" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link rel="stylesheet" href="css/font-awesome.min.css" />
+      <link rel="stylesheet" href="css/style.css?v=5" />
+    </noscript>
   </head>
   <body>
     <!-- Layered background -->
@@ -215,8 +227,9 @@
           <p class="hero-prefix">$ whoami</p>
           <h1 id="hero-heading" class="hero-title">
             <span class="accent">hi, I'm</span> Sanskar Man Pradhan
+            <span class="hero-title-role">Content Writer &amp; Content Handler</span>
           </h1>
-          <p class="hero-role">Content Writer · Content Handler · Static Web Design</p>
+          <p class="hero-role">Static Web Design · Lalitpur, Nepal</p>
           <p class="hero-loc">Lalitpur, Nepal</p>
 
           <p class="hero-summary">
@@ -252,13 +265,14 @@
         <aside class="hero-aside">
           <figure class="profile-frame">
             <img
-              src="assets/sanskar-man-pradhan.webp"
+              src="assets/sanskar-man-pradhan-180.webp"
+              srcset="assets/sanskar-man-pradhan-180.webp 180w, assets/sanskar-man-pradhan-360.webp 360w"
+              sizes="(max-width: 680px) 150px, 180px"
               alt="Sanskar Man Pradhan — content writer and content handler"
               loading="eager"
               fetchpriority="high"
-              width="220"
-              height="220"
-              onerror="this.onerror=null; this.src='assets/sanskar-man-pradhan.jpg';"
+              width="180"
+              height="180"
             />
             <figcaption class="profile-caption">~/profile.png</figcaption>
           </figure>
@@ -312,7 +326,7 @@
 
         <div class="about-grid">
           <figure class="about-photo">
-            <img src="assets/sanskar-man-pradhan-portrait.jpg" alt="Sanskar Man Pradhan portrait, content writer and content handler" loading="lazy" width="260" height="346" onerror="this.onerror=null; this.src='assets/sanskar-man-pradhan-profile.jpg';" />
+            <img src="assets/sanskar-man-pradhan-portrait-260.webp" srcset="assets/sanskar-man-pradhan-portrait-260.webp 260w, assets/sanskar-man-pradhan-portrait-520.webp 520w" sizes="(max-width: 680px) 220px, (max-width: 960px) 200px, 260px" alt="Sanskar Man Pradhan portrait, content writer and content handler" loading="lazy" width="260" height="347" />
           </figure>
 
           <div class="about-body">
@@ -705,6 +719,7 @@
 
     <!-- Scripts -->
     <script src="js/main.js?v=4" defer></script>
+    <script src="js/analytics.js" defer></script>
 
     <!-- Visitor analytics (GoatCounter — privacy-friendly, cookie-free)
          Replace YOUR-CODE with your GoatCounter site code, then remove this comment.
