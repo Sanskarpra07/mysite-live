@@ -246,7 +246,6 @@ const projectsCarousel = document.querySelector('.projects-carousel');
 const projectsTrack = document.querySelector('[data-projects-track]');
 const carouselPrev = document.querySelector('[data-carousel-prev]');
 const carouselNext = document.querySelector('[data-carousel-next]');
-const carouselToggle = document.querySelector('[data-carousel-toggle]');
 const carouselStatus = document.querySelector('[data-carousel-status]');
 
 if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
@@ -280,7 +279,6 @@ if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
     let setWidth = 0;
     let targetLeft = 0;
     let index = 0;
-    let userPaused = reduceMotion.matches;
     let hoverPaused = false;
     let focusPaused = false;
     let inView = true;
@@ -337,7 +335,7 @@ if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
       projectsCarousel.scrollTo({ left: targetLeft, behavior: 'smooth' });
     };
 
-    const shouldAutoplay = () => !userPaused && !hoverPaused && !focusPaused && inView && !document.hidden;
+    const shouldAutoplay = () => !reduceMotion.matches && !hoverPaused && !focusPaused && inView && !document.hidden;
 
     const stopAutoplay = () => {
       clearInterval(autoplayTimer);
@@ -349,35 +347,13 @@ if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
       if (shouldAutoplay()) autoplayTimer = setInterval(() => goTo(1), AUTOPLAY_MS);
     };
 
-    const syncToggle = () => {
-      if (!carouselToggle) return;
-      const paused = !shouldAutoplay();
-      carouselToggle.setAttribute('aria-pressed', String(paused));
-      carouselToggle.setAttribute('aria-label', paused ? 'Play carousel' : 'Pause carousel');
-      carouselToggle.innerHTML = paused
-        ? '<i class="fa-solid fa-play" aria-hidden="true"></i>'
-        : '<i class="fa-solid fa-pause" aria-hidden="true"></i>';
-    };
-
-    const updateAutoplay = () => {
-      syncToggle();
-      startAutoplay();
-    };
-
     const move = (direction) => {
       goTo(direction);
-      if (!userPaused) startAutoplay();
+      startAutoplay();
     };
 
     carouselPrev.addEventListener('click', () => move(-1));
     carouselNext.addEventListener('click', () => move(1));
-
-    if (carouselToggle) {
-      carouselToggle.addEventListener('click', () => {
-        userPaused = !userPaused;
-        updateAutoplay();
-      });
-    }
 
     projectsCarousel.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') { e.preventDefault(); move(1); }
@@ -422,7 +398,7 @@ if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
       suppressClick = true;
       targetLeft = Math.round(projectsCarousel.scrollLeft / step) * step;
       projectsCarousel.scrollTo({ left: targetLeft, behavior: 'smooth' });
-      if (!userPaused) startAutoplay();
+      startAutoplay();
     };
 
     projectsCarousel.addEventListener('pointerup', endPointer);
@@ -445,25 +421,23 @@ if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
 
     projectsCarousel.addEventListener('scroll', onScrollSettled, { passive: true });
 
-    projectsCarousel.addEventListener('mouseenter', () => { hoverPaused = true; updateAutoplay(); });
-    projectsCarousel.addEventListener('mouseleave', () => { hoverPaused = false; updateAutoplay(); });
-    projectsCarousel.addEventListener('focusin', () => { focusPaused = true; updateAutoplay(); });
-    projectsCarousel.addEventListener('focusout', () => { focusPaused = false; updateAutoplay(); });
+    projectsCarousel.addEventListener('mouseenter', () => { hoverPaused = true; startAutoplay(); });
+    projectsCarousel.addEventListener('mouseleave', () => { hoverPaused = false; startAutoplay(); });
+    projectsCarousel.addEventListener('focusin', () => { focusPaused = true; startAutoplay(); });
+    projectsCarousel.addEventListener('focusout', () => { focusPaused = false; startAutoplay(); });
 
-    document.addEventListener('visibilitychange', updateAutoplay);
+    document.addEventListener('visibilitychange', startAutoplay);
 
     if ('IntersectionObserver' in window) {
       const carouselObserver = new IntersectionObserver(([entry]) => {
         inView = entry.isIntersecting;
-        updateAutoplay();
+        startAutoplay();
       }, { threshold: 0.15 });
       carouselObserver.observe(projectsCarousel);
     }
 
     if (reduceMotion.addEventListener) {
-      reduceMotion.addEventListener('change', (e) => {
-        if (e.matches) { userPaused = true; updateAutoplay(); }
-      });
+      reduceMotion.addEventListener('change', startAutoplay);
     }
 
     window.addEventListener('resize', () => {
@@ -479,7 +453,7 @@ if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
     targetLeft = setWidth;
     setScroll(targetLeft, true);
     renderStatus();
-    updateAutoplay();
+    startAutoplay();
   }
 }
 

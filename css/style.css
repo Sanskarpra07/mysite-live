@@ -771,7 +771,6 @@ button { font-family: inherit; cursor: pointer; }
 }
 .carousel-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .carousel-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-.carousel-btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
 
 .projects-carousel {
   padding: 8px 2px 12px;
