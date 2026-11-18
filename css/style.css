@@ -754,8 +754,12 @@ button { font-family: inherit; cursor: pointer; }
    PROJECTS
    ===================================================== */
 .projects-toolbar {
-  display: flex; align-items: center; justify-content: flex-end;
+  display: flex; align-items: center; justify-content: space-between;
   gap: 16px; flex-wrap: wrap; margin-bottom: 28px;
+}
+.carousel-status {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.05em; color: var(--text-faint);
 }
 .carousel-nav { display: flex; gap: 8px; }
 .carousel-btn {
@@ -767,6 +771,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .carousel-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .carousel-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.carousel-btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
 
 .projects-carousel {
   padding: 8px 2px 12px;
@@ -783,6 +788,7 @@ button { font-family: inherit; cursor: pointer; }
   -webkit-overflow-scrolling: touch;
 }
 .projects-carousel.dragging { cursor: grabbing; user-select: none; }
+.projects-carousel:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius); }
 .projects-carousel::-webkit-scrollbar { display: none; }
 
 .projects-grid {

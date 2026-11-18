@@ -240,97 +240,247 @@ const skillObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('#about, #skills').forEach(el => skillObserver.observe(el));
 
 // =====================================================
-//  PROJECTS CAROUSEL
+//  PROJECTS CAROUSEL (infinite loop + autoplay)
 // =====================================================
 const projectsCarousel = document.querySelector('.projects-carousel');
 const projectsTrack = document.querySelector('[data-projects-track]');
 const carouselPrev = document.querySelector('[data-carousel-prev]');
 const carouselNext = document.querySelector('[data-carousel-next]');
+const carouselToggle = document.querySelector('[data-carousel-toggle]');
+const carouselStatus = document.querySelector('[data-carousel-status]');
 
 if (projectsCarousel && projectsTrack && carouselPrev && carouselNext) {
-  const cardStep = () => {
-    const card = projectsTrack.querySelector('.project-card');
-    if (!card) return projectsCarousel.clientWidth;
-    const gap = parseFloat(getComputedStyle(projectsTrack).columnGap) || 0;
-    return card.getBoundingClientRect().width + gap;
-  };
+  const originalCards = Array.from(projectsTrack.querySelectorAll('.project-card'));
+  const count = originalCards.length;
 
-  const updateCarouselState = () => {
-    const maxScroll = projectsCarousel.scrollWidth - projectsCarousel.clientWidth - 1;
-    carouselPrev.disabled = projectsCarousel.scrollLeft <= 0;
-    carouselNext.disabled = projectsCarousel.scrollLeft >= maxScroll;
-  };
+  if (count < 2) {
+    const toolbar = projectsCarousel.previousElementSibling;
+    if (toolbar && toolbar.classList.contains('projects-toolbar')) toolbar.hidden = true;
+    projectsCarousel.removeAttribute('tabindex');
+  } else {
+    // Three copies: [wrap-before][originals][wrap-after] so there is always a card in either direction.
+    const cloneSet = () => {
+      const fragment = document.createDocumentFragment();
+      originalCards.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.querySelectorAll('a, button, input').forEach((el) => el.setAttribute('tabindex', '-1'));
+        fragment.appendChild(clone);
+      });
+      return fragment;
+    };
+    projectsTrack.prepend(cloneSet());
+    projectsTrack.append(cloneSet());
 
-  carouselPrev.addEventListener('click', () => {
-    projectsCarousel.scrollBy({ left: -cardStep(), behavior: 'smooth' });
-  });
-  carouselNext.addEventListener('click', () => {
-    projectsCarousel.scrollBy({ left: cardStep(), behavior: 'smooth' });
-  });
+    const mod = (n, m) => ((n % m) + m) % m;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const AUTOPLAY_MS = 4000;
 
-  // Swipe / drag support
-  let isPointerDown = false;
-  let isSwiping = false;
-  let suppressClick = false;
-  let startX = 0;
-  let startY = 0;
-  let startScrollLeft = 0;
+    let step = 0;
+    let setWidth = 0;
+    let targetLeft = 0;
+    let index = 0;
+    let userPaused = reduceMotion.matches;
+    let hoverPaused = false;
+    let focusPaused = false;
+    let inView = true;
+    let autoplayTimer = null;
+    let settleTimer;
+    let resizeTimer;
 
-  projectsCarousel.addEventListener('pointerdown', (e) => {
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-    isPointerDown = true;
-    isSwiping = false;
-    suppressClick = false;
-    startX = e.clientX;
-    startY = e.clientY;
-    startScrollLeft = projectsCarousel.scrollLeft;
-    projectsCarousel.style.scrollBehavior = 'auto';
-  });
+    let isPointerDown = false;
+    let isSwiping = false;
+    let suppressClick = false;
+    let startX = 0;
+    let startY = 0;
+    let startScrollLeft = 0;
 
-  projectsCarousel.addEventListener('pointermove', (e) => {
-    if (!isPointerDown) return;
-    const deltaX = e.clientX - startX;
-    const deltaY = e.clientY - startY;
-    if (!isSwiping) {
-      if (Math.abs(deltaX) < 8 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
-      isSwiping = true;
-      projectsCarousel.classList.add('dragging');
-      if (projectsCarousel.setPointerCapture) {
-        projectsCarousel.setPointerCapture(e.pointerId);
+    const measure = () => {
+      const card = originalCards[0];
+      const gap = parseFloat(getComputedStyle(projectsTrack).columnGap) || 0;
+      step = card.getBoundingClientRect().width + gap;
+      setWidth = step * count;
+    };
+
+    const setScroll = (left, instant = false) => {
+      const previous = projectsCarousel.style.scrollBehavior;
+      projectsCarousel.style.scrollBehavior = instant ? 'auto' : 'smooth';
+      projectsCarousel.scrollLeft = left;
+      projectsCarousel.style.scrollBehavior = previous;
+    };
+
+    const renderStatus = () => {
+      if (carouselStatus) {
+        carouselStatus.textContent = `${String(index + 1).padStart(2, '0')} / ${String(count).padStart(2, '0')}`;
       }
+    };
+
+    const syncIndex = () => {
+      const next = mod(Math.round((projectsCarousel.scrollLeft - setWidth) / step), count);
+      if (next !== index) {
+        index = next;
+        renderStatus();
+      }
+    };
+
+    const wrapIfNeeded = () => {
+      const left = projectsCarousel.scrollLeft;
+      const set = Math.floor((left + 1) / setWidth);
+      if (set === 1) return;
+      const nextLeft = left - set * setWidth + setWidth;
+      targetLeft = Math.round(nextLeft / step) * step;
+      setScroll(targetLeft, true);
+    };
+
+    const goTo = (direction) => {
+      targetLeft += direction * step;
+      projectsCarousel.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    };
+
+    const shouldAutoplay = () => !userPaused && !hoverPaused && !focusPaused && inView && !document.hidden;
+
+    const stopAutoplay = () => {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    };
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (shouldAutoplay()) autoplayTimer = setInterval(() => goTo(1), AUTOPLAY_MS);
+    };
+
+    const syncToggle = () => {
+      if (!carouselToggle) return;
+      const paused = !shouldAutoplay();
+      carouselToggle.setAttribute('aria-pressed', String(paused));
+      carouselToggle.setAttribute('aria-label', paused ? 'Play carousel' : 'Pause carousel');
+      carouselToggle.innerHTML = paused
+        ? '<i class="fa-solid fa-play" aria-hidden="true"></i>'
+        : '<i class="fa-solid fa-pause" aria-hidden="true"></i>';
+    };
+
+    const updateAutoplay = () => {
+      syncToggle();
+      startAutoplay();
+    };
+
+    const move = (direction) => {
+      goTo(direction);
+      if (!userPaused) startAutoplay();
+    };
+
+    carouselPrev.addEventListener('click', () => move(-1));
+    carouselNext.addEventListener('click', () => move(1));
+
+    if (carouselToggle) {
+      carouselToggle.addEventListener('click', () => {
+        userPaused = !userPaused;
+        updateAutoplay();
+      });
     }
-    e.preventDefault();
-    projectsCarousel.scrollLeft = startScrollLeft - deltaX;
-  });
 
-  const endPointer = () => {
-    if (!isPointerDown) return;
-    isPointerDown = false;
-    projectsCarousel.style.scrollBehavior = 'smooth';
-    projectsCarousel.classList.remove('dragging');
-    if (!isSwiping) return;
-    isSwiping = false;
-    suppressClick = true;
-    const step = cardStep();
-    if (step > 0) {
-      const target = Math.round(projectsCarousel.scrollLeft / step) * step;
-      projectsCarousel.scrollTo({ left: target, behavior: 'smooth' });
+    projectsCarousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); move(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); move(-1); }
+    });
+
+    // Swipe / drag support
+    projectsCarousel.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      isPointerDown = true;
+      isSwiping = false;
+      suppressClick = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      startScrollLeft = projectsCarousel.scrollLeft;
+      projectsCarousel.style.scrollBehavior = 'auto';
+    });
+
+    projectsCarousel.addEventListener('pointermove', (e) => {
+      if (!isPointerDown) return;
+      const deltaX = e.clientX - startX;
+      const deltaY = e.clientY - startY;
+      if (!isSwiping) {
+        if (Math.abs(deltaX) < 8 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+        isSwiping = true;
+        projectsCarousel.classList.add('dragging');
+        if (projectsCarousel.setPointerCapture) {
+          projectsCarousel.setPointerCapture(e.pointerId);
+        }
+      }
+      e.preventDefault();
+      projectsCarousel.scrollLeft = startScrollLeft - deltaX;
+    });
+
+    const endPointer = () => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      projectsCarousel.style.scrollBehavior = 'smooth';
+      projectsCarousel.classList.remove('dragging');
+      if (!isSwiping) return;
+      isSwiping = false;
+      suppressClick = true;
+      targetLeft = Math.round(projectsCarousel.scrollLeft / step) * step;
+      projectsCarousel.scrollTo({ left: targetLeft, behavior: 'smooth' });
+      if (!userPaused) startAutoplay();
+    };
+
+    projectsCarousel.addEventListener('pointerup', endPointer);
+    projectsCarousel.addEventListener('pointercancel', endPointer);
+    projectsCarousel.addEventListener('click', (e) => {
+      if (!suppressClick) return;
+      e.preventDefault();
+      e.stopPropagation();
+      suppressClick = false;
+    }, true);
+
+    const onScrollSettled = () => {
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => {
+        if (isPointerDown) return;
+        wrapIfNeeded();
+        syncIndex();
+      }, 90);
+    };
+
+    projectsCarousel.addEventListener('scroll', onScrollSettled, { passive: true });
+
+    projectsCarousel.addEventListener('mouseenter', () => { hoverPaused = true; updateAutoplay(); });
+    projectsCarousel.addEventListener('mouseleave', () => { hoverPaused = false; updateAutoplay(); });
+    projectsCarousel.addEventListener('focusin', () => { focusPaused = true; updateAutoplay(); });
+    projectsCarousel.addEventListener('focusout', () => { focusPaused = false; updateAutoplay(); });
+
+    document.addEventListener('visibilitychange', updateAutoplay);
+
+    if ('IntersectionObserver' in window) {
+      const carouselObserver = new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        updateAutoplay();
+      }, { threshold: 0.15 });
+      carouselObserver.observe(projectsCarousel);
     }
-  };
 
-  projectsCarousel.addEventListener('pointerup', endPointer);
-  projectsCarousel.addEventListener('pointercancel', endPointer);
-  projectsCarousel.addEventListener('click', (e) => {
-    if (!suppressClick) return;
-    e.preventDefault();
-    e.stopPropagation();
-    suppressClick = false;
-  }, true);
+    if (reduceMotion.addEventListener) {
+      reduceMotion.addEventListener('change', (e) => {
+        if (e.matches) { userPaused = true; updateAutoplay(); }
+      });
+    }
 
-  projectsCarousel.addEventListener('scroll', updateCarouselState, { passive: true });
-  window.addEventListener('resize', updateCarouselState);
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        measure();
+        targetLeft = setWidth + index * step;
+        setScroll(targetLeft, true);
+      }, 120);
+    });
 
-  updateCarouselState();
+    measure();
+    targetLeft = setWidth;
+    setScroll(targetLeft, true);
+    renderStatus();
+    updateAutoplay();
+  }
 }
 
 // =====================================================
