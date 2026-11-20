@@ -2,14 +2,14 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
-  font-display: swap;
+  font-display: optional;
   src: url('../assets/fonts/inter-latin.woff2') format('woff2');
 }
 @font-face {
   font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 100 900;
-  font-display: swap;
+  font-display: optional;
   src: url('../assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
 }
 
@@ -170,7 +170,7 @@ button { font-family: inherit; cursor: pointer; }
 .navbar {
   display: flex; align-items: center;
   justify-content: space-between;
-  gap: 16px; padding: 14px 0;
+  gap: 16px; padding: 14px 0; min-height: 57px;
 }
 .brand {
   display: flex; align-items: center; gap: 6px;

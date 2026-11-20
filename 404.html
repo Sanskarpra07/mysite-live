@@ -42,8 +42,8 @@
     <link rel="stylesheet" href="css/font-awesome.min.css" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="css/font-awesome.min.css" /></noscript>
     <style>
-@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:swap;src:url('assets/fonts/inter-latin.woff2') format('woff2')}
-@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:100 900;font-display:swap;src:url('assets/fonts/jetbrains-mono-latin.woff2') format('woff2')}
+@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:optional;src:url('assets/fonts/inter-latin.woff2') format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:100 900;font-display:optional;src:url('assets/fonts/jetbrains-mono-latin.woff2') format('woff2')}
       :root {
         --bg: #0a0a0a;
         --surface: #111111;
@@ -192,6 +192,7 @@
         .actions { flex-direction: column; }
         .actions .btn { justify-content: center; }
       }
+      .fa-solid,.fa-brands,.fa-regular{display:inline-block;width:1em;height:1em;line-height:1;vertical-align:-.125em;text-align:center;flex:none}
     </style>
   </head>
   <body>

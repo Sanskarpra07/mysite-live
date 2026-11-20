@@ -610,6 +610,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     'where are you based?',
   ];
 
+  chipsWrap.textContent = '';
   chips.forEach(label => {
     const b = document.createElement('button');
     b.type = 'button';
@@ -880,6 +881,7 @@ const musicTracks = [
     probe.src = track.file;
   });
 
+  list.textContent = '';
   musicTracks.forEach((track, i) => {
     const row = document.createElement('button');
     row.type = 'button';
