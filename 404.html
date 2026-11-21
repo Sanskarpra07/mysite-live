@@ -58,7 +58,7 @@
         --text: #e5e5e5;
         --text-bright: #ffffff;
         --text-dim: #9a9a9a;
-        --text-faint: #5a5a5a;
+        --text-faint: #7a7a7a;
         --accent: #00ff88;
         --accent-ink: #001a0e;
         --accent-dim: rgba(0, 255, 136, 0.12);
@@ -76,11 +76,11 @@
         --text: #1a1a1a;
         --text-bright: #000000;
         --text-dim: #6b6b6b;
-        --text-faint: #b0b0b0;
-        --accent: #00a85a;
+        --text-faint: #6f6f6f;
+        --accent: #007f40;
         --accent-ink: #ffffff;
-        --accent-dim: rgba(0, 168, 90, 0.12);
-        --accent-glow: rgba(0, 168, 90, 0.3);
+        --accent-dim: rgba(0, 127, 64, 0.12);
+        --accent-glow: rgba(0, 127, 64, 0.3);
       }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
@@ -206,13 +206,15 @@
     <div class="bg-layer bg-dots-base" aria-hidden="true"></div>
     <div class="bg-layer bg-vignette" aria-hidden="true"></div>
 
+    <a class="skip-link" href="#main">Skip to main content</a>
+
     <header id="site-header" role="banner">
       <nav class="navbar" aria-label="Primary navigation">
         <a href="/" class="brand" aria-label="Homepage">
           <span class="brand-glyph" aria-hidden="true">~/</span>
           <span class="brand-name">sanskar</span>
         </a>
-        <button id="theme-toggle" class="nav-btn" aria-label="Toggle theme" title="Toggle theme">
+        <button id="theme-toggle" class="nav-btn" aria-label="Toggle theme" aria-pressed="false" title="Toggle theme">
           <i class="fa-solid fa-moon"></i>
         </button>
       </nav>

@@ -23,7 +23,7 @@
             --text: #e5e5e5;
             --text-bright: #ffffff;
             --text-dim: #9a9a9a;
-            --text-faint: #5a5a5a;
+            --text-faint: #7a7a7a;
             --accent: #00ff88;
             --accent-ink: #001a0e;
             --accent-glow: rgba(0,255,136,0.35);

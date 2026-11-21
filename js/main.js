@@ -7,6 +7,7 @@ const root = document.documentElement;
 
 const applyTheme = (theme) => {
   root.setAttribute('data-theme', theme);
+  if (themeToggle) themeToggle.setAttribute('aria-pressed', String(theme === 'light'));
   if (themeIcon) {
     themeIcon.classList.toggle('fa-moon', theme !== 'light');
     themeIcon.classList.toggle('fa-sun', theme === 'light');
@@ -22,6 +23,9 @@ const writeStoredValue = (key, value) => {
 
 const savedTheme = readStoredValue('theme');
 if (savedTheme === 'light') applyTheme('light');
+if (themeToggle) {
+  themeToggle.setAttribute('aria-pressed', String(root.getAttribute('data-theme') === 'light'));
+}
 
 if (themeToggle) {
   themeToggle.addEventListener('click', () => {
@@ -56,6 +60,7 @@ const closeMenu = () => {
 };
 
 if (hamburger && navLinks) {
+  if (navLinks.id) hamburger.setAttribute('aria-controls', navLinks.id);
   hamburger.addEventListener('click', () => {
     mobileMenuOpen = !mobileMenuOpen;
     hamburger.setAttribute('aria-expanded', String(mobileMenuOpen));
@@ -88,15 +93,37 @@ window.addEventListener('resize', () => {
 // =====================================================
 //  NAV DROPDOWN SUBMENUS ("Projects ▾")
 // =====================================================
-document.querySelectorAll('.nav-drop').forEach(drop => {
+document.querySelectorAll('.nav-drop').forEach((drop, i) => {
   const toggle = drop.querySelector('.nav-drop-toggle');
   if (!toggle) return;
+  const menu = drop.querySelector('.nav-drop-menu');
+  if (menu) {
+    if (!menu.id) menu.id = `projects-submenu-${i + 1}`;
+    toggle.setAttribute('aria-controls', menu.id);
+  }
   toggle.addEventListener('click', (e) => {
     // On mobile/tablet the submenu opens as an accordion instead of scrolling.
     if (window.innerWidth <= 900) {
       e.preventDefault();
       const open = drop.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
+    }
+  });
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  if (mobileMenuOpen && hamburger) {
+    closeMenu();
+    hamburger.focus();
+    return;
+  }
+  document.querySelectorAll('.nav-drop.open').forEach((drop) => {
+    const toggle = drop.querySelector('.nav-drop-toggle');
+    drop.classList.remove('open');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
     }
   });
 });
