@@ -59,12 +59,14 @@ Each one is a single self-contained demo on `mini-projects.html`:
 
 ## How it's put together
 
-Fonts come from Google Fonts (JetBrains Mono for the terminal-flavoured text,
-Inter for body copy) and icons from Font Awesome, both loaded from a CDN.
-Everything else is hand-written.
+Fonts are self-hosted: JetBrains Mono (terminal-flavoured text) and Inter (body
+copy) live in `assets/fonts/`, with Font Awesome CSS and webfonts under `css/`.
+They are preloaded on the main pages. Everything else is hand-written.
 
 The contact form posts to [Formspree](https://formspree.io/), a hosted form
-service. A hidden decoy field catches automated spam submissions.
+service. Hidden decoy fields catch automated spam submissions. Visits are counted
+with Google Analytics and GoatCounter; the shoe-store demo also loads Bootstrap
+and SweetAlert2 from a CDN.
 
 `js/main.js` is loaded with `defer`, which means the browser downloads it while
 still reading the page and runs it once the HTML is parsed. Every page repeats
@@ -137,37 +139,48 @@ card to the grid in `blog/index.html` and a new entry in `sitemap.xml`.
 
 ## Security and privacy follow-up
 
-Repository review on 2026-10-26: these items are still open unless noted below.
-The site is static GitHub Pages content, with no site-side login or database.
-Fixed in this review: the shoe-store notification helper now displays message
-content as text instead of injecting it as HTML, preventing markup-based script
-injection through notification messages.
+Latest review 2026-11-21 (previous review 2026-10-26). The site is static GitHub
+Pages content, with no site-side login or database. Fixed in the earlier review:
+the shoe-store notification helper now displays message content as text instead
+of injecting it as HTML, preventing markup-based script injection through
+notification messages.
 
 - [ ] **Add a privacy notice.** Explain that contact form submissions (name,
-  email, subject, and message) are sent to Formspree. Disclose GoatCounter
-  analytics and link to both providers' privacy information. No notice was
-  found in the site pages.
+  email, subject, and message) are sent to Formspree, and that visits are counted
+  by Google Analytics and GoatCounter. Link to each provider's privacy
+  information. No notice was found in the site pages.
 - [ ] **Review public personal information.** Check the downloadable CV for
   details and PDF metadata that should not be public. Review the published email,
   photographs, and social links as well. This review has not been documented.
-- [ ] **Reduce third-party requests.** Consider self-hosting Google Fonts,
-  Font Awesome, Bootstrap, and SweetAlert assets used by the portfolio and
-  shoe-store demo. Bootstrap references use version 5.3.3 and Bootstrap Icons
-  1.11.3, but SweetAlert uses the floating `@11` version; externally hosted
-  resources found in the pages do not have Subresource Integrity attributes.
+- [ ] **Reduce third-party requests (partly done).** Fonts and icons are now
+  self-hosted. Remaining external requests are Google Analytics, GoatCounter,
+  Formspree, and Bootstrap 5.3.3 / SweetAlert2 in the shoe-store demo. SweetAlert
+  uses the floating `@11` version, and the demo's CDN scripts have no Subresource
+  Integrity attributes.
 - [ ] **Plan a Content Security Policy.** The pages contain inline scripts and
   load assets from several external providers, so inventory those dependencies
   and move inline scripts into files before enforcing a restrictive policy.
   No CSP or documented CSP plan was found. Start with a report-only policy if
   the hosting setup allows it.
-- [ ] **Check deployment security settings.** Confirm GitHub Pages has Enforce
-  HTTPS enabled. Review the response headers the hosting setup can provide;
-  this cannot be confirmed from the repository. GitHub Pages does not use
-  `.htaccess`.
-- [ ] **Use the `www` hostname consistently.** `CNAME` is set to
-  `www.sanskarmanpradhan.com.np`, but canonical URLs, Open Graph URLs, structured
-  data, the sitemap, and other absolute links still use the apex hostname.
-  Update them to `https://www.sanskarmanpradhan.com.np/` and confirm the redirect.
+- [x] **Check deployment security settings.** Verified on the live site on
+  2026-11-21: HTTP redirects to HTTPS, the apex domain redirects to `www`, and
+  `strict-transport-security: max-age=31536000` is served. No CSP,
+  `X-Content-Type-Options`, `Referrer-Policy`, or `Permissions-Policy` headers are
+  set; Cloudflare sits in front of GitHub Pages and is the place to add them.
+  GitHub Pages itself does not use `.htaccess`, and its "Enforce HTTPS" toggle
+  cannot be confirmed from the repository.
+- [x] **Use the `www` hostname consistently.** `CNAME`, canonical URLs, Open
+  Graph URLs, structured data, the sitemap, and other absolute links all use
+  `https://www.sanskarmanpradhan.com.np/`. The apex redirect was verified live.
+- [ ] **Verify analytics are recording.** The Google Analytics loader is async
+  in `<head>`, while `js/analytics.js` (which calls `gtag('config', ...)`) is
+  deferred at the end of the body. Confirm pageviews still arrive in both the
+  Google Analytics and GoatCounter dashboards.
+
+Cloudflare also prepends a managed block to the live `robots.txt`: search
+indexing is allowed (`search=yes`) while AI training is disallowed
+(`ai-train=no`, `use=reference`). That block is added at the edge, so it is not
+present in the repository copy of `robots.txt`.
 
 ---
 
