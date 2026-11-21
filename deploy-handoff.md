@@ -88,7 +88,8 @@ XAMPP is only needed to render/export pages locally.
   `*.php` links to `.html`; product pages are `product-<id>.html`.
 - Default logins (from the shoe_store README): admin / `password`,
   staff1 / `password`, customer `sita@example.com` / `customer123`.
-- eSewa + Khalti keys in `backend/payment_config.php` are **sandbox** keys.
+- eSewa + Khalti keys are **sandbox** keys, now read from environment variables /
+  a git-ignored `.env` (see `.env.example`); none are committed in source.
   Some free hosts block outbound PHP connections, so sandbox payments may not
   complete there.
 
