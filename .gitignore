@@ -1,0 +1,6 @@
+# Local-only private content (kept on machine, not in repo)
+music.html
+assets/audio/
+
+# OS/editor noise
+.DS_Store
