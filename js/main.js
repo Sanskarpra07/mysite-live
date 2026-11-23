@@ -2,15 +2,17 @@
 //  THEME TOGGLE (data-theme on <html>)
 // =====================================================
 const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+const themeIcon = themeToggle ? themeToggle.querySelector('.icon, i') : null;
 const root = document.documentElement;
 
 const applyTheme = (theme) => {
   root.setAttribute('data-theme', theme);
   if (themeToggle) themeToggle.setAttribute('aria-pressed', String(theme === 'light'));
   if (themeIcon) {
-    themeIcon.classList.toggle('fa-moon', theme !== 'light');
-    themeIcon.classList.toggle('fa-sun', theme === 'light');
+    const use = themeIcon.querySelector('use');
+    if (use) {
+      use.setAttribute('href', '#i-solid-' + (theme === 'light' ? 'sun' : 'moon'));
+    }
   }
 };
 
@@ -534,7 +536,7 @@ if (form) {
     const btn = form.querySelector('button[type="submit"]');
     if (btn) {
       btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> sending...';
+      btn.innerHTML = '<svg class="icon icon-spin" aria-hidden="true" focusable="false"><use href="#i-solid-spinner"></use></svg> sending...';
     }
 
     const formData = new FormData(form);
@@ -560,7 +562,7 @@ if (form) {
       .finally(() => {
         if (btn) {
           btn.disabled = false;
-          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> send message';
+          btn.innerHTML = '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-solid-paper-plane"></use></svg> send message';
         }
       });
   });
@@ -814,8 +816,11 @@ const musicTracks = [
   };
 
   const setPlaying = (playing) => {
-    const icon = toggle.querySelector('i');
-    if (icon) icon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+    const icon = toggle.querySelector('.icon, i');
+    if (icon) {
+      const use = icon.querySelector('use');
+      if (use) use.setAttribute('href', '#i-solid-' + (playing ? 'pause' : 'play'));
+    }
     toggle.setAttribute('aria-label', playing ? 'Pause' : 'Play');
     const box = toggle.closest('.music-player');
     if (box) box.classList.toggle('playing', playing);
@@ -917,7 +922,7 @@ const musicTracks = [
 
     const play = document.createElement('span');
     play.className = 'music-row-play';
-    play.innerHTML = '<i class="fa-solid fa-play"></i>';
+    play.innerHTML = '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-solid-play"></use></svg>';
 
     const num = document.createElement('span');
     num.className = 'music-row-num';
@@ -972,9 +977,11 @@ const musicTracks = [
     const syncVolume = () => {
       const v = audio.muted ? 0 : audio.volume;
       volumeEl.value = String(Math.round(v * 100));
-      const icon = muteBtn.querySelector('i');
+      const icon = muteBtn.querySelector('.icon, i');
       if (icon) {
-        icon.className = 'fa-solid ' + (v === 0 ? 'fa-volume-xmark' : v < 0.5 ? 'fa-volume-low' : 'fa-volume-high');
+        const name = v === 0 ? 'volume-xmark' : v < 0.5 ? 'volume-low' : 'volume-high';
+        const use = icon.querySelector('use');
+        if (use) use.setAttribute('href', '#i-solid-' + name);
       }
       muteBtn.setAttribute('aria-label', v === 0 ? 'Unmute' : 'Mute');
     };
