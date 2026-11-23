@@ -45,6 +45,8 @@ Each one is a single self-contained demo on `mini-projects.html`:
 - **Chat assistant** — a small terminal-style widget in the Contact section that
   answers questions about me. It's plain JavaScript running in the page; nothing
   is sent to a third-party service.
+- **FAQ section** — visible question-and-answer section on the homepage, with
+  matching `FAQPage` JSON-LD for search engines.
 - **Fully responsive** — a hamburger menu on mobile, fluid layout throughout.
 - **Search engine basics** — structured data (JSON-LD), social preview tags,
   canonical URLs, `robots.txt`, and an XML sitemap.
@@ -60,8 +62,9 @@ Each one is a single self-contained demo on `mini-projects.html`:
 ## How it's put together
 
 Fonts are self-hosted: JetBrains Mono (terminal-flavoured text) and Inter (body
-copy) live in `assets/fonts/`, with Font Awesome CSS and webfonts under `css/`.
-They are preloaded on the main pages. Everything else is hand-written.
+copy) live in `assets/fonts/`. Icons are inline SVGs from `assets/icons.svg`
+(injected per page as a hidden symbol sprite), so there are no icon font files.
+Everything else is hand-written.
 
 The contact form posts to [Formspree](https://formspree.io/), a hosted form
 service. Hidden decoy fields catch automated spam submissions. Visits are counted
@@ -78,7 +81,7 @@ paint — that inline copy is deliberate, and it is what prevents the theme flas
 ## Files
 
 ```
-index.html              Main portfolio page
+index.html              Main portfolio page (includes FAQ)
 music.html              Music player
 mini-projects.html      The six demos
 404.html                Custom not-found page
@@ -89,8 +92,10 @@ css/mini-projects.css   Styling specific to the mini projects
 
 js/main.js              Theme toggle, menu, scroll effects, music player, chat
 js/mini-projects.js     Logic for the six demos
+js/analytics.js         Analytics configuration
 
-assets/                 Photos, the CV (PDF), and audio tracks
+assets/icons.svg        SVG icon sprite (symbols injected into pages)
+assets/                 Photos, fonts, CV (PDF), and audio tracks
 sitemap.xml             Every page listed for search engines
 sitemap.xsl             Makes that sitemap render as a styled table
 robots.txt              Points crawlers to the sitemap
@@ -152,11 +157,11 @@ notification messages.
 - [ ] **Review public personal information.** Check the downloadable CV for
   details and PDF metadata that should not be public. Review the published email,
   photographs, and social links as well. This review has not been documented.
-- [ ] **Reduce third-party requests (partly done).** Fonts and icons are now
-  self-hosted. Remaining external requests are Google Analytics, GoatCounter,
-  Formspree, and Bootstrap 5.3.3 / SweetAlert2 in the shoe-store demo. SweetAlert
-  uses the floating `@11` version, and the demo's CDN scripts have no Subresource
-  Integrity attributes.
+- [ ] **Reduce third-party requests (partly done).** Fonts are self-hosted and
+  icons are inline SVGs (no icon font files). Remaining external requests are
+  Google Analytics, GoatCounter, Formspree, and Bootstrap 5.3.3 / SweetAlert2 /
+  Bootstrap Icons in the shoe-store demo. SweetAlert uses the floating `@11`
+  version, and the demo's CDN scripts have no Subresource Integrity attributes.
 - [ ] **Plan a Content Security Policy.** The pages contain inline scripts and
   load assets from several external providers, so inventory those dependencies
   and move inline scripts into files before enforcing a restrictive policy.
