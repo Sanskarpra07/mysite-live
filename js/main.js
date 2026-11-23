@@ -753,18 +753,9 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // =====================================================
 //  MUSIC PLAYER
-//  To publish a track: save the file under assets/audio/,
-//  then add one line to the list below, e.g.
-//    { title: 'My Song', file: 'assets/audio/my-song.mp3' }
-//  The track list and player render automatically.
+//  Track data is supplied by the page via window.MUSIC_TRACKS.
 // =====================================================
-const musicTracks = [
-  { title: 'behos', file: 'assets/audio/behos.mp3' },
-  { title: 'mayalu', file: 'assets/audio/mayalu.mp3' },
-  { title: 'sarangi', file: 'assets/audio/sarangi.mp3' },
-  { title: 'syndicate', file: 'assets/audio/syndicate.mp3' },
-  { title: 'thamana', file: 'assets/audio/thamana.mp3' },
-];
+const musicTracks = Array.isArray(window.MUSIC_TRACKS) ? window.MUSIC_TRACKS : [];
 
 (function () {
   const shell = document.getElementById('music-shell');
