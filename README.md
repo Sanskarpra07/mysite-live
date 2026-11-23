@@ -15,7 +15,6 @@ Live at [www.sanskarmanpradhan.com.np](https://www.sanskarmanpradhan.com.np/).
 | --- | --- |
 | `index.html` | The main portfolio. Hero, About, Experience, Skills, Projects, and Contact all live on this one page. |
 | `mini-projects.html` | Six small interactive tools I built to practise JavaScript. |
-| `music.html` | A self-hosted audio player for five recorded tracks. |
 | `blog/index.html` | The blog, listing every post. |
 | `blog/why-content-handling-matters.html` | Why content structure and upkeep matter more than design. |
 | `blog/static-web-design-basics.html` | Why a plain static page is the right call for most small projects. |
@@ -82,7 +81,6 @@ paint — that inline copy is deliberate, and it is what prevents the theme flas
 
 ```
 index.html              Main portfolio page (includes FAQ)
-music.html              Music player
 mini-projects.html      The six demos
 404.html                Custom not-found page
 blog/                   Blog index and posts
@@ -131,10 +129,6 @@ comment marking where it starts and ends.
 
 **Change the colours** — edit the variables in the `:root` block at the top of
 `css/style.css`, and the `[data-theme="light"]` block below it for light mode.
-
-**Add a music track** — drop the audio file into `assets/audio/`, then add an
-entry to the `musicTracks` array near the top of `js/main.js`. The player builds
-its own track list from that array.
 
 **Write a blog post** — copy an existing file in `blog/`, rename it, and update
 the `<title>`, meta description, canonical URL, and Open Graph tags. Then add a
