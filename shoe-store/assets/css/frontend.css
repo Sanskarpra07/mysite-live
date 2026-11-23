@@ -506,3 +506,8 @@ section.py-5.bg-light {
         height: 300px;
     }
 }
+
+/* Icon SVGs (replacing Font Awesome) */
+.icon{width:1em;height:1em;vertical-align:-.125em;fill:currentColor;display:inline-block;flex-shrink:0;overflow:visible}
+.icon-spin{animation:icon-spin 1s linear infinite}
+@keyframes icon-spin{to{transform:rotate(360deg)}}
