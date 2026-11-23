@@ -347,10 +347,10 @@
     }
     if (ok) {
       copyBtn.classList.add('copied');
-      copyBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+      copyBtn.innerHTML = '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-solid-check"></use></svg>';
       setTimeout(() => {
         copyBtn.classList.remove('copied');
-        copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+        copyBtn.innerHTML = '<svg class="icon" aria-hidden="true" focusable="false"><use href="#i-solid-copy"></use></svg>';
       }, 1200);
     }
   };
