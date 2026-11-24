@@ -48,7 +48,7 @@ Each one is a single self-contained demo on `mini-projects.html`:
   matching `FAQPage` JSON-LD for search engines.
 - **Fully responsive** — a hamburger menu on mobile, fluid layout throughout.
 - **Search engine basics** — structured data (JSON-LD), social preview tags,
-  canonical URLs, `robots.txt`, and an XML sitemap.
+  canonical URLs, `robots.txt`, `ads.txt`, and an XML sitemap.
 - **Readable sitemap** — open `sitemap.xml` in a browser and it renders as a
   styled table instead of raw XML.
 - **Accessible markup** — a skip-to-content link on the main pages, `aria-label`s
@@ -97,6 +97,7 @@ assets/                 Photos, fonts, CV (PDF), and audio tracks
 sitemap.xml             Every page listed for search engines
 sitemap.xsl             Makes that sitemap render as a styled table
 robots.txt              Points crawlers to the sitemap
+ads.txt                 Declares that no ad sellers are authorized
 favicon.png / .svg      Site icons
 CNAME                   Custom domain setting for GitHub Pages
 ```
