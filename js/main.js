@@ -653,7 +653,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     intro: 'I\'m Sanskar Man Pradhan, a content writer and content handler based in Lalitpur, Nepal. I also build static web pages and am studying for a Bachelor in Computer Applications (BCA) at Mega College.',
     stack: 'My tools and skills include content writing and management, WordPress and WooCommerce, HTML, CSS, JavaScript, PHP, MySQL, responsive web design, and SEO basics. I use Figma and Photoshop for design work, and I\'m currently learning React.',
     services: 'I can help with writing and managing website content, content delivery workflows, WordPress/WooCommerce content sites, and clean static web pages. I can also help with page layouts using Figma or Photoshop and basic SEO.',
-    hire: 'Yes, I\'m accepting work. I\'m open to freelance projects and new opportunities in content writing/handling and static web design. You can reach me through the contact form or email me at pradhansanskar86@gmail.com.',
+    hire: 'Yes, I\'m accepting work. I\'m open to freelance projects and new opportunities in content writing/handling and static web design. You can reach me through the contact form or email me at pradhanskar86\u0040gmail.com.',
     experience: 'I\'ve worked as a Content Writer at Longtail E-Media since August 2024, writing and managing website content, including hotel-related content, and supporting CMS/content workflows and basic technical tasks. I also worked as a Receptionist at Swornim Multipurpose Co-operative from August to November 2023.',
     education: 'I\'m studying for a Bachelor in Computer Applications (BCA) at Mega College, where I started in 2023. I completed higher secondary (+2) there from 2021 to 2023.',
     location: 'I\'m based in Lalitpur, Nepal (Nepal Time, UTC+5:45).',
@@ -662,7 +662,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     medical: 'Medical-IMS is a PHP and MySQL medical inventory management system with a stock dashboard, product and category management, stock logs, and authenticated user accounts. The Projects section links to its GitHub repository; it does not have a live demo.',
     daura: 'Daura & Co. is a responsive static clothing storefront built with HTML, CSS, JavaScript, and Bootstrap 5. It has product grids, category sections, cart interactions, and a mobile-first layout. See the Projects section for its live site and GitHub links.',
     portfolio: 'This portfolio is a responsive static site built with HTML, CSS, and JavaScript. It includes light/dark themes, interactive page effects, a contact form, and this scripted FAQ chat widget.',
-    contact: 'Email me at pradhansanskar86@gmail.com, use the contact form, or find me on GitHub as @Sanskarpra07 and on LinkedIn as Sanskar Pradhan. My social links are also listed in the Contact section.',
+    contact: 'Email me at pradhanskar86\u0040gmail.com, use the contact form, or find me on GitHub as @Sanskarpra07 and on LinkedIn as Sanskar Pradhan. My social links are also listed in the Contact section.',
     default: 'I can answer questions about Sanskar\'s background, skills, services, work experience, education, projects, availability, location, and contact details. Try asking about one of those topics.',
   };
 
